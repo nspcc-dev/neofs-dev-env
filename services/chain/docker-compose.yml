@@ -1,0 +1,36 @@
+---
+
+version: "2.4"
+services:
+  neofs_main_chain:
+    image: nspccdev/neo-go:${NEOGO_VERSION}
+    container_name: main_chain.localtest.nspcc.ru
+    networks:
+      chain_int:
+      internet:
+        ipv4_address: ${IPV4_PREFIX}.50
+    healthcheck:
+      interval: 5s
+      retries: 15
+      test: ['CMD', 'sh', '-c', 'echo | nc 127.0.0.1 30333']
+      timeout: 10s
+    stop_signal: SIGKILL
+    environment:
+    - ACC=/chain.gz
+    volumes:
+    - ./../../vendor/chain.gz:/chain.gz
+    - ./protocol.privnet.yml:/config/protocol.privnet.yml
+    - ./node-wallet.json:/wallets/node-wallet.json
+
+  neofs_main_chain-healthy:
+    image: alpine
+    container_name: neofs_main_chain-healthy
+    depends_on:
+      neofs_main_chain:
+        condition: service_healthy
+
+networks:
+  chain_int:
+  internet:
+    external:
+      name: basenet_internet

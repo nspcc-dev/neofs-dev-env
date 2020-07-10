@@ -1,0 +1,5 @@
+vendor
+tmp
+.secrets
+sites/*
+!sites/.gitkeep

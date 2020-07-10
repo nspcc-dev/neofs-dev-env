@@ -1,0 +1,36 @@
+---
+
+version: "2.4"
+services:
+  neofs_morph_chain:
+    image: nspccdev/neo-go:${NEOGO_VERSION}
+    container_name: morph_chain.localtest.nspcc.ru
+    networks:
+      chain_int:
+      internet:
+        ipv4_address: ${IPV4_PREFIX}.90
+    healthcheck:
+      interval: 5s
+      retries: 15
+      test: ['CMD', 'sh', '-c', 'echo | nc 127.0.0.1 30333']
+      timeout: 10s
+    stop_signal: SIGKILL
+    environment:
+    - ACC=/morph_chain.gz
+    volumes:
+    - ./../../vendor/morph_chain.gz:/morph_chain.gz
+    - ./protocol.privnet.yml:/config/protocol.privnet.yml
+    - ./node-wallet.json:/wallets/node-wallet.json
+
+  neofs_morph_chain-healthy:
+    image: alpine
+    container_name: neofs_morph_chain-healthy
+    depends_on:
+      neofs_morph_chain:
+        condition: service_healthy
+
+networks:
+  chain_int:
+  internet:
+    external:
+      name: basenet_internet
