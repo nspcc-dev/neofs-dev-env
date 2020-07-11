@@ -7,7 +7,7 @@ get.chain:
 ifeq (${CHAIN_PATH},)
 	@echo "⇒ Download blockchain dump VERSION=${CHAIN_VERSION}"
 	@curl \
-		-sS "https://cdn.fs.neo.org/5iZZi4HzXpk3xjHa2ahi8RCrVae74Q7487ns5ms7S2EF/a488ff1a-6339-404c-8360-456005445032" \
+		-sS "https://fs.neo.org/dist/chain.gz" \
 		-o ./vendor/chain.gz
 else
 	@echo "⇒ Copy local archive ${CHAIN_PATH}"
