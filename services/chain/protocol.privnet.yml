@@ -25,6 +25,7 @@ ApplicationConfiguration:
   MinPeers: 0
   RPC:
     Enabled: true
+    MaxGasInvoke: 10
     EnableCORSWorkaround: false
     Port: 30333
   Prometheus:
