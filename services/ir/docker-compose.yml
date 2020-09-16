@@ -4,7 +4,7 @@ version: "2.4"
 services:
 
   ir01:
-    image: nspccdev/neofs-ir:${IR_VERSION}
+    image: ${IR_IMAGE}:${IR_VERSION}
     container_name: m01.localtest.nspcc.ru
     networks:
       ir_int:
@@ -18,7 +18,7 @@ services:
 
 
   ir02:
-    image: nspccdev/neofs-ir:${IR_VERSION}
+    image: ${IR_IMAGE}:${IR_VERSION}
     container_name: m02.localtest.nspcc.ru
     networks:
       ir_int:
@@ -31,7 +31,7 @@ services:
     - NEOFS_IR_KEY=/02.key
 
   ir03:
-    image: nspccdev/neofs-ir:${IR_VERSION}
+    image: ${IR_IMAGE}:${IR_VERSION}
     container_name: m03.localtest.nspcc.ru
     networks:
       ir_int:
@@ -44,7 +44,7 @@ services:
     - NEOFS_IR_KEY=/03.key
 
   ir04:
-    image: nspccdev/neofs-ir:${IR_VERSION}
+    image: ${IR_IMAGE}:${IR_VERSION}
     container_name: m04.localtest.nspcc.ru
     networks:
       ir_int:

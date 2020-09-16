@@ -5,9 +5,9 @@ get.morph_chain:
 	@mkdir -p ./vendor
 
 ifeq (${MORPH_CHAIN_PATH},)
-	@echo "⇒ Download morph chain dump VERSION=${MORPH_CHAIN_VERSION}"
+	@echo "⇒ Download morph chain dump from ${MORPH_CHAIN_URL}"
 	@curl \
-		-sS "https://fs.neo.org/dist/morph.chain.gz" \
+		-sS "${MORPH_CHAIN_URL}" \
 		-o ./vendor/morph_chain.gz
 else
 	@echo "⇒ Copy local archive ${MORPH_CHAIN_PATH}"

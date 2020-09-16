@@ -4,12 +4,8 @@ version: "2.4"
 services:
 
   storage01:
-    image: nspccdev/neofs-storage:${NODE_VERSION}
+    image: ${NODE_IMAGE}:${NODE_VERSION}
     container_name: s01.localtest.nspcc.ru
-    healthcheck:
-      test: ["CMD", "neofs-node", "-health"]
-      timeout: 10s
-      retries: 50
     networks:
       storage_int:
       internet:
@@ -18,19 +14,13 @@ services:
     volumes: [ "./01.key:/01.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
-    - NEOFS_NODE_PRIVATE_KEY=/01.key
+    - NEOFS_NODE_KEY=/01.key
     - NEOFS_NODE_ADDRESS=s01.localtest.nspcc.ru:8080
-    - NEOFS_NODE_LOCATION=NorthAmerica
-    - NEOFS_NODE_COUNTRY=US
-    - NEOFS_NODE_CITY=NewYork
+    - NEOFS_GRPC_ENDPOINT=s01.localtest.nspcc.ru:8080
 
   storage02:
-    image: nspccdev/neofs-storage:${NODE_VERSION}
+    image: ${NODE_IMAGE}:${NODE_VERSION}
     container_name: s02.localtest.nspcc.ru
-    healthcheck:
-      test: ["CMD", "neofs-node", "-health"]
-      timeout: 10s
-      retries: 50
     networks:
       storage_int:
       internet:
@@ -39,19 +29,13 @@ services:
     volumes: [ "./02.key:/02.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
-    - NEOFS_NODE_PRIVATE_KEY=/02.key
+    - NEOFS_NODE_KEY=/02.key
     - NEOFS_NODE_ADDRESS=s02.localtest.nspcc.ru:8080
-    - NEOFS_NODE_LOCATION=Asia
-    - NEOFS_NODE_COUNTRY=SG
-    - NEOFS_NODE_CITY=Singapore
+    - NEOFS_GRPC_ENDPOINT=s02.localtest.nspcc.ru:8080
 
   storage03:
-    image: nspccdev/neofs-storage:${NODE_VERSION}
+    image: ${NODE_IMAGE}:${NODE_VERSION}
     container_name: s03.localtest.nspcc.ru
-    healthcheck:
-      test: ["CMD", "neofs-node", "-health"]
-      timeout: 10s
-      retries: 50
     networks:
       storage_int:
       internet:
@@ -60,19 +44,13 @@ services:
     volumes: [ "./03.key:/03.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
-    - NEOFS_NODE_PRIVATE_KEY=/03.key
+    - NEOFS_NODE_KEY=/03.key
     - NEOFS_NODE_ADDRESS=s03.localtest.nspcc.ru:8080
-    - NEOFS_NODE_LOCATION=Europe
-    - NEOFS_NODE_COUNTRY=DE
-    - NEOFS_NODE_CITY=Frankfurt
+    - NEOFS_GRPC_ENDPOINT=s03.localtest.nspcc.ru:8080
 
   storage04:
-    image: nspccdev/neofs-storage:${NODE_VERSION}
+    image: ${NODE_IMAGE}:${NODE_VERSION}
     container_name: s04.localtest.nspcc.ru
-    healthcheck:
-      test: ["CMD", "neofs-node", "-health"]
-      timeout: 10s
-      retries: 50
     networks:
       storage_int:
       internet:
@@ -81,23 +59,9 @@ services:
     volumes: [ "./04.key:/04.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
-    - NEOFS_NODE_PRIVATE_KEY=/04.key
-    - NEOFS_NODE_ADDRESS=s04.localtest.nspcc.ru:8080
-    - NEOFS_NODE_LOCATION=Europe
-    - NEOFS_NODE_COUNTRY=GB
-    - NEOFS_NODE_CITY=London
-
-  neofs-storage-healthy:
-    image: alpine
-    depends_on:
-      storage01:
-        condition: service_healthy
-      storage02:
-        condition: service_healthy
-      storage03:
-        condition: service_healthy
-      storage04:
-        condition: service_healthy
+      - NEOFS_NODE_KEY=/04.key
+      - NEOFS_NODE_ADDRESS=s04.localtest.nspcc.ru:8080
+      - NEOFS_GRPC_ENDPOINT=s04.localtest.nspcc.ru:8080
 
 networks:
   storage_int:
