@@ -5,11 +5,13 @@ get.chain:
 	@mkdir -p ./vendor
 
 ifeq (${CHAIN_PATH},)
-	@echo "⇒ Download blockchain dump VERSION=${CHAIN_VERSION}"
+	@echo "⇒ Download blockchain dump from ${CHAIN_URL}"
 	@curl \
-		-sS "https://fs.neo.org/dist/chain.gz" \
+		-sS "${CHAIN_URL}" \
 		-o ./vendor/chain.gz
 else
 	@echo "⇒ Copy local archive ${CHAIN_PATH}"
 	@cp ${CHAIN_PATH} ./vendor/chain.gz
 endif
+
+
