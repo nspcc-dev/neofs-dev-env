@@ -16,11 +16,12 @@ GET_SVCS = $(shell grep -Rl "get.*:" ./services/* | sort -u | grep artifacts.mk 
 PULL_SVCS = $(shell find ./services -type f -name 'docker-compose.yml' | sort -u | xargs -I {} dirname {} | xargs basename -a)
 
 # Sorted services for running
-START_SVCS = $(shell find ./services -type f -name '.order' | xargs -I % /bin/bash -c 'echo "$$(cat %) %"' | sort -u | awk '{ print $$2 }' | xargs -I {} dirname {} | xargs basename -a)
-STOP_SVCS = $(shell find ./services -type f -name '.order' | xargs -I % /bin/bash -c 'echo "$$(cat %) %"' | sort -ur | awk '{ print $$2 }' | xargs -I {} dirname {} | xargs basename -a)
+START_SVCS = $(shell cat .services | grep -v \\\#)
+STOP_SVCS = $(shell tac .services | grep -v \\\#)
 
 # List of available sites
 HOSTS_LINES = $(shell grep -Rl IPV4_PREFIX ./services/* | grep .hosts)
+
 
 # Pull all required Docker images
 .PHONY: pull
