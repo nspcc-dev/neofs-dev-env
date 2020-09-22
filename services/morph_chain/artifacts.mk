@@ -1,4 +1,3 @@
-get.morph_chain: JF_TOKEN?=
 get.morph_chain: MORPH_CHAIN_DUMP_NAME=neo.morph.dump.
 get.morph_chain: MORPH_CHAIN_PATH?=
 get.morph_chain:

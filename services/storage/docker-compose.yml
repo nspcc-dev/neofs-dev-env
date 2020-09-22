@@ -2,66 +2,82 @@
 
 version: "2.4"
 services:
-
   storage01:
     image: ${NODE_IMAGE}:${NODE_VERSION}
-    container_name: s01.localtest.nspcc.ru
+    domainname: ${LOCAL_DOMAIN}
+    hostname: s01
+    container_name: s01
     networks:
       storage_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.71
+    extra_hosts:
+      - "morph_chain:${IPV4_PREFIX}.90"
     stop_signal: SIGKILL
     volumes: [ "./01.key:/01.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
     - NEOFS_NODE_KEY=/01.key
-    - NEOFS_NODE_ADDRESS=s01.localtest.nspcc.ru:8080
-    - NEOFS_GRPC_ENDPOINT=s01.localtest.nspcc.ru:8080
+    - NEOFS_NODE_ADDRESS=s01.${LOCAL_DOMAIN}:8080
+    - NEOFS_GRPC_ENDPOINT=s01.${LOCAL_DOMAIN}:8080
 
   storage02:
     image: ${NODE_IMAGE}:${NODE_VERSION}
-    container_name: s02.localtest.nspcc.ru
+    domainname: ${LOCAL_DOMAIN}
+    hostname: s02
+    container_name: s02
+    container_name: s02
     networks:
       storage_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.72
+    extra_hosts:
+      - "morph_chain:${IPV4_PREFIX}.90"
     stop_signal: SIGKILL
     volumes: [ "./02.key:/02.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
     - NEOFS_NODE_KEY=/02.key
-    - NEOFS_NODE_ADDRESS=s02.localtest.nspcc.ru:8080
-    - NEOFS_GRPC_ENDPOINT=s02.localtest.nspcc.ru:8080
+    - NEOFS_NODE_ADDRESS=s02.${LOCAL_DOMAIN}:8080
+    - NEOFS_GRPC_ENDPOINT=s02.${LOCAL_DOMAIN}:8080
 
   storage03:
     image: ${NODE_IMAGE}:${NODE_VERSION}
-    container_name: s03.localtest.nspcc.ru
+    domainname: ${LOCAL_DOMAIN}
+    hostname: s03
+    container_name: s03
     networks:
       storage_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.73
+    extra_hosts:
+      - "morph_chain:${IPV4_PREFIX}.90"
     stop_signal: SIGKILL
     volumes: [ "./03.key:/03.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
     - NEOFS_NODE_KEY=/03.key
-    - NEOFS_NODE_ADDRESS=s03.localtest.nspcc.ru:8080
-    - NEOFS_GRPC_ENDPOINT=s03.localtest.nspcc.ru:8080
+    - NEOFS_NODE_ADDRESS=s03.${LOCAL_DOMAIN}:8080
+    - NEOFS_GRPC_ENDPOINT=s03.${LOCAL_DOMAIN}:8080
 
   storage04:
     image: ${NODE_IMAGE}:${NODE_VERSION}
-    container_name: s04.localtest.nspcc.ru
+    domainname: ${LOCAL_DOMAIN}
+    hostname: s04
+    container_name: s04
     networks:
       storage_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.74
+    extra_hosts:
+      - "morph_chain:${IPV4_PREFIX}.90"
     stop_signal: SIGKILL
     volumes: [ "./04.key:/04.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
       - NEOFS_NODE_KEY=/04.key
-      - NEOFS_NODE_ADDRESS=s04.localtest.nspcc.ru:8080
-      - NEOFS_GRPC_ENDPOINT=s04.localtest.nspcc.ru:8080
+      - NEOFS_NODE_ADDRESS=s04.${LOCAL_DOMAIN}:8080
+      - NEOFS_GRPC_ENDPOINT=s04.${LOCAL_DOMAIN}:8080
 
 networks:
   storage_int:

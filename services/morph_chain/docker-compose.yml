@@ -4,7 +4,9 @@ version: "2.4"
 services:
   neofs_morph_chain:
     image: nspccdev/neo-go:${NEOGO_VERSION}
-    container_name: morph_chain.localtest.nspcc.ru
+    container_name: morph_chain
+    domainname: ${LOCAL_DOMAIN}
+    hostname: morph_chain
     networks:
       chain_int:
       internet:

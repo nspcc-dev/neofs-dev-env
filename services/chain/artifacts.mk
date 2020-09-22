@@ -1,4 +1,3 @@
-get.chain: JF_TOKEN?=
 get.chain: CHAIN_DUMP_NAME=devenv.dump.
 get.chain: CHAIN_PATH?=
 get.chain:

@@ -2,28 +2,36 @@
 
 version: "2.4"
 services:
-
   ir01:
     image: ${IR_IMAGE}:${IR_VERSION}
-    container_name: m01.localtest.nspcc.ru
+    domainname: ${LOCAL_DOMAIN}
+    hostname: ir01
+    container_name: ir01
     networks:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.61
+    extra_hosts:
+      - "main_chain:${IPV4_PREFIX}.50"
+      - "morph_chain:${IPV4_PREFIX}.90"
     stop_signal: SIGKILL
     volumes: [ "./01.key:/01.key" ]
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/01.key
 
-
   ir02:
     image: ${IR_IMAGE}:${IR_VERSION}
-    container_name: m02.localtest.nspcc.ru
+    domainname: ${LOCAL_DOMAIN}
+    hostname: ir02
+    container_name: ir02
     networks:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.62
+    extra_hosts:
+      - "main_chain:${IPV4_PREFIX}.50"
+      - "morph_chain:${IPV4_PREFIX}.90"
     stop_signal: SIGKILL
     volumes: [ "./02.key:/02.key" ]
     env_file: [ ".env", ".ir.env" ]
@@ -32,11 +40,16 @@ services:
 
   ir03:
     image: ${IR_IMAGE}:${IR_VERSION}
-    container_name: m03.localtest.nspcc.ru
+    domainname: ${LOCAL_DOMAIN}
+    hostname: ir03
+    container_name: ir03
     networks:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.63
+    extra_hosts:
+      - "main_chain:${IPV4_PREFIX}.50"
+      - "morph_chain:${IPV4_PREFIX}.90"
     stop_signal: SIGKILL
     volumes: [ "./03.key:/03.key" ]
     env_file: [ ".env", ".ir.env" ]
@@ -45,16 +58,75 @@ services:
 
   ir04:
     image: ${IR_IMAGE}:${IR_VERSION}
-    container_name: m04.localtest.nspcc.ru
+    domainname: ${LOCAL_DOMAIN}
+    hostname: ir04
+    container_name: ir04
     networks:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.64
+    extra_hosts:
+      - "main_chain:${IPV4_PREFIX}.50"
+      - "morph_chain:${IPV4_PREFIX}.90"
     stop_signal: SIGKILL
     volumes: [ "./04.key:/04.key" ]
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/04.key
+
+  ir05:
+    image: ${IR_IMAGE}:${IR_VERSION}
+    domainname: ${LOCAL_DOMAIN}
+    hostname: ir05
+    container_name: ir05
+    networks:
+      ir_int:
+      internet:
+        ipv4_address: ${IPV4_PREFIX}.65
+    extra_hosts:
+      - "main_chain:${IPV4_PREFIX}.50"
+      - "morph_chain:${IPV4_PREFIX}.90"
+    stop_signal: SIGKILL
+    volumes: [ "./05.key:/05.key" ]
+    env_file: [ ".env", ".ir.env" ]
+    environment:
+    - NEOFS_IR_KEY=/05.key
+
+  ir06:
+    image: ${IR_IMAGE}:${IR_VERSION}
+    domainname: ${LOCAL_DOMAIN}
+    hostname: ir06
+    container_name: ir06
+    networks:
+      ir_int:
+      internet:
+        ipv4_address: ${IPV4_PREFIX}.66
+    extra_hosts:
+      - "main_chain:${IPV4_PREFIX}.50"
+      - "morph_chain:${IPV4_PREFIX}.90"
+    stop_signal: SIGKILL
+    volumes: [ "./06.key:/06.key" ]
+    env_file: [ ".env", ".ir.env" ]
+    environment:
+    - NEOFS_IR_KEY=/06.key
+
+  ir07:
+    image: ${IR_IMAGE}:${IR_VERSION}
+    domainname: ${LOCAL_DOMAIN}
+    hostname: ir07
+    container_name: ir07
+    networks:
+      ir_int:
+      internet:
+        ipv4_address: ${IPV4_PREFIX}.67
+    extra_hosts:
+      - "main_chain:${IPV4_PREFIX}.50"
+      - "morph_chain:${IPV4_PREFIX}.90"
+    stop_signal: SIGKILL
+    volumes: [ "./07.key:/07.key" ]
+    env_file: [ ".env", ".ir.env" ]
+    environment:
+    - NEOFS_IR_KEY=/07.key
 
 networks:
   ir_int:

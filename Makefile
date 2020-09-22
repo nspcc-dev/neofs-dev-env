@@ -42,19 +42,22 @@ rebuild: $(foreach SVC, $(BUILD_SVCS), build.$(SVC))
 .PHONY: up
 up: get
 	$(foreach SVC, $(START_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
-	@:
 
 # Stop environments
 .PHONY: down
 down:
 	$(foreach SVC, $(STOP_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
-	@:
 
 # Display changes for /etc/hosts
 .PHONY: hosts
+.ONESHELL:
 hosts:
-	@for file in $(HOSTS_LINES); do \
-		while read h; do \
-			echo $${h} | sed 's|IPV4_PREFIX|$(IPV4_PREFIX)|g'; \
-		done < $${file}; \
+	@for file in $(HOSTS_LINES)
+	do
+		while read h
+		do
+			echo $${h} | \
+			sed 's|IPV4_PREFIX|$(IPV4_PREFIX)|g' | \
+			sed 's|LOCAL_DOMAIN|$(LOCAL_DOMAIN)|g'
+		done < $${file};
 	done

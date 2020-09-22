@@ -4,7 +4,9 @@ version: "2.4"
 services:
   neofs_main_chain:
     image: nspccdev/neo-go:${NEOGO_VERSION}
-    container_name: main_chain.localtest.nspcc.ru
+    container_name: main_chain
+    domainname: ${LOCAL_DOMAIN}
+    hostname: main_chain
     networks:
       chain_int:
       internet:

@@ -6,13 +6,13 @@ services:
   basenet:
     container_name: bastion
     image: debian:10
-    domainname: localtest.nspcc.ru
+    domainname: ${LOCAL_DOMAIN}
     hostname: bastion
     command: ["/bin/sleep", "infinity"]
     restart: always
     stop_signal: SIGKILL
     environment:
-      - TZ=Europe/Moscow
+      - TZ=Etc/UTC
     networks:
       internet:
         ipv4_address: ${IPV4_PREFIX}.10
