@@ -2,11 +2,13 @@
 
 version: "2.4"
 services:
+
   ir01:
     image: ${IR_IMAGE}:${IR_VERSION}
     domainname: ${LOCAL_DOMAIN}
     hostname: ir01
     container_name: ir01
+    restart: on-failure
     networks:
       ir_int:
       internet:
@@ -24,6 +26,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: ir02
     container_name: ir02
+    restart: on-failure
     networks:
       ir_int:
       internet:
@@ -41,6 +44,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: ir03
     container_name: ir03
+    restart: on-failure
     networks:
       ir_int:
       internet:
@@ -58,6 +62,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: ir04
     container_name: ir04
+    restart: on-failure
     networks:
       ir_int:
       internet:
@@ -75,6 +80,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: ir05
     container_name: ir05
+    restart: on-failure
     networks:
       ir_int:
       internet:
@@ -92,6 +98,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: ir06
     container_name: ir06
+    restart: on-failure
     networks:
       ir_int:
       internet:
@@ -109,6 +116,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: ir07
     container_name: ir07
+    restart: on-failure
     networks:
       ir_int:
       internet:
