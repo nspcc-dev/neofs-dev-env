@@ -16,7 +16,8 @@ services:
     networks:
       internet:
         ipv4_address: ${IPV4_PREFIX}.10
-
+    volumes:
+      - ./../../vendor/hosts:/etc/hosts
 networks:
   internet:
     driver: bridge

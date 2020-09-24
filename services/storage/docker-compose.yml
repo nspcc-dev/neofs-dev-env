@@ -11,10 +11,10 @@ services:
       storage_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.71
-    extra_hosts:
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./01.key:/01.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./01.key:/01.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
     - NEOFS_NODE_KEY=/01.key
@@ -31,10 +31,10 @@ services:
       storage_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.72
-    extra_hosts:
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./02.key:/02.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./02.key:/02.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
     - NEOFS_NODE_KEY=/02.key
@@ -50,10 +50,10 @@ services:
       storage_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.73
-    extra_hosts:
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./03.key:/03.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./03.key:/03.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
     - NEOFS_NODE_KEY=/03.key
@@ -69,10 +69,10 @@ services:
       storage_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.74
-    extra_hosts:
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./04.key:/04.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./04.key:/04.key" ]
     env_file: [ ".env", ".storage.env" ]
     environment:
       - NEOFS_NODE_KEY=/04.key

@@ -11,11 +11,10 @@ services:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.61
-    extra_hosts:
-      - "main_chain:${IPV4_PREFIX}.50"
-      - "morph_chain:${IPV4_PREFIX}.90"
     stop_signal: SIGKILL
-    volumes: [ "./01.key:/01.key" ]
+    volumes:
+      - ./01.key:/01.key
+      - ./../../vendor/hosts:/etc/hosts
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/01.key
@@ -29,11 +28,10 @@ services:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.62
-    extra_hosts:
-      - "main_chain:${IPV4_PREFIX}.50"
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./02.key:/02.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./02.key:/02.key" ]
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/02.key
@@ -47,11 +45,10 @@ services:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.63
-    extra_hosts:
-      - "main_chain:${IPV4_PREFIX}.50"
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./03.key:/03.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./03.key:/03.key" ]
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/03.key
@@ -65,11 +62,10 @@ services:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.64
-    extra_hosts:
-      - "main_chain:${IPV4_PREFIX}.50"
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./04.key:/04.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./04.key:/04.key" ]
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/04.key
@@ -83,11 +79,10 @@ services:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.65
-    extra_hosts:
-      - "main_chain:${IPV4_PREFIX}.50"
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./05.key:/05.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./05.key:/05.key" ]
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/05.key
@@ -101,11 +96,10 @@ services:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.66
-    extra_hosts:
-      - "main_chain:${IPV4_PREFIX}.50"
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./06.key:/06.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./06.key:/06.key" ]
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/06.key
@@ -119,11 +113,10 @@ services:
       ir_int:
       internet:
         ipv4_address: ${IPV4_PREFIX}.67
-    extra_hosts:
-      - "main_chain:${IPV4_PREFIX}.50"
-      - "morph_chain:${IPV4_PREFIX}.90"
+    volumes:
+      - ./07.key:/07.key
+      - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    volumes: [ "./07.key:/07.key" ]
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/07.key

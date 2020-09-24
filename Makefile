@@ -34,14 +34,9 @@ pull:
 get: $(foreach SVC, $(GET_SVCS), get.$(SVC))
 	@:
 
-# Build custom environments
-.PHONY: rebuild
-rebuild: $(foreach SVC, $(BUILD_SVCS), build.$(SVC))
-	@:
-
 # Start environments
 .PHONY: up
-up: get
+up: get vendor/hosts
 	$(foreach SVC, $(START_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
 
 # Stop environments
@@ -49,10 +44,9 @@ up: get
 down:
 	$(foreach SVC, $(STOP_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
 
-# Display changes for /etc/hosts
-.PHONY: hosts
+.PHONY: vendor/hosts
 .ONESHELL:
-hosts:
+vendor/hosts:
 	@for file in $(HOSTS_LINES)
 	do
 		while read h
@@ -61,4 +55,9 @@ hosts:
 			sed 's|IPV4_PREFIX|$(IPV4_PREFIX)|g' | \
 			sed 's|LOCAL_DOMAIN|$(LOCAL_DOMAIN)|g'
 		done < $${file};
-	done
+	done > $@
+
+# Display changes for /etc/hosts
+.PHONY: hosts
+hosts: vendor/hosts
+	@cat vendor/hosts

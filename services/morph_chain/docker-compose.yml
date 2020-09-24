@@ -23,6 +23,7 @@ services:
     - ./../../vendor/morph_chain.gz:/morph_chain.gz
     - ./protocol.privnet.yml:/config/protocol.privnet.yml
     - ./node-wallet.json:/wallets/node-wallet.json
+    - ./../../vendor/hosts:/etc/hosts
 
   neofs_morph_chain-healthy:
     image: alpine
