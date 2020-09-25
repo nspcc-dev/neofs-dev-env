@@ -8,7 +8,7 @@
 ---
 ## Overview
 
-Tools to setup local NeoFS network and Neo 3 privnet.
+Tools to set up local NeoFS network and Neo 3 privnet. Devenv, for short.
 
 ## Quick Start
 
@@ -28,6 +28,32 @@ $ make hosts
 ```
 
 It's recommended to add `make hosts` output to your local `/etc/hosts` file.
+
+## How it's organized
+
+```
+.
+├── Makefile         # Commands to manage devenv
+├── .services        # List of services to work with
+├── services         # Services definitions and files
+│   ├── basenet
+│   ├── chain
+│   ├── ir
+│   ├── morph_chain
+│   └── storage
+├── vendor           # Temporary files and artifacts
+└── wallets          # Wallet files to manage GAS assets
+```
+
+Main commands and targets to manage devenv's services are in `Makefile`.
+
+Each service is defined in it's own directory under `services/` with all
+required files to run and scripts to get external artifacts or dependencies.
+
+The list of services and the starting order is defined in `.services` file. You
+can comment out services you don't want to start or add your own new services.
+
+You can find more information on each service in `docs` directory.
 
 ## Contributing
 

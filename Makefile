@@ -1,12 +1,16 @@
 #!/usr/bin/make -f
-SHELL := bash
+SHELL = bash
 
+# Main environment configuration
 include .env
+
+# Optional variables with secrests
 -include .secrets
 
+# help target
 include help.mk
 
-# Get
+# Targets to get required artifacts and external resources for each service
 include services/*/artifacts.mk
 
 # Services that require artifacts
@@ -15,11 +19,11 @@ GET_SVCS = $(shell grep -Rl "get.*:" ./services/* | sort -u | grep artifacts.mk 
 # Services that require pulling images
 PULL_SVCS = $(shell find ./services -type f -name 'docker-compose.yml' | sort -u | xargs -I {} dirname {} | xargs basename -a)
 
-# Sorted services for running
+# List of services to run
 START_SVCS = $(shell cat .services | grep -v \\\#)
 STOP_SVCS = $(shell tac .services | grep -v \\\#)
 
-# List of available sites
+# List of hosts available in devenv
 HOSTS_LINES = $(shell grep -Rl IPV4_PREFIX ./services/* | grep .hosts)
 
 
@@ -34,12 +38,12 @@ pull:
 get: $(foreach SVC, $(GET_SVCS), get.$(SVC))
 	@:
 
-# Start environments
+# Start environment
 .PHONY: up
 up: get vendor/hosts
 	$(foreach SVC, $(START_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
 
-# Stop environments
+# Stop environment
 .PHONY: down
 down:
 	$(foreach SVC, $(STOP_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
