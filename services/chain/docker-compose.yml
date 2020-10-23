@@ -19,6 +19,7 @@ services:
     - ./protocol.privnet.yml:/config/protocol.privnet.yml
     - ./node-wallet.json:/wallets/node-wallet.json
     - ./../../vendor/hosts:/etc/hosts
+    - ./../../wallets/wallet.json:/wallets/wallet.json
 
 networks:
   chain_int:
