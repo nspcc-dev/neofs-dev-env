@@ -13,6 +13,9 @@ include help.mk
 # Targets to get required artifacts and external resources for each service
 include services/*/artifacts.mk
 
+# Targets helpful to prepare service environment
+include services/*/prepare.mk
+
 # Services that require artifacts
 GET_SVCS = $(shell grep -Rl "get.*:" ./services/* | sort -u | grep artifacts.mk | xargs -I {} dirname {} | xargs basename -a)
 
