@@ -8,7 +8,7 @@ Contracts deployed:
 
 ## .env settings
 
-### CHAIN_URL="https://fs.neo.org/dist/devenv.gz"
+### CHAIN_URL="https://fs.neo.org/dist/chain.gz"
 
 URL to get main chain dump. Used on artifact get stage.
 
@@ -16,7 +16,7 @@ URL to get main chain dump. Used on artifact get stage.
 
 Path to get main chain dump. If set, overrides `CHAIN_URL`.
 
-### NEOGO_VERSION=0.91.0-6-gd7e13de5
+### NEOGO_VERSION=0.91.1-pre-389-g71216865
 
 Version on NeoGo container to use in both main privnet and sidechain.
 
@@ -129,7 +129,7 @@ And call the `deposit` method:
 $ neo-go  contract invokefunction -w wallets/neofs1.json \
     -a NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 \
     -r http://main_chain.neofs.devenv:30333 \
-    af5dc5f7e6a6efc64d679098f328027591a2e518 \
+    5f490fbd8010fd716754073ee960067d28549b7d \
     deposit 0b1afa304f4791ad468137b7e141e47d2e0e5082 \
     int:50 bytes: -- 0b1afa304f4791ad468137b7e141e47d2e0e5082
 

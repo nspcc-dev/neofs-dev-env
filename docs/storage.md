@@ -2,7 +2,7 @@
 
 ## .env settings
 
-### NODE_VERSION=0.11.0-153-g50a19cf
+### NODE_VERSION=0.12.0
 
 Image version label to use for Storage Node containers.
 

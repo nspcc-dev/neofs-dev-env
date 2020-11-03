@@ -5,7 +5,7 @@ It's a single-node Neo3-based NeoFS sidechain deployment running on
 
 ## .env settings
 
-### MORPH_CHAIN_URL="https://fs.neo.org/dist/neo.morph.gz"
+### MORPH_CHAIN_URL="https://fs.neo.org/dist/morph.chain.gz"
 
 URL to get NeoFS sidechain dump. Used on artifact get stage.
 
@@ -13,6 +13,6 @@ URL to get NeoFS sidechain dump. Used on artifact get stage.
 
 Path to get NeoFS sidechain chain dump. If set, overrides `MORPH_CHAIN_URL`.
 
-### NEOGO_VERSION=0.91.0-6-gd7e13de5
+### NEOGO_VERSION=0.91.1-pre-389-g71216865
 
 Version on NeoGo container to use in both main privnet and sidechain.
