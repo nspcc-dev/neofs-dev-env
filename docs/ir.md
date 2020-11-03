@@ -4,7 +4,7 @@ Minimal set of seven NeoFS InnerRing as required by Governance scheme.
 
 ## .env settings
 
-### IR_VERSION=0.11.0-153-g50a19cf
+### IR_VERSION=0.12.0
 
 Image version label to use for InnerRing containers.
 
