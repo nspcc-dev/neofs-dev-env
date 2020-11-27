@@ -1,0 +1,35 @@
+---
+
+version: "2.4"
+services:
+  http_gate:
+    image: ${HTTP_GW_IMAGE}:${HTTP_GW_VERSION}
+    domainname: ${LOCAL_DOMAIN}
+    hostname: http_gate
+    container_name: http_gate
+    restart: on-failure
+    networks:
+      http_gate_int:
+      internet:
+        ipv4_address: ${IPV4_PREFIX}.81
+    volumes:
+      - ./user.key:/user.key
+      - ./../../vendor/hosts:/etc/hosts
+    stop_signal: SIGKILL
+    env_file: [ ".env", ".http.env" ]
+    environment:
+      - HTTP_GW_KEY=/user.key
+      - HTTP_GW_PEERS_0_ADDRESS=s01.${LOCAL_DOMAIN}:8080
+      - HTTP_GW_PEERS_0_WEIGHT=0.2
+      - HTTP_GW_PEERS_1_ADDRESS=s02.${LOCAL_DOMAIN}:8080
+      - HTTP_GW_PEERS_1_WEIGHT=0.2
+      - HTTP_GW_PEERS_2_ADDRESS=s03.${LOCAL_DOMAIN}:8080
+      - HTTP_GW_PEERS_2_WEIGHT=0.2
+      - HTTP_GW_PEERS_3_ADDRESS=s04.${LOCAL_DOMAIN}:8080
+      - HTTP_GW_PEERS_3_WEIGHT=0.2
+
+networks:
+  http_gate_int:
+  internet:
+    external:
+      name: basenet_internet
