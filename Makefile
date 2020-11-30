@@ -54,14 +54,10 @@ down:
 .PHONY: vendor/hosts
 .ONESHELL:
 vendor/hosts:
-	@for file in $(HOSTS_LINES)
-	do
-		while read h
-		do
-			echo $${h} | \
-			sed 's|IPV4_PREFIX|$(IPV4_PREFIX)|g' | \
-			sed 's|LOCAL_DOMAIN|$(LOCAL_DOMAIN)|g'
-		done < $${file};
+	@for file in $(HOSTS_LINES); do \
+		while read h; do \
+			echo $${h}| sed 's|IPV4_PREFIX|$(IPV4_PREFIX)|g' | sed 's|LOCAL_DOMAIN|$(LOCAL_DOMAIN)|g'; \
+		done < $${file}; \
 	done > $@
 
 # Display changes for /etc/hosts
