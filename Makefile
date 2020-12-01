@@ -43,7 +43,7 @@ get: $(foreach SVC, $(GET_SVCS), get.$(SVC))
 
 # Start environment
 .PHONY: up
-up: get vendor/hosts
+up: pull get vendor/hosts
 	$(foreach SVC, $(START_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
 
 # Stop environment
@@ -52,7 +52,6 @@ down:
 	$(foreach SVC, $(STOP_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
 
 .PHONY: vendor/hosts
-.ONESHELL:
 vendor/hosts:
 	@for file in $(HOSTS_LINES); do \
 		while read h; do \
@@ -64,3 +63,8 @@ vendor/hosts:
 .PHONY: hosts
 hosts: vendor/hosts
 	@cat vendor/hosts
+
+# Clean-up the envirinment
+.PHONY: clean
+clean:
+	@rm -rf vendor/*
