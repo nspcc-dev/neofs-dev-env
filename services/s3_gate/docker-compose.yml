@@ -1,0 +1,43 @@
+---
+
+version: "2.4"
+services:
+  http_gate:
+    image: ${S3_GW_IMAGE}:${S3_GW_VERSION}
+    domainname: ${LOCAL_DOMAIN}
+    hostname: s3_gate
+    container_name: s3_gate
+    restart: on-failure
+    networks:
+      s3_gate_int:
+      internet:
+        ipv4_address: ${IPV4_PREFIX}.82
+    volumes:
+      - ./user.key:/user.key
+      - ./hcs.pub.key:/hcs.pub.key
+      - ./hcs.sec.key:/hcs.sec.key
+      - ./tls.key:/tls.key
+      - ./tls.crt:/tls.crt
+      - ./../../vendor/hosts:/etc/hosts
+    stop_signal: SIGKILL
+    env_file: [ ".env", ".s3.env" ]
+    environment:
+      - S3_GW_AUTH-KEY=/hcs.sec.key
+      - S3_GW_NEOFS-KEY=/user.key
+      - S3_GW_TLS_KEY_FILE=/tls.key
+      - S3_GW_TLS_CERT_FILE=/tls.crt
+      - S3_GW_LISTEN_ADDRESS=s3.${LOCAL_DOMAIN}:8080
+      - S3_GW_PEERS_0_ADDRESS=s01.${LOCAL_DOMAIN}:8080
+      - S3_GW_PEERS_0_WEIGHT=0.2
+      - S3_GW_PEERS_1_ADDRESS=s02.${LOCAL_DOMAIN}:8080
+      - S3_GW_PEERS_1_WEIGHT=0.2
+      - S3_GW_PEERS_2_ADDRESS=s03.${LOCAL_DOMAIN}:8080
+      - S3_GW_PEERS_2_WEIGHT=0.2
+      - S3_GW_PEERS_3_ADDRESS=s04.${LOCAL_DOMAIN}:8080
+      - S3_GW_PEERS_3_WEIGHT=0.2
+
+networks:
+  s3_gate_int:
+  internet:
+    external:
+      name: basenet_internet
