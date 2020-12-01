@@ -6,3 +6,4 @@ morph_chain
 ir
 storage
 http_gate
+s3_gate
