@@ -1,3 +1,3 @@
-# Deposit GAS from defualt wallet to NeoFS mainnet contract 
+# Deposit GAS from default wallet to NeoFS privnet contract 
 prepare.ir:
 	@./bin/deposit.sh

@@ -15,6 +15,14 @@ Tools to set up local NeoFS network and Neo 3 privnet. Devenv, for short.
 ```
 $ make up
 ```
+When all services are up, you need to make GAS deposit for test wallet to be
+able to pay for NeoFS operations. Test wallet is located in `wallet/wallet.json`.
+
+```
+$ make prepare.ir
+Enter account NTrezR3C4X8aMLVg7vozt5wguyNfFhwuFx password >
+Sent invocation transaction fa6ba62bffb04030d303dcc95bda7413e03aa3c7e6ca9c2f999d65db9ec9b82c
+```
 
 You can see the addresses and hostnames of components with `make hosts` command.
 
@@ -28,6 +36,7 @@ $ make hosts
 ```
 
 It's recommended to add `make hosts` output to your local `/etc/hosts` file.
+
 
 ## How it's organized
 
@@ -54,6 +63,34 @@ The list of services and the starting order is defined in `.services` file. You
 can comment out services you don't want to start or add your own new services.
 
 You can find more information on each service in `docs` directory.
+
+Maybe you will find the answer for your question in [F.A.Q.](docs/faq.md)
+
+## Notable make targets
+
+`make help` will print the brief description of available targets. Here we
+describe some of them in a more detailed way.
+
+### up
+
+Start all Devenv services.
+
+This target call `pull` to get container images, `get` to download required
+artifacts, `vendor/hosts` to generate hosts file and then starts all services in
+the order defined in `.services` file.
+
+### down
+
+Shutdowns all services. This will destroy all containers and networks. All
+changes made inside containers will be lost.
+
+### hosts
+
+Display addresses and host names for each running service, if available.
+
+### clean
+
+Clean up `vendor` directory.
 
 ## Contributing
 
