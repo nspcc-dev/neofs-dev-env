@@ -38,6 +38,8 @@ $ make hosts
 
 It's recommended to add `make hosts` output to your local `/etc/hosts` file.
 
+For instructions on how to set up DevEnv on macOS, please refer [the
+guide](docs/macOS.md) in `docs` directory.
 
 ## How it's organized
 
