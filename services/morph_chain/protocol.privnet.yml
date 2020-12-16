@@ -9,6 +9,7 @@ ProtocolConfiguration:
     - 172.200.0.1:20333
   VerifyBlocks: true
   VerifyTransactions: true
+  StateRootInHeader: false
 
 ApplicationConfiguration:
   DBConfiguration:
@@ -27,7 +28,7 @@ ApplicationConfiguration:
   RPC:
     Enabled: true
     EnableCORSWorkaround: false
-    MaxGasInvoke: 10
+    MaxGasInvoke: 15
     Port: 30333
   Prometheus:
     Enabled: true
