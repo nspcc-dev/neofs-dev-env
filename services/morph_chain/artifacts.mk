@@ -7,7 +7,7 @@ get.morph_chain:
 ifeq (${MORPH_CHAIN_PATH},)
 	@echo "⇒ Download morph chain dump from ${MORPH_CHAIN_URL}"
 	@curl \
-		-sS "${MORPH_CHAIN_URL}" \
+		-sSL "${MORPH_CHAIN_URL}" \
 		-o ./vendor/morph_chain.gz
 else
 	@echo "⇒ Copy local archive ${MORPH_CHAIN_PATH}"

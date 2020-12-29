@@ -7,7 +7,7 @@ get.chain:
 ifeq (${CHAIN_PATH},)
 	@echo "⇒ Download blockchain dump from ${CHAIN_URL}"
 	@curl \
-		-sS "${CHAIN_URL}" \
+		-sSL "${CHAIN_URL}" \
 		-o ./vendor/chain.gz
 else
 	@echo "⇒ Copy local archive ${CHAIN_PATH}"
