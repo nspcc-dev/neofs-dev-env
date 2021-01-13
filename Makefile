@@ -71,5 +71,15 @@ hosts: vendor/hosts
 
 # Clean-up the envirinment
 .PHONY: clean
+.ONESHELL:
 clean:
 	@rm -rf vendor/*
+	@for svc in $(START_SVCS)
+	do
+		vols=`docker-compose -f services/$${svc}/docker-compose.yml config --volumes`
+		if [[ ! -z "$${vols}" ]]; then
+			for vol in $${vols}; do
+				docker volume rm "$${svc}_$${vol}" 2> /dev/null
+			done
+		fi
+	done
