@@ -15,6 +15,7 @@ services:
     volumes:
       - ./01.key:/01.key
       - ./../../vendor/hosts:/etc/hosts
+      - storage_s01:/storage
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -36,6 +37,7 @@ services:
     volumes:
       - ./02.key:/02.key
       - ./../../vendor/hosts:/etc/hosts
+      - storage_s02:/storage
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -57,6 +59,7 @@ services:
     volumes:
       - ./03.key:/03.key
       - ./../../vendor/hosts:/etc/hosts
+      - storage_s03:/storage
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -78,6 +81,7 @@ services:
     volumes:
       - ./04.key:/04.key
       - ./../../vendor/hosts:/etc/hosts
+      - storage_s04:/storage
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -85,6 +89,12 @@ services:
       - NEOFS_NODE_ADDRESS=s04.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_ENDPOINT=s04.${LOCAL_DOMAIN}:8080
       - NEOFS_NODE_ATTRIBUTE_0=/Location:Europe/Country:Finalnd/City:Helsinki
+
+volumes:
+  storage_s01:
+  storage_s02:
+  storage_s03:
+  storage_s04:
 
 networks:
   storage_int:
