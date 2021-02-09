@@ -22,7 +22,7 @@ services:
       - NEOFS_NODE_KEY=/01.key
       - NEOFS_NODE_ADDRESS=s01.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_ENDPOINT=s01.${LOCAL_DOMAIN}:8080
-      - NEOFS_NODE_ATTRIBUTE_0=/Location:Europe/Country:Russia/City:Moscow
+      - NEOFS_NODE_ATTRIBUTE_0=/Locode:RU MSK
 
   storage02:
     image: ${NODE_IMAGE}:${NODE_VERSION}
@@ -44,7 +44,7 @@ services:
       - NEOFS_NODE_KEY=/02.key
       - NEOFS_NODE_ADDRESS=s02.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_ENDPOINT=s02.${LOCAL_DOMAIN}:8080
-      - NEOFS_NODE_ATTRIBUTE_0=/Location:Europe/Country:Russia/City:Saint-Petersburg
+      - NEOFS_NODE_ATTRIBUTE_0=/Locode:RU LED
 
   storage03:
     image: ${NODE_IMAGE}:${NODE_VERSION}
@@ -66,7 +66,7 @@ services:
       - NEOFS_NODE_KEY=/03.key
       - NEOFS_NODE_ADDRESS=s03.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_ENDPOINT=s03.${LOCAL_DOMAIN}:8080
-      - NEOFS_NODE_ATTRIBUTE_0=/Location:Europe/Country:Sweden/City:Stockholm
+      - NEOFS_NODE_ATTRIBUTE_0=/Locode:SE STO
 
   storage04:
     image: ${NODE_IMAGE}:${NODE_VERSION}
@@ -88,7 +88,7 @@ services:
       - NEOFS_NODE_KEY=/04.key
       - NEOFS_NODE_ADDRESS=s04.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_ENDPOINT=s04.${LOCAL_DOMAIN}:8080
-      - NEOFS_NODE_ATTRIBUTE_0=/Location:Europe/Country:Finalnd/City:Helsinki
+      - NEOFS_NODE_ATTRIBUTE_0=/Locode:FI HEL
 
 volumes:
   storage_s01:
