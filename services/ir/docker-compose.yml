@@ -17,6 +17,7 @@ services:
     volumes:
       - ./01.key:/01.key
       - ./../../vendor/hosts:/etc/hosts
+      - ./../../vendor/locode_db:/locode/db
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_KEY=/01.key
@@ -34,6 +35,7 @@ services:
     volumes:
       - ./02.key:/02.key
       - ./../../vendor/hosts:/etc/hosts
+      - ./../../vendor/locode_db:/locode/db
     stop_signal: SIGKILL
     env_file: [ ".env", ".ir.env" ]
     environment:
@@ -52,6 +54,7 @@ services:
     volumes:
       - ./03.key:/03.key
       - ./../../vendor/hosts:/etc/hosts
+      - ./../../vendor/locode_db:/locode/db
     stop_signal: SIGKILL
     env_file: [ ".env", ".ir.env" ]
     environment:
@@ -70,6 +73,7 @@ services:
     volumes:
       - ./04.key:/04.key
       - ./../../vendor/hosts:/etc/hosts
+      - ./../../vendor/locode_db:/locode/db
     stop_signal: SIGKILL
     env_file: [ ".env", ".ir.env" ]
     environment:
@@ -88,6 +92,7 @@ services:
     volumes:
       - ./05.key:/05.key
       - ./../../vendor/hosts:/etc/hosts
+      - ./../../vendor/locode_db:/locode/db
     stop_signal: SIGKILL
     env_file: [ ".env", ".ir.env" ]
     environment:
@@ -106,6 +111,7 @@ services:
     volumes:
       - ./06.key:/06.key
       - ./../../vendor/hosts:/etc/hosts
+      - ./../../vendor/locode_db:/locode/db
     stop_signal: SIGKILL
     env_file: [ ".env", ".ir.env" ]
     environment:
@@ -124,6 +130,7 @@ services:
     volumes:
       - ./07.key:/07.key
       - ./../../vendor/hosts:/etc/hosts
+      - ./../../vendor/locode_db:/locode/db
     stop_signal: SIGKILL
     env_file: [ ".env", ".ir.env" ]
     environment:
