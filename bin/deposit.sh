@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Source env settigns
+# Source env settings
 . .env
 . services/ir/.ir.env
 

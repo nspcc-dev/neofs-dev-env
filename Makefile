@@ -4,7 +4,7 @@ SHELL = bash
 # Main environment configuration
 include .env
 
-# Optional variables with secrests
+# Optional variables with secrets
 -include .secrets
 
 # help target
@@ -69,7 +69,7 @@ vendor/hosts:
 hosts: vendor/hosts
 	@cat vendor/hosts
 
-# Clean-up the envirinment
+# Clean-up the environment
 .PHONY: clean
 .ONESHELL:
 clean:

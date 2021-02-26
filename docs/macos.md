@@ -25,7 +25,7 @@ $ brew cask install tuntap
 
 - Restart macOS and allow tuntap kext in settings before
 
-- Docker for macOS should be runned before
+- Docker for macOS should be run before
 
 - Install docker-tuntap. This will automatically check if the currently
   installed shim is the correct version and make a backup if necessary
