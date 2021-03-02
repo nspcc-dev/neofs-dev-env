@@ -10,6 +10,7 @@ ProtocolConfiguration:
   VerifyBlocks: true
   VerifyTransactions: true
   StateRootInHeader: false
+  P2PSigExtensions: true
 
 ApplicationConfiguration:
   DBConfiguration:
@@ -30,6 +31,11 @@ ApplicationConfiguration:
     EnableCORSWorkaround: false
     MaxGasInvoke: 15
     Port: 30333
+  P2PNotary:
+    Enabled: true
+    UnlockWallet:
+      Path: "./wallets/node-wallet.json"
+      Password: "one"
   Prometheus:
     Enabled: true
     Port: 20001
