@@ -36,7 +36,7 @@ pull:
 	$(foreach SVC, $(PULL_SVCS), $(shell cd services/$(SVC) && docker-compose pull))
 	@:
 
-# Get all services artifacs
+# Get all services artifacts
 .PHONY: get
 get: $(foreach SVC, $(GET_SVCS), get.$(SVC))
 	@:
