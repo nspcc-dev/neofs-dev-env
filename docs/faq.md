@@ -37,6 +37,31 @@ $ xxd wallets/wallet.key
 
 Later this functionality will be included in `neofs-cli` directly.
 
+### How to create Neo wallet JSON file using a NeoFS key file?
+
+You will need `neo-go` and `neofs-cli`.
+
+1. Get the WIF format of the private key
+
+```
+$ neofs-cli util keyer -key ./services/ir/01.key | grep WIF | awk '{print $NF}' > temp_WIF
+```
+
+2. Init a new empty Neo wallet
+
+```
+$ neo-go wallet init -w my_new_wallet.json
+```
+
+3. Import WIF to the new wallet
+
+```
+$ neo-go wallet import -w my_new_wallet.json --wif $(cat temp_WIF) && rm temp_WIF
+Enter the name of the account > 
+Enter passphrase > 
+Confirm passphrase > 
+```
+
 ### How to see what's inside running container if there's no shell?
 
 You can run any program in container's namespace using `nsenter` utility.
