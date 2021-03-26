@@ -1,5 +1,5 @@
 ProtocolConfiguration:
-  Magic: 56753
+  Magic: 15405
   SecondsPerBlock: 1
   MemPoolSize: 50000
   StandbyCommittee:
