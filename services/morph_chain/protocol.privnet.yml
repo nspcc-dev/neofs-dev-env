@@ -9,7 +9,7 @@ ProtocolConfiguration:
     - 172.200.0.1:20333
   VerifyBlocks: true
   VerifyTransactions: true
-  StateRootInHeader: false
+  StateRootInHeader: true
   P2PSigExtensions: true
 
 ApplicationConfiguration:
