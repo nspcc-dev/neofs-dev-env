@@ -25,6 +25,19 @@ Enter account NTrezR3C4X8aMLVg7vozt5wguyNfFhwuFx password >
 Sent invocation transaction fa6ba62bffb04030d303dcc95bda7413e03aa3c7e6ca9c2f999d65db9ec9b82c
 ```
 
+Change NeoFS global configuration values with `make update.*` commands. The
+password of inner ring wallet is `one`. See examples in `make help`.
+
+```
+$ make update.epoch_duration val=30
+Changing EpochDuration configration value to 30
+Enter account NNudMSGzEoktFzdYGYoNb3bzHzbmM1genF password > 
+Sent invocation transaction dbb8c1145b6d10f150135630e13bb0dc282023163f5956c6945a60db0cb45cb0
+Updating NeoFS epoch to 2
+Enter account NNudMSGzEoktFzdYGYoNb3bzHzbmM1genF password > 
+Sent invocation transaction 0e6eb5e190f36332e5e5f4e866c7e100826e285fd949e11c085e15224f343ba6
+```
+
 You can see the addresses and hostnames of components with `make hosts` command.
 
 ```
