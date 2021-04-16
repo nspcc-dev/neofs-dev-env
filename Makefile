@@ -10,6 +10,9 @@ include .env
 # help target
 include help.mk
 
+# update NeoFS global config targets
+include neofs_config.mk
+
 # Targets to get required artifacts and external resources for each service
 include services/*/artifacts.mk
 
