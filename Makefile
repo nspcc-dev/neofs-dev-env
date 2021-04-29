@@ -29,6 +29,12 @@ STOP_SVCS = $(shell tac .services | grep -v \\\#)
 # List of hosts available in devenv
 HOSTS_LINES = $(shell grep -Rl IPV4_PREFIX ./services/* | grep .hosts)
 
+# Paths to protocol.privnet.yml
+MORPH_CHAIN_PROTOCOL = './services/morph_chain/protocol.privnet.yml'
+CHAIN_PROTOCOL = './services/chain/protocol.privnet.yml'
+
+# List of grepped environment variables from *.env
+GREP_DOTENV = $(shell find . -name '*.env' -exec grep -rhv -e '^\#' -e '^$$' {} + )
 
 # Pull all required Docker images
 .PHONY: pull
@@ -83,3 +89,10 @@ clean:
 			done
 		fi
 	done
+
+# Generate environment
+.PHONY: env
+env:
+	@$(foreach envvar,$(GREP_DOTENV),echo $(envvar);)
+	@echo MORPH_BLOCK_TIME=$(shell grep 'SecondsPerBlock' $(MORPH_CHAIN_PROTOCOL) | awk '{print $$2}')s
+	@echo MAINNET_BLOCK_TIME=$(shell grep 'SecondsPerBlock' $(CHAIN_PROTOCOL) | awk '{print $$2}')s
