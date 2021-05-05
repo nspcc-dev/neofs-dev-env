@@ -9,6 +9,7 @@ ProtocolConfiguration:
     - 172.200.0.1:20333
   VerifyBlocks: true
   VerifyTransactions: true
+  P2PSigExtensions: true
 
 ApplicationConfiguration:
   DBConfiguration:
@@ -46,6 +47,11 @@ ApplicationConfiguration:
         - s02.neofs.devenv:8080
         - s03.neofs.devenv:8080
         - s04.neofs.devenv:8080
+    UnlockWallet:
+      Path: "./wallets/node-wallet.json"
+      Password: "one"
+  P2PNotary:
+    Enabled: true
     UnlockWallet:
       Path: "./wallets/node-wallet.json"
       Password: "one"
