@@ -23,4 +23,4 @@ ${NEOGO} contract invokefunction \
 ${NEOFS_IR_CONTRACTS_NEOFS} \
 deposit ${LESH} \
 int:${DEPOSIT} \
-bytes: -- ${LESH}
+bytes: -- ${LESH}:Global

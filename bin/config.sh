@@ -45,4 +45,4 @@ ${NEOGO} contract invokefunction \
 -a ${ADDR} \
 -r http://morph_chain.${LOCAL_DOMAIN}:30333 \
 ${NEOFS_IR_CONTRACTS_NETMAP} \
-newEpoch int:$((EPOCH+1)) -- ${ADDR}
+newEpoch int:$((EPOCH+1)) -- ${ADDR}:Global
