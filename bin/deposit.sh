@@ -13,14 +13,13 @@ DEPOSIT="${1:-50}"
 
 # Internal variables
 ADDR=`cat ${WALLET} | jq -r .accounts[0].address`
-LESH=`${NEOGO} util convert ${ADDR} | grep 'Address to LE ScriptHash' | awk '{print $5}' | grep -oP [A-z0-9]+`
+CONTRACT_ADDR=`${NEOGO} util convert ${NEOFS_IR_CONTRACTS_NEOFS} | grep 'LE ScriptHash to Address' | awk '{print $5}' | grep -oP [A-z0-9]+`
 
 # Make deposit
-${NEOGO} contract invokefunction \
+${NEOGO} wallet nep17 transfer \
 -w ${WALLET} \
--a ${ADDR} \
 -r http://main_chain.${LOCAL_DOMAIN}:30333 \
-${NEOFS_IR_CONTRACTS_NEOFS} \
-deposit ${LESH} \
-int:${DEPOSIT} \
-bytes: -- ${LESH}:Global
+--from ${ADDR} \
+--to ${CONTRACT_ADDR} \
+--token GAS \
+--amount ${DEPOSIT}
