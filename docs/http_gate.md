@@ -6,7 +6,7 @@ Source code and more information can be found in [project's GitHub repository](h
 
 ## .env settings
 
-### HTTP_GW_VERSION=0.12.0
+### HTTP_GW_VERSION=0.15.0
 
 Image version label to use for containers.
 
