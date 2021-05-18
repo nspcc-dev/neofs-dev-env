@@ -13,7 +13,7 @@ Image version label to use for containers.
 If you want to use locally built image, just set it's label here. Instead of
 pulling from DockerHub, the local image will be used.
 
-### HTTP_GW_IMAGE=nspccdev/neofs-http-gate
+### HTTP_GW_IMAGE=nspccdev/neofs-http-gw
 
 Image label prefix to use for containers.
 
