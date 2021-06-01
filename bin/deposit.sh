@@ -8,6 +8,8 @@
 NEOGO="${NEOGO:-docker exec -it main_chain neo-go}"
 # Wallet file to use for deposit GAS from
 WALLET="${WALLET:-wallets/wallet.json}"
+# Wallet password that would be entered automatically; '-' means no password
+PASSWD="-"
 # How much GAS to deposit. First cli argument or 50 by default
 DEPOSIT="${1:-50}"
 
@@ -16,7 +18,7 @@ ADDR=`cat ${WALLET} | jq -r .accounts[0].address`
 CONTRACT_ADDR=`${NEOGO} util convert ${NEOFS_IR_CONTRACTS_NEOFS} | grep 'LE ScriptHash to Address' | awk '{print $5}' | grep -oP [A-z0-9]+`
 
 # Make deposit
-${NEOGO} wallet nep17 transfer \
+./bin/passwd.exp ${PASSWD} ${NEOGO} wallet nep17 transfer \
 -w ${WALLET} \
 -r http://main_chain.${LOCAL_DOMAIN}:30333 \
 --from ${ADDR} \

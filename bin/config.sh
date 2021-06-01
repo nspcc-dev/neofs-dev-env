@@ -7,9 +7,11 @@
 # NeoGo binary path.
 NEOGO="${NEOGO:-docker exec -it main_chain neo-go}"
 
-# Wallet files to change config value 
+# Wallet files to change config value
 WALLET="${WALLET:-services/chain/node-wallet.json}"
 WALLET_IMG="${WALLET_IMG:-wallets/node-wallet.json}"
+# Wallet password that would be entered automatically; '-' means no password
+PASSWD="one"
 
 # NeoFS configuration record: key is a string and value is an int
 KEY=${1}
@@ -23,7 +25,7 @@ ADDR=`cat ${WALLET} | jq -r .accounts[2].address`
 
 # Change config value in side chain
 echo "Changing ${KEY} configration value to ${VALUE}"
-${NEOGO} contract invokefunction \
+./bin/passwd.exp ${PASSWD} ${NEOGO} contract invokefunction \
 -w ${WALLET_IMG} \
 -a ${ADDR} \
 -r http://morph_chain.${LOCAL_DOMAIN}:30333 \
@@ -40,7 +42,7 @@ epoch | grep 'value' | awk -F'"' '{ print $4 }'`
 
 # Update epoch to apply new configuartion value
 echo "Updating NeoFS epoch to $((EPOCH+1))"
-${NEOGO} contract invokefunction \
+./bin/passwd.exp ${PASSWD} ${NEOGO} contract invokefunction \
 -w ${WALLET_IMG} \
 -a ${ADDR} \
 -r http://morph_chain.${LOCAL_DOMAIN}:30333 \
