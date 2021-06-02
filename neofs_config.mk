@@ -21,3 +21,9 @@ update.eigen_trust_iterations:
 # Update basic income rate in fixed 12 (make update.basic_income_rate val=1000)
 update.basic_income_rate:
 	@./bin/config.sh BasicIncomeRate $(val)
+
+# Tick new epoch in side chain
+tick.epoch:
+# UnusedGlobalVariable is passed as argument to 
+# provoke epoch change without any changes in `bin/*`. 
+	@./bin/config.sh UnusedGlobalVariable 0
