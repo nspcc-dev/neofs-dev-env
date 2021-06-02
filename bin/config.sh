@@ -38,7 +38,7 @@ http://morph_chain.${LOCAL_DOMAIN}:30333 \
 ${NEOFS_IR_CONTRACTS_NETMAP} \
 epoch | grep 'value' | awk -F'"' '{ print $4 }'`
 
-# Update epoch to apply new configuartion value
+# Update epoch to apply new configuration value
 echo "Updating NeoFS epoch to $((EPOCH+1))"
 ${NEOGO} contract invokefunction \
 -w ${WALLET_IMG} \
