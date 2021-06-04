@@ -8,7 +8,7 @@
 ---
 ## Overview
 
-Tools to set up local NeoFS network and Neo 3 privnet. Devenv, for short.
+Tools to set up local NeoFS network and N3 privnets. Devenv, for short.
 
 ## Quick Start
 

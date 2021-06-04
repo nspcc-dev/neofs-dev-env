@@ -9,7 +9,7 @@ simple steps.
 1. Get the key in WIF format
 
 ```
-$ docker exec -it main_chain neo-go wallet export -w wallets/wallet.json -d NTrezR3C4X8aMLVg7vozt5wguyNfFhwuFx
+$ docker exec -it main_chain neo-go wallet export -w wallets/wallet.json -d NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM
 Enter password >
 KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr
 ```
@@ -21,9 +21,9 @@ $ neofs-cli util keyer KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr
 PrivateKey      1dd37fba80fec4e6a6f13fd708d8dcb3b29def768017052f6c930fa1c5d90bbb
 PublicKey       031a6c6fbbdf02ca351745fa86b9ba5a9452d785ac4f7fc2b7548ca2a46c4fcf4a
 WIF             KxDgvEKzgSBPPfuVfw67oPQBSjidEiqTHURKSDL1R7yGaGYAeYnr
-Wallet3.0       NTrezR3C4X8aMLVg7vozt5wguyNfFhwuFx
-ScriptHash3.0   12b97a2206ae4b10c7e0194b7b655c32cc912057
-ScriptHash3.0BE 572091cc325c657b4b19e0c7104bae06227ab912
+Wallet3.0       NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM
+ScriptHash3.0   5ea4d57ff4b09098a37db8138686ae2ef6a5b9aa
+ScriptHash3.0BE aab9a5f62eae868613b87da39890b0f47fd5a45e
 ```
 
 3. Dump into file in binary format
@@ -35,7 +35,7 @@ $ xxd wallets/wallet.key
 00000010: b29d ef76 8017 052f 6c93 0fa1 c5d9 0bbb  ...v.../l.......
 ```
 
-Later this functionality will be included in `neofs-cli` directly.
+Later you will be able to provide wallet file in neofs-node config.
 
 ### How to create Neo wallet JSON file using a NeoFS key file?
 

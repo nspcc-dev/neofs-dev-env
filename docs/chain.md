@@ -1,14 +1,17 @@
-# Neo 3 privnet service
+# N3 main chain privnet service
 
-A single-node Neo3 privnet deployment running on
-[neo-go](https://github.com/nspcc-dev/neo-go).
+A single-node N3 privnet deployment, running on
+[neo-go](https://github.com/nspcc-dev/neo-go). Represents N3 MainNet.
 
 Contracts deployed:
-- NeoFS [mainnet contract](https://github.com/nspcc-dev/neofs-contract)
+- NeoFS [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/neofs)
+- Processing [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/processing)
+
+RPC available at `http://main_chain.neofs.devenv:30333`.
 
 ## .env settings
 
-### CHAIN_URL="https://fs.neo.org/dist/chain.gz"
+### CHAIN_URL
 
 URL to get main chain dump. Used on artifact get stage.
 
@@ -16,31 +19,30 @@ URL to get main chain dump. Used on artifact get stage.
 
 Path to get main chain dump. If set, overrides `CHAIN_URL`.
 
-### NEOGO_VERSION=0.91.1-pre-389-g71216865
+### NEOGO_VERSION
 
-Version on NeoGo container to use in both main privnet and sidechain.
+Version of neo-go docker container for main chain deployment.
 
-## Main Privnet GAS
+## Main chain wallets
 
-There is a wallet with GAS for both main privnet and side chain in
-`wallets/wallet.json`.
+There is a wallet with GAS that used for contract deployment: 
+`wallets/wallet.json`. This wallet has one account with **empty password**.
 
 ```
-$ neo-go wallet nep5 balance --token GAS \
+$ neo-go wallet nep17 balance \
     -w wallets/wallet.json \
-    --addr NTrezR3C4X8aMLVg7vozt5wguyNfFhwuFx \
-    -r http://main_chain.neofs.devenv:30333
-
-TokenHash: 668e0c1f9d7b70a99dd9e06eadd4c784d641afbc
-    Amount : 9987.92281340
-    Updated: 13908
+    -r http://main_chain.neofs.devenv:30333 
+   
+Account NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM
+GAS: GasToken (d2a4cff31913016155e38e474a2c06d08be276cf)
+        Amount : 9978.0074623
+        Updated: 34
 ```
 
-If you need GAS to deploy contracts on main privnet or create NeoFS account by
-making deposits on NeoFS mainnet contract, you can transfer GAS from that
-wallet.
+If you want to operate in main chain with your personal wallet (e.g. to make 
+a deposit in NeoFS contract), you can transfer GAS from there.
 
-Create new wallet
+1. Create new wallet.
 
 ```
 $ neo-go wallet init -a -w wallets/neofs1.json
@@ -58,39 +60,46 @@ Confirm passphrase >
 wallet successfully created, file location is wallets/neofs1.json
 ```
 
-Transfer some GAS there
+2. Transfer GAS from `wallets/wallet.json`. The password is empty.
+
 ```
-$ neo-go wallet nep5 transfer --privnet -w wallets/wallet.json \
-    --from NTrezR3C4X8aMLVg7vozt5wguyNfFhwuFx \
+$ neo-go wallet nep17 transfer \
+    -w wallets/wallet.json \
+    -r http://main_chain.neofs.devenv:30333 \
+    --from NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM \
     --to NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 \
-    --amount 50 --token GAS \
-    --rpc-endpoint http://main_chain.neofs.devenv:30333
+    --amount 50 \
+    --token GAS
 ```
 
-Check it's there
+3. Check it's there.
+
 ```
-$ neo-go wallet nep5 balance --token GAS \
+$ neo-go wallet nep17 balance \
     -w wallets/neofs1.json \
-    --addr NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 \
-    -r http://main_chain.neofs.devenv:30333
+    -r http://main_chain.neofs.devenv:30333 
 
-TokenHash: 668e0c1f9d7b70a99dd9e06eadd4c784d641afbc
-    Amount : 50
-    Updated: 14689
+Account NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 
+GAS: GasToken (d2a4cff31913016155e38e474a2c06d08be276cf)
+        Amount : 50
+        Updated: 14689
 ```
 
-## Claim GAS from NEO on CN
+## Claim GAS from consensus node
 
 If there is no enough GAS on `wallets/wallet.json` account, you can claim some
-GAS from CN node's wallet from `services/chain/node-wallet.json` and then
-transfer it. Wallet password can be found in
-`services/chain/protocol.privnet.yml` file.
+GAS to consensus node's wallet and then transfer it.
 
+Consensus node is running with `services/chain/node-wallet.json` wallet. It has
+multiple accounts with the password `one`.
+
+
+Claim GAS to consensus node's wallet. Use account that contains NEO tokens. 
 ```
-$ neo-go wallet claim -w services/chain/node-wallet.json \
-    -a NVNvVRW5Q5naSx2k2iZm7xRgtRNGuZppAK \
-    -r http://main_chain.neofs.devenv:30333
-
+$ neo-go wallet claim \
+    -w services/chain/node-wallet.json \
+    -r http://main_chain.neofs.devenv:30333 \
+    -a NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP \
 Password >
 70e09bbd55846dcc7cee23905b737c63e5a80d32e387bce108bc6db8e641fb90
 ```
@@ -98,41 +107,52 @@ Password >
 Then you can transfer GAS the same way as it was done in previous section.
 
 ```
-neo-go wallet nep5 transfer --privnet -w services/chain/node-wallet.json \
-    --from NVNvVRW5Q5naSx2k2iZm7xRgtRNGuZppAK \
+$ neo-go wallet nep17 transfer \
+    -w services/chain/node-wallet.json \
+    -r http://main_chain.neofs.devenv:30333 \
+    --from NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP \
     --to NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 \
-    --amount 500 --token GAS \
-    --rpc-endpoint http://main_chain.neofs.devenv:30333
+    --amount 50 \
+    --token GAS
 ```
 
 ## NeoFS GAS deposit
 
 NeoFS identifies users by their Neo wallet key pair. To start using NeoFS in
-devenv you need to transfer some GAS from Main privnet account to NeoFS main
-contract's account by calling the `deposit` method.
+devenv you need to transfer some GAS to NeoFS contract in main chain.
 
-First you need to get your account's LE encoded ScriptHash
+Invoke `bin/deposit.sh` script by running `make prepare.ir` command to transfer
+50 GAS from account in `wallets/wallet.json` file. Script enters passwords
+automatically with `expect` utility.
 
 ```
-$ neo-go util convert NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6
-
-Address to BE ScriptHash	82500e2e7de441e1b7378146ad91474f30fa1a0b
-Address to LE ScriptHash	0b1afa304f4791ad468137b7e141e47d2e0e5082
-Address to Base64 (BE)		glAOLn3kQeG3N4FGrZFHTzD6Ggs=
-Address to Base64 (LE)		Cxr6ME9Hka1GgTe34UHkfS4OUII=
-String to Hex				4e586e7a77334a3956764b586a4d314250414a4b3451557054744551753454705536
-String to Base64			TlhuenczSjlWdktYak0xQlBBSks0UVVwVHRFUXU0VHBVNg==
+$ make prepare.ir 
+Password > 
+Can't find matching token in the wallet. Querying RPC-node for balances.
+6713c776f4102300691d9c3c493bcd3402434f5e32e8147e0a5bc72209a1e410
 ```
 
-And call the `deposit` method:
+Script converts addresses and executes this command:
 ```
-$ neo-go  contract invokefunction -w wallets/neofs1.json \
-    -a NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 \
+$ neo-go wallet nep17 transfer \
+    -w wallets/wallet.json \
     -r http://main_chain.neofs.devenv:30333 \
-    5f490fbd8010fd716754073ee960067d28549b7d \
-    deposit 0b1afa304f4791ad468137b7e141e47d2e0e5082 \
-    int:50 bytes: -- 0b1afa304f4791ad468137b7e141e47d2e0e5082
+    --from NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM \
+    --to NerhjaqJsJt4LxMqUbkkVMpsF2d9TtcpFv \
+    --token GAS \
+    --amount 50
+```
 
-Enter account NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 password >
-Sent invocation transaction 50e25f8e85c3b52dbd99381104cbe8056dad1a6e8809e8bf0e5d0a2527f55932
+You can specify any wallet address scripthash in the transfer's data argument,
+and NeoFS deposit will be transferred to that address.
+
+```
+$ neo-go wallet nep17 transfer \
+    -w wallets/wallet.json \
+    -r http://main_chain.neofs.devenv:30333 \
+    --from NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM \
+    --to NerhjaqJsJt4LxMqUbkkVMpsF2d9TtcpFv \
+    --token GAS \
+    --amount 50 \
+    hash160:bd711de066e9c2f7b502c7f3f0e0a6f1c8341edd
 ```
