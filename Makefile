@@ -84,7 +84,7 @@ hosts: vendor/hosts
 .PHONY: clean
 .ONESHELL:
 clean:
-	@rm -rf vendor/*
+	@rm -rf vendor/* services/storage/s04tls.*
 	@for svc in $(START_SVCS)
 	do
 		vols=`docker-compose -f services/$${svc}/docker-compose.yml config --volumes`
