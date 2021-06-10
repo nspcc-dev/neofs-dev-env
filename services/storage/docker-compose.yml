@@ -114,6 +114,8 @@ services:
       - storage_s04:/storage
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
+      - ./s04tls.crt:/tls.crt
+      - ./s04tls.key:/tls.key
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -121,6 +123,7 @@ services:
       - NEOFS_NODE_ADDRESSES=s04.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s04.${LOCAL_DOMAIN}:8080
       - NEOFS_CONTROL_GRPC_ENDPOINT=s04.${LOCAL_DOMAIN}:8081
+      - NEOFS_GRPC_0_TLS_ENABLED=true
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:FI HEL
       - NEOFS_NODE_ATTRIBUTE_1=Price:44
     healthcheck:

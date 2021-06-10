@@ -10,6 +10,16 @@
 
 Tools to set up local NeoFS network and N3 privnets. Devenv, for short.
 
+## Prerequisites
+
+Make sure you have installed all of the following prerequisites on your machine:
+* docker
+* docker-compose
+* make
+* expect
+* openssl
+
+
 ## Quick Start
 
 ```
@@ -23,6 +33,12 @@ with the corresponding key in `wallets/wallet.key`. The password is empty.
 $ make prepare.ir
 password >
 fa6ba62bffb04030d303dcc95bda7413e03aa3c7e6ca9c2f999d65db9ec9b82c
+```
+Also you should add self-signed node (`s04.neofs.devenv`) certificate to truststore 
+(default location might be changed using `CA_CERTS_TRUSTED_STORE` variable). 
+This step is required for client services (neofs-http-gw, neofs-s3-gw) to interact with the node:
+```
+$ sudo make prepare.storage
 ```
 
 Change NeoFS global configuration values with `make update.*` commands. The

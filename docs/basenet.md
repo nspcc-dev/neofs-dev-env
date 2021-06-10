@@ -17,6 +17,9 @@ IPv4 /24 subnet to use for all containers exposed to `basenet_internet`. Last
 octet will be defined in `docker-compose.yml` file for each container inside
 service. For simplicity, each service reserves ten host addresses.
 
+### CA_CERTS_TRUSTED_STORE=/usr/local/share/ca-certificates
+Trusted store location to add node self-signed tls certificates.
+
 ## bastion container
 
 There is a `bastion` container with debian 10 userspace to simplify access to
