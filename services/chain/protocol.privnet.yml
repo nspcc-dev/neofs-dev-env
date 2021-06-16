@@ -10,7 +10,7 @@ ProtocolConfiguration:
     - 172.200.0.1:20333
   VerifyBlocks: true
   VerifyTransactions: true
-  P2PSigExtensions: true
+  P2PSigExtensions: false
 
 ApplicationConfiguration:
   DBConfiguration:
@@ -52,7 +52,7 @@ ApplicationConfiguration:
       Path: "./wallets/node-wallet.json"
       Password: "one"
   P2PNotary:
-    Enabled: true
+    Enabled: false
     UnlockWallet:
       Path: "./wallets/node-wallet.json"
       Password: "one"
