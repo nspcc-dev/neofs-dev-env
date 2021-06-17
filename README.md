@@ -16,8 +16,8 @@ Tools to set up local NeoFS network and N3 privnets. Devenv, for short.
 $ make up
 ```
 When all services are up, you need to make GAS deposit for test wallet to be
-able to pay for NeoFS operations. Test wallet is located in `wallet/wallet.json`
-with the corresponding key in `wallet/wallet.key`. The password is empty.
+able to pay for NeoFS operations. Test wallet is located in `wallets/wallet.json`
+with the corresponding key in `wallets/wallet.key`. The password is empty.
 
 ```
 $ make prepare.ir
