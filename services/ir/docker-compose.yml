@@ -15,12 +15,14 @@ services:
         ipv4_address: ${IPV4_PREFIX}.61
     stop_signal: SIGKILL
     volumes:
-      - ./01.key:/01.key
+      - ./wallet01.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/locode_db:/locode/db
     env_file: [ ".env", ".ir.env" ]
     environment:
-    - NEOFS_IR_KEY=/01.key
+    - NEOFS_IR_WALLET_PATH=/wallet.json
+    - NEOFS_IR_WALLET_ADDRESS=Nhfg3TbpwogLvDGVvAvqyThbsHgoSUKwtn
+    - NEOFS_IR_WALLET_PASSWORD=one
 
 networks:
   ir_int:
