@@ -21,8 +21,8 @@ with the corresponding key in `wallets/wallet.key`. The password is empty.
 
 ```
 $ make prepare.ir
-Enter account NTrezR3C4X8aMLVg7vozt5wguyNfFhwuFx password >
-Sent invocation transaction fa6ba62bffb04030d303dcc95bda7413e03aa3c7e6ca9c2f999d65db9ec9b82c
+password >
+fa6ba62bffb04030d303dcc95bda7413e03aa3c7e6ca9c2f999d65db9ec9b82c
 ```
 
 Change NeoFS global configuration values with `make update.*` commands. The
