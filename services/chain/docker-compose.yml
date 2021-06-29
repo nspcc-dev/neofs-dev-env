@@ -5,6 +5,7 @@ services:
   neofs_main_chain:
     image: nspccdev/neo-go:${NEOGO_VERSION}
     container_name: main_chain
+    command: ["node", "--config-path", "/config", "--privnet", "--debug"]
     domainname: ${LOCAL_DOMAIN}
     hostname: main_chain
     networks:
