@@ -16,9 +16,6 @@ services:
       - ./01.key:/01.key
       - ./../../vendor/hosts:/etc/hosts
       - storage_s01:/storage
-      - ./../../vendor/neofs-cli:/neofs-cli
-      - ./healthcheck.sh:/healthcheck.sh
-      - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -28,12 +25,6 @@ services:
       - NEOFS_CONTROL_GRPC_ENDPOINT=s01.${LOCAL_DOMAIN}:8081
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:RU MSK
       - NEOFS_NODE_ATTRIBUTE_1=Price:22
-    healthcheck:
-      test: ["CMD-SHELL", "/healthcheck.sh"]
-      interval: 2s
-      timeout: 1s
-      retries: 5
-      start_period: 10s
 
   storage02:
     image: ${NODE_IMAGE}:${NODE_VERSION}
@@ -49,9 +40,6 @@ services:
       - ./02.key:/02.key
       - ./../../vendor/hosts:/etc/hosts
       - storage_s02:/storage
-      - ./../../vendor/neofs-cli:/neofs-cli
-      - ./healthcheck.sh:/healthcheck.sh
-      - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -61,12 +49,6 @@ services:
       - NEOFS_CONTROL_GRPC_ENDPOINT=s02.${LOCAL_DOMAIN}:8081
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:RU LED
       - NEOFS_NODE_ATTRIBUTE_1=Price:33
-    healthcheck:
-      test: ["CMD-SHELL", "/healthcheck.sh"]
-      interval: 2s
-      timeout: 1s
-      retries: 5
-      start_period: 10s
 
   storage03:
     image: ${NODE_IMAGE}:${NODE_VERSION}
@@ -82,9 +64,6 @@ services:
       - ./03.key:/03.key
       - ./../../vendor/hosts:/etc/hosts
       - storage_s03:/storage
-      - ./../../vendor/neofs-cli:/neofs-cli
-      - ./healthcheck.sh:/healthcheck.sh
-      - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -94,12 +73,6 @@ services:
       - NEOFS_CONTROL_GRPC_ENDPOINT=s03.${LOCAL_DOMAIN}:8081
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:SE STO
       - NEOFS_NODE_ATTRIBUTE_1=Price:11
-    healthcheck:
-      test: ["CMD-SHELL", "/healthcheck.sh"]
-      interval: 2s
-      timeout: 1s
-      retries: 5
-      start_period: 10s
 
   storage04:
     image: ${NODE_IMAGE}:${NODE_VERSION}
@@ -115,41 +88,15 @@ services:
       - ./04.key:/04.key
       - ./../../vendor/hosts:/etc/hosts
       - storage_s04:/storage
-      - ./../../vendor/neofs-cli:/neofs-cli
-      - ./healthcheck.sh:/healthcheck.sh
-      - ./s04tls.crt:/tls.crt
-      - ./s04tls.key:/tls.key
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
       - NEOFS_NODE_KEY=/04.key
-      - NEOFS_NODE_ADDRESSES=grpcs://s04.${LOCAL_DOMAIN}:8080 s04.${LOCAL_DOMAIN}:8082
-      - NEOFS_CONTROL_GRPC_ENDPOINT=s04.${LOCAL_DOMAIN}:8081
-      - NEOFS_GRPC_NUM=2
+      - NEOFS_NODE_ADDRESSES=s04.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s04.${LOCAL_DOMAIN}:8080
-      - NEOFS_GRPC_0_TLS_ENABLED=true
-      - NEOFS_GRPC_1_ENDPOINT=s04.${LOCAL_DOMAIN}:8082
+      - NEOFS_CONTROL_GRPC_ENDPOINT=s04.${LOCAL_DOMAIN}:8081
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:FI HEL
       - NEOFS_NODE_ATTRIBUTE_1=Price:44
-    healthcheck:
-      test: ["CMD-SHELL", "/healthcheck.sh"]
-      interval: 2s
-      timeout: 1s
-      retries: 5
-      start_period: 10s
-     
-  sn-healthcheck:
-    container_name: sn-healthcheck
-    image: debian:10
-    depends_on:
-      storage01:
-        condition: service_healthy
-      storage02:
-        condition: service_healthy
-      storage03:
-        condition: service_healthy
-      storage04:
-        condition: service_healthy
 
 volumes:
   storage_s01:
