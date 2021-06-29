@@ -16,13 +16,29 @@ services:
     stop_signal: SIGKILL
     volumes:
       - ./wallet01.json:/wallet.json
+      - ./wallet01.key:/wallet01.key
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/locode_db:/locode/db
+      - ./../../vendor/neofs-cli:/neofs-cli
+      - ./healthcheck.sh:/healthcheck.sh
     env_file: [ ".env", ".ir.env" ]
     environment:
     - NEOFS_IR_WALLET_PATH=/wallet.json
     - NEOFS_IR_WALLET_ADDRESS=Nhfg3TbpwogLvDGVvAvqyThbsHgoSUKwtn
     - NEOFS_IR_WALLET_PASSWORD=one
+    healthcheck:
+      test: ["CMD-SHELL", "/healthcheck.sh"]
+      interval: 2s
+      timeout: 1s
+      retries: 5
+      start_period: 20s
+
+  ir-healthcheck:
+    container_name: ir-healthcheck
+    image: debian:10
+    depends_on:
+      ir01:
+        condition: service_healthy
 
 networks:
   ir_int:
