@@ -53,7 +53,9 @@ get: $(foreach SVC, $(GET_SVCS), get.$(SVC))
 # Start environment
 .PHONY: up
 up: pull get vendor/hosts
-	$(foreach SVC, $(START_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
+	@$(foreach SVC, $(START_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
+	@./bin/tick.sh
+	@echo "NeoFS Developer Environment is ready"
 
 # Stop environment
 .PHONY: down
