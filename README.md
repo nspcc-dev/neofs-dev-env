@@ -18,6 +18,7 @@ Make sure you have installed all of the following prerequisites on your machine:
 * make
 * expect
 * openssl
+* jq
 
 
 ## Quick Start
