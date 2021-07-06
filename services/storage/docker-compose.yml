@@ -18,6 +18,7 @@ services:
       - storage_s01:/storage
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
+      - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -50,6 +51,7 @@ services:
       - storage_s02:/storage
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
+      - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -82,6 +84,7 @@ services:
       - storage_s03:/storage
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
+      - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env" ]
     environment:
@@ -120,10 +123,12 @@ services:
     env_file: [ ".env", ".storage.env" ]
     environment:
       - NEOFS_NODE_KEY=/04.key
-      - NEOFS_NODE_ADDRESSES=s04.${LOCAL_DOMAIN}:8080
-      - NEOFS_GRPC_0_ENDPOINT=s04.${LOCAL_DOMAIN}:8080
+      - NEOFS_NODE_ADDRESSES=grpcs://s04.${LOCAL_DOMAIN}:8080 s04.${LOCAL_DOMAIN}:8082
       - NEOFS_CONTROL_GRPC_ENDPOINT=s04.${LOCAL_DOMAIN}:8081
+      - NEOFS_GRPC_NUM=2
+      - NEOFS_GRPC_0_ENDPOINT=s04.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_TLS_ENABLED=true
+      - NEOFS_GRPC_1_ENDPOINT=s04.${LOCAL_DOMAIN}:8082
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:FI HEL
       - NEOFS_NODE_ATTRIBUTE_1=Price:44
     healthcheck:
