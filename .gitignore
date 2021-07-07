@@ -4,3 +4,5 @@ tmp
 .secrets
 sites/*
 !sites/.gitkeep
+services/storage/*tls.crt
+services/storage/*tls.key
