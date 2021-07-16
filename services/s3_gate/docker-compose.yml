@@ -13,17 +13,15 @@ services:
       internet:
         ipv4_address: ${IPV4_PREFIX}.82
     volumes:
-      - ./user.key:/user.key
-      - ./hcs.pub.key:/hcs.pub.key
-      - ./hcs.sec.key:/hcs.sec.key
+      - ./wallet.json:/wallet.json
       - ./tls.key:/tls.key
       - ./tls.crt:/tls.crt
       - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
     env_file: [ ".env", ".s3.env" ]
     environment:
-      - S3_GW_AUTH-KEY=/hcs.sec.key
-      - S3_GW_NEOFS-KEY=/user.key
+      - S3_GW_WALLET=/wallet.json
+      - S3_GW_WALLET_PASSPHRASE=s3
       - S3_GW_TLS_KEY_FILE=/tls.key
       - S3_GW_TLS_CERT_FILE=/tls.crt
       - S3_GW_LISTEN_ADDRESS=s3.${LOCAL_DOMAIN}:8080
