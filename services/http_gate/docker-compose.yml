@@ -13,12 +13,13 @@ services:
       internet:
         ipv4_address: ${IPV4_PREFIX}.81
     volumes:
-      - ./node.key:/node.key
+      - ./wallet.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
     env_file: [ ".env", ".http.env" ]
     environment:
-      - HTTP_GW_KEY=/node.key
+      - HTTP_GW_WALLET=/wallet.json
+      - HTTP_GW_WALLET_PASSPHRASE=one
       - HTTP_GW_PEERS_0_ADDRESS=s01.${LOCAL_DOMAIN}:8080
       - HTTP_GW_PEERS_0_WEIGHT=0.2
       - HTTP_GW_PEERS_1_ADDRESS=s02.${LOCAL_DOMAIN}:8080
