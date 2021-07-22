@@ -102,3 +102,13 @@ env:
 	@echo MORPH_BLOCK_TIME=$(shell grep 'SecondsPerBlock' $(MORPH_CHAIN_PROTOCOL) | awk '{print $$2}')s
 	@echo MAINNET_BLOCK_TIME=$(shell grep 'SecondsPerBlock' $(CHAIN_PROTOCOL) | awk '{print $$2}')s
 	@echo MORPH_MAGIC=$(shell grep 'Magic' $(MORPH_CHAIN_PROTOCOL) | awk '{print $$2}')
+
+# Restart storage nodes with clean volumes
+.PHONY: restart.storage-clean
+restart.storage-clean:
+	@docker-compose -f ./services/storage/docker-compose.yml down
+	@$(foreach vol, \
+		$(shell docker-compose -f services/storage/docker-compose.yml config --volumes),\
+		docker volume rm storage_$(vol);)
+	@docker-compose -f ./services/storage/docker-compose.yml up -d
+
