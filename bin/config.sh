@@ -21,7 +21,11 @@ VALUE="${2}"
 [ -z "$VALUE" ] && echo "Empty config value" && exit 1
 
 # Internal variables
-ADDR=`cat ${WALLET} | jq -r .accounts[2].address`
+if [[ -z "${NEOFS_NOTARY_DISABLED}" ]]; then
+  ADDR=`cat ${WALLET} | jq -r .accounts[2].address`
+else
+  ADDR=`cat ${WALLET} | jq -r .accounts[0].address`
+fi
 
 # Change config value in side chain
 echo "Changing ${KEY} configration value to ${VALUE}"

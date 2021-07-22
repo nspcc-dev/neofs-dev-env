@@ -15,7 +15,11 @@ WALLET_IMG="${WALLET_IMG:-wallets/node-wallet.json}"
 PASSWD="one"
 
 # Internal variables
-ADDR=`cat ${WALLET} | jq -r .accounts[2].address`
+if [[ -z "${NEOFS_NOTARY_DISABLED}" ]]; then
+  ADDR=`cat ${WALLET} | jq -r .accounts[2].address`
+else
+  ADDR=`cat ${WALLET} | jq -r .accounts[0].address`
+fi
 
 # Fetch current epoch value
 EPOCH=`${NEOGO} contract testinvokefunction -r \

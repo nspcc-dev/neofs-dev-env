@@ -45,9 +45,19 @@ Chain dump without notary service does not have predefined network map.
 Therefore, you need to wait about 5 minutes until new epoch tick with updated
 network map.
 
-All helper commands such as `make tick.epoch` or `make update.epoch_duration`
-are designed as multisignature transactions, so you can't use them without
-notary.
+
+4. Enable helper commands
+
+To enable helper commands such as `make tick.epoch` or `make update.epoch_duration`
+make sure to export non-empty `NEOFS_NOTARY_DISABLED` environment variable. 
+```
+$ export NEOFS_NOTARY_DISABLED=1
+```
+
+Use `unset` command to return it back.
+```
+$ unset NEOFS_NOTARY_DISABLED
+```
 
 # Enable notary service in main chain
 
