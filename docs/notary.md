@@ -36,17 +36,12 @@ ApplicationConfiguration:
     Enabled: false
 ```
 
-3. Update `services/ir/.ir.env` and disable notary support.
-```
-NEOFS_IR_WITHOUT_NOTARY=true
-```
-
 Chain dump without notary service does not have predefined network map.
 Therefore, you need to wait about 5 minutes until new epoch tick with updated
 network map.
 
 
-4. Enable helper commands
+3. Enable helper commands
 
 To enable helper commands such as `make tick.epoch` or `make update.epoch_duration`
 make sure to export non-empty `NEOFS_NOTARY_DISABLED` environment variable. 
@@ -79,11 +74,6 @@ ProtocolConfiguration:
 ApplicationConfiguration:
   P2PNotary:
     Enabled: true
-```
-
-3. Update `services/ir/.ir.env` and enable main chain notary support.
-```
-NEOFS_IR_WITHOUT_MAIN_NOTARY=false
 ```
 
 Main chain generates a block once per 15 seconds, so Inner Ring takes about 
