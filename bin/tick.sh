@@ -24,6 +24,10 @@ else
   ADDR=`cat ${WALLET} | jq -r .accounts[0].address`
 fi
 
+# Grep Morph block time
+SIDECHAIN_PROTO="${SIDECHAIN_PROTO:-services/morph_chain/protocol.privnet.yml}"
+BLOCK_DURATION=`grep SecondsPerBlock < $SIDECHAIN_PROTO | awk '{print $2}'`
+
 # Fetch current epoch value
 EPOCH=`${NEOGO_NONINTERACTIVE} contract testinvokefunction -r \
 http://morph_chain.${LOCAL_DOMAIN}:30333 \
@@ -37,3 +41,6 @@ echo "Updating NeoFS epoch to $((EPOCH+1))"
 -r http://morph_chain.${LOCAL_DOMAIN}:30333 \
 ${NEOFS_IR_CONTRACTS_NETMAP} \
 newEpoch int:$((EPOCH+1)) -- ${ADDR}:Global
+
+# Wait one Morph block to ensure the transaction broadcasted
+sleep $BLOCK_DURATION
