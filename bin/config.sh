@@ -12,6 +12,7 @@ WALLET="${WALLET:-services/chain/node-wallet.json}"
 WALLET_IMG="${WALLET_IMG:-wallets/node-wallet.json}"
 # Wallet password that would be entered automatically; '-' means no password
 PASSWD="one"
+NETMAP_ADDR=`bin/resolve.sh netmap.neofs`
 
 # NeoFS configuration record: key is a string and value is an int
 KEY=${1}
@@ -33,7 +34,7 @@ echo "Changing ${KEY} configration value to ${VALUE}"
 -w ${WALLET_IMG} \
 -a ${ADDR} \
 -r http://morph_chain.${LOCAL_DOMAIN}:30333 \
-${NEOFS_IR_CONTRACTS_NETMAP} \
+${NETMAP_ADDR} \
 setConfig bytes:beefcafe \
 string:${KEY} \
 int:${VALUE} -- ${ADDR} || exit 1
