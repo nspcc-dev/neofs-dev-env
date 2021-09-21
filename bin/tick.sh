@@ -27,11 +27,12 @@ fi
 # Grep Morph block time
 SIDECHAIN_PROTO="${SIDECHAIN_PROTO:-services/morph_chain/protocol.privnet.yml}"
 BLOCK_DURATION=`grep SecondsPerBlock < $SIDECHAIN_PROTO | awk '{print $2}'`
+NETMAP_ADDR=`bin/resolve.sh netmap.neofs`
 
 # Fetch current epoch value
 EPOCH=`${NEOGO_NONINTERACTIVE} contract testinvokefunction -r \
 http://morph_chain.${LOCAL_DOMAIN}:30333 \
-${NEOFS_IR_CONTRACTS_NETMAP} \
+${NETMAP_ADDR} \
 epoch | grep 'value' | awk -F'"' '{ print $4 }'`
 
 echo "Updating NeoFS epoch to $((EPOCH+1))"
@@ -39,7 +40,7 @@ echo "Updating NeoFS epoch to $((EPOCH+1))"
 -w ${WALLET_IMG} \
 -a ${ADDR} \
 -r http://morph_chain.${LOCAL_DOMAIN}:30333 \
-${NEOFS_IR_CONTRACTS_NETMAP} \
+${NETMAP_ADDR} \
 newEpoch int:$((EPOCH+1)) -- ${ADDR}:Global
 
 # Wait one Morph block to ensure the transaction broadcasted
