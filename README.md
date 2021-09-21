@@ -19,6 +19,7 @@ Make sure you have installed all of the following prerequisites on your machine:
 * expect
 * openssl
 * jq
+* base64 (coreutils)
 
 
 ## Quick Start
