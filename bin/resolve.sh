@@ -10,4 +10,4 @@ NNS_ADDR=`curl -s --data '{ "id": 1, "jsonrpc": "2.0", "method": "getcontractsta
 
 ${NEOGO} contract testinvokefunction \
 -r http://morph_chain.${LOCAL_DOMAIN}:30333 \
-${NNS_ADDR} resolve string:${1} int:16 | jq -r '.stack[0].value' | base64 -d
+${NNS_ADDR} resolve string:${1} int:16 | jq -r '.stack[0].value | if type=="array" then .[0].value else . end' | base64 -d
