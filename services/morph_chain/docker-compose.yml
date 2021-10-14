@@ -25,5 +25,5 @@ services:
 networks:
   chain_int:
   internet:
-    external:
-      name: basenet_internet
+    external: true
+    name: basenet_internet
