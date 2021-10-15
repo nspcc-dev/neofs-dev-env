@@ -14,10 +14,13 @@ WALLET_IMG="${WALLET_IMG:-wallets/node-wallet.json}"
 PASSWD="one"
 NETMAP_ADDR=`bin/resolve.sh netmap.neofs`
 
-# NeoFS configuration record: key is a string and value is an int
-KEY=${1}
-VALUE="${2}"
+# NeoFS configuration record: variable type [string|int|etc],
+# key is a string and value is a constant of given type
+TYPE=${1}
+KEY=${2}
+VALUE="${3}"
 
+[ -z "$TYPE" ] && echo "Empty config value type" && exit 1
 [ -z "$KEY" ] && echo "Empty config key" && exit 1
 [ -z "$VALUE" ] && echo "Empty config value" && exit 1
 
@@ -37,7 +40,7 @@ echo "Changing ${KEY} configration value to ${VALUE}"
 ${NETMAP_ADDR} \
 setConfig bytes:beefcafe \
 string:${KEY} \
-int:${VALUE} -- ${ADDR} || exit 1
+${TYPE}:${VALUE} -- ${ADDR} || exit 1
 
 # Update epoch to apply new configuration value
 ./bin/tick.sh
