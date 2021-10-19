@@ -14,6 +14,10 @@ update.audit_fee:
 update.container_fee:
 	@./bin/config.sh int ContainerFee $(val)
 
+# Update container alias fee per alphabet node in fixed 12 (make update.container_alias_fee val=100)
+update.container_alias_fee:
+	@./bin/config.sh int ContainerAliasFee $(val)
+
 # Update amount of EigenTrust iterations (make update.eigen_trust_iterations val=2)
 update.eigen_trust_iterations:
 	@./bin/config.sh int EigenTrustIterations $(val)
