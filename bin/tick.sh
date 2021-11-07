@@ -6,9 +6,6 @@
 
 # NeoGo binary path.
 NEOGO="${NEOGO:-docker exec -it main_chain neo-go}"
-# Launching neo-go this way is useful, when running the script not from
-# terminal, for instance, in jenkins job.
-NEOGO_NONINTERACTIVE="${NEOGO_NONINTERACTIVE:-docker exec main_chain neo-go}"
 
 # Wallet files to change config value
 WALLET="${WALLET:-services/chain/node-wallet.json}"
@@ -30,7 +27,7 @@ BLOCK_DURATION=`grep SecondsPerBlock < $SIDECHAIN_PROTO | awk '{print $2}'`
 NETMAP_ADDR=`bin/resolve.sh netmap.neofs`
 
 # Fetch current epoch value
-EPOCH=`${NEOGO_NONINTERACTIVE} contract testinvokefunction -r \
+EPOCH=`${NEOGO} contract testinvokefunction -r \
 http://morph_chain.${LOCAL_DOMAIN}:30333 \
 ${NETMAP_ADDR} \
 epoch | grep 'value' | awk -F'"' '{ print $4 }'`
