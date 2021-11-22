@@ -21,6 +21,7 @@ services:
     - ./node-wallet.json:/wallets/node-wallet.json
     - ./../../vendor/hosts:/etc/hosts
     - ./../../wallets/wallet.json:/wallets/wallet.json
+    - ./../s3_gate/wallet.json:/services/s3_gate/wallet.json
 
 networks:
   chain_int:
