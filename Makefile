@@ -55,6 +55,7 @@ get: $(foreach SVC, $(GET_SVCS), get.$(SVC))
 up: pull get vendor/hosts
 	@$(foreach SVC, $(START_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
 	@./bin/tick.sh
+	@./bin/config.sh string SystemDNS container
 	@echo "NeoFS Developer Environment is ready"
 
 # Stop environment

@@ -23,6 +23,10 @@ update.eigen_trust_iterations:
 	@./bin/config.sh int EigenTrustIterations $(val)
 
 
+# Update system dns to resolve container names (make update.system_dns val=container)
+update.system_dns:
+	@./bin/config.sh string SystemDNS $(val)
+
 # Update alpha parameter of EigenTrust algorithm in 0 <= f <= 1.0 (make update.eigen_trust_alpha val=0.2)
 update.eigen_trust_alpha:
 	@./bin/config.sh string EigenTrustAlpha $(val)
