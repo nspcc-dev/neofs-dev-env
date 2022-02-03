@@ -1,10 +1,5 @@
 # Services start/stop order
 # Will start from top to bottom and stop in reverse
-basenet
-chain
-morph_chain
-ir
-storage
 http_gate
 s3_gate
 coredns

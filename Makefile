@@ -27,8 +27,9 @@ PULL_SVCS = $(shell find ./services -type f -name 'docker-compose.yml' | sort -u
 
 # List of services to run
 START_SVCS = $(shell cat .services | grep -v \\\#)
-START_NEOFS = $(shell cat .basic_services | grep -v \\\#)
+START_BASIC = $(shell cat .basic_services | grep -v \\\#)
 STOP_SVCS = $(shell tac .services | grep -v \\\#)
+STOP_BASIC = $(shell tac .basic_services | grep -v \\\#)
 
 # List of hosts available in devenv
 HOSTS_LINES = $(shell grep -Rl IPV4_PREFIX ./services/* | grep .hosts)
@@ -53,30 +54,37 @@ get: $(foreach SVC, $(GET_SVCS), get.$(SVC))
 
 # Start environment
 .PHONY: up
-up: get vendor/hosts
+up: up/basic
 	@$(foreach SVC, $(START_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
-	@./bin/tick.sh
-	@./bin/config.sh string SystemDNS container
-	@echo "NeoFS Developer Environment is ready"
+	@echo "Full NeoFS Developer Environment is ready"
 
 # Build up NeoFS
 .PHONY: up/basic
 up/basic: get vendor/hosts
-	@$(foreach SVC, $(START_NEOFS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
+	@$(foreach SVC, $(START_BASIC), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
 	@./bin/tick.sh
+	@./bin/config.sh string SystemDNS container
 	@echo "Basic NeoFS Developer Environment is ready"
 
 # Build up certain service
 .PHONY: up/%
 up/%: get vendor/hosts
 	@docker-compose -f services/$*/docker-compose.yml up -d
-	@./bin/tick.sh
 	@echo "Developer Environment for $* service is ready"
 
 # Stop environment
 .PHONY: down
-down:
+down: down/add down/basic
+	@echo "Full NeoFS Developer Environment is down"
+
+.PHONY: down/add
+down/add:
 	$(foreach SVC, $(STOP_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
+
+# Stop basic environment
+.PHONY: down/basic
+down/basic:
+	$(foreach SVC, $(STOP_BASIC), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
 
 # Stop certain service
 .PHONY: down/%
