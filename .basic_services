@@ -3,5 +3,6 @@
 basenet
 chain
 morph_chain
+nats
 ir
 storage
