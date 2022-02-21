@@ -19,6 +19,9 @@ services:
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
+      - ../nats/client-cert.pem:/etc/neofs-node/nats.tls.cert
+      - ../nats/client-key.pem:/etc/neofs-node/nats.tls.key
+      - ../nats/ca-cert.pem:/etc/neofs-node/nats.ca.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
@@ -54,6 +57,9 @@ services:
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
+      - ../nats/client-cert.pem:/etc/neofs-node/nats.tls.cert
+      - ../nats/client-key.pem:/etc/neofs-node/nats.tls.key
+      - ../nats/ca-cert.pem:/etc/neofs-node/nats.ca.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
@@ -89,6 +95,9 @@ services:
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
+      - ../nats/client-cert.pem:/etc/neofs-node/nats.tls.cert
+      - ../nats/client-key.pem:/etc/neofs-node/nats.tls.key
+      - ../nats/ca-cert.pem:/etc/neofs-node/nats.ca.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
@@ -125,6 +134,9 @@ services:
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/tls.crt
       - ./s04tls.key:/tls.key
+      - ../nats/client-cert.pem:/etc/neofs-node/nats.tls.cert
+      - ../nats/client-key.pem:/etc/neofs-node/nats.tls.key
+      - ../nats/ca-cert.pem:/etc/neofs-node/nats.ca.crt
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
