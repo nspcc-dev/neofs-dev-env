@@ -7,7 +7,7 @@ services:
     container_name: morph_chain
     command: ["node", "--config-path", "/config", "--privnet", "--debug"]
     domainname: ${LOCAL_DOMAIN}
-    hostname: morph_chain
+    hostname: morph-chain
     networks:
       chain_int:
       internet:

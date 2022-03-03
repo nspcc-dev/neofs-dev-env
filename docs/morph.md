@@ -12,7 +12,7 @@ Contracts deployed:
 - Proxy [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/proxy)
 - Reputation [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/reputation)
  
-RPC available at `http://morph_chain.neofs.devenv:30333`.
+RPC available at `http://morph-chain.neofs.devenv:30333`.
 
 ## .env settings
 
@@ -36,8 +36,8 @@ There is a wallet with GAS that used for contract deployment:
 ```
 $ neo-go wallet nep17 balance \
     -w wallets/wallet.json \
-    -r http://morph_chain.neofs.devenv:30333 
-   
+    -r http://morph-chain.neofs.devenv:30333
+
 Account NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM
 GAS: GasToken (d2a4cff31913016155e38e474a2c06d08be276cf)
         Amount : 189826.0515316

@@ -7,7 +7,7 @@ services:
     container_name: main_chain
     command: ["node", "--config-path", "/config", "--privnet", "--debug"]
     domainname: ${LOCAL_DOMAIN}
-    hostname: main_chain
+    hostname: main-chain
     networks:
       chain_int:
       internet:
