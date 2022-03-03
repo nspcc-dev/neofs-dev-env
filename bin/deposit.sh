@@ -20,7 +20,7 @@ CONTRACT_ADDR=`${NEOGO} util convert ${NEOFS_IR_CONTRACTS_NEOFS} | grep 'LE Scri
 # Make deposit
 ./bin/passwd.exp ${PASSWD} ${NEOGO} wallet nep17 transfer \
 -w ${WALLET} \
--r http://main_chain.${LOCAL_DOMAIN}:30333 \
+-r http://main-chain.${LOCAL_DOMAIN}:30333 \
 --from ${ADDR} \
 --to ${CONTRACT_ADDR} \
 --token GAS \

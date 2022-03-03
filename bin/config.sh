@@ -36,7 +36,7 @@ echo "Changing ${KEY} configration value to ${VALUE}"
 ./bin/passwd.exp ${PASSWD} ${NEOGO} contract invokefunction \
 -w ${WALLET_IMG} \
 -a ${ADDR} \
--r http://morph_chain.${LOCAL_DOMAIN}:30333 \
+-r http://morph-chain.${LOCAL_DOMAIN}:30333 \
 ${NETMAP_ADDR} \
 setConfig bytes:beefcafe \
 string:${KEY} \

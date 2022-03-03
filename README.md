@@ -61,7 +61,7 @@ You can see the addresses and hostnames of components with `make hosts` command.
 ```
 $ make hosts
 192.168.130.10 bastion.neofs.devenv
-192.168.130.50 main_chain.neofs.devenv
+192.168.130.50 main-chain.neofs.devenv
 192.168.130.61 ir01.neofs.devenv
 ...
 192.168.130.74 s04.neofs.devenv

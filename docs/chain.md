@@ -7,7 +7,7 @@ Contracts deployed:
 - NeoFS [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/neofs)
 - Processing [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/processing)
 
-RPC available at `http://main_chain.neofs.devenv:30333`.
+RPC available at `http://main-chain.neofs.devenv:30333`.
 
 ## .env settings
 
@@ -31,7 +31,7 @@ There is a wallet with GAS that used for contract deployment:
 ```
 $ neo-go wallet nep17 balance \
     -w wallets/wallet.json \
-    -r http://main_chain.neofs.devenv:30333 
+    -r http://main-chain.neofs.devenv:30333 
    
 Account NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM
 GAS: GasToken (d2a4cff31913016155e38e474a2c06d08be276cf)
@@ -65,7 +65,7 @@ wallet successfully created, file location is wallets/neofs1.json
 ```
 $ neo-go wallet nep17 transfer \
     -w wallets/wallet.json \
-    -r http://main_chain.neofs.devenv:30333 \
+    -r http://main-chain.neofs.devenv:30333 \
     --from NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM \
     --to NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 \
     --amount 50 \
@@ -77,7 +77,7 @@ $ neo-go wallet nep17 transfer \
 ```
 $ neo-go wallet nep17 balance \
     -w wallets/neofs1.json \
-    -r http://main_chain.neofs.devenv:30333 
+    -r http://main-chain.neofs.devenv:30333
 
 Account NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 
 GAS: GasToken (d2a4cff31913016155e38e474a2c06d08be276cf)
@@ -98,7 +98,7 @@ Claim GAS to consensus node's wallet. Use account that contains NEO tokens.
 ```
 $ neo-go wallet claim \
     -w services/chain/node-wallet.json \
-    -r http://main_chain.neofs.devenv:30333 \
+    -r http://main-chain.neofs.devenv:30333 \
     -a NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP \
 Password >
 70e09bbd55846dcc7cee23905b737c63e5a80d32e387bce108bc6db8e641fb90
@@ -109,7 +109,7 @@ Then you can transfer GAS the same way as it was done in previous section.
 ```
 $ neo-go wallet nep17 transfer \
     -w services/chain/node-wallet.json \
-    -r http://main_chain.neofs.devenv:30333 \
+    -r http://main-chain.neofs.devenv:30333 \
     --from NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP \
     --to NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 \
     --amount 50 \
@@ -136,7 +136,7 @@ Script converts addresses and executes this command:
 ```
 $ neo-go wallet nep17 transfer \
     -w wallets/wallet.json \
-    -r http://main_chain.neofs.devenv:30333 \
+    -r http://main-chain.neofs.devenv:30333 \
     --from NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM \
     --to NerhjaqJsJt4LxMqUbkkVMpsF2d9TtcpFv \
     --token GAS \
@@ -149,7 +149,7 @@ and NeoFS deposit will be transferred to that address.
 ```
 $ neo-go wallet nep17 transfer \
     -w wallets/wallet.json \
-    -r http://main_chain.neofs.devenv:30333 \
+    -r http://main-chain.neofs.devenv:30333 \
     --from NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM \
     --to NerhjaqJsJt4LxMqUbkkVMpsF2d9TtcpFv \
     --token GAS \

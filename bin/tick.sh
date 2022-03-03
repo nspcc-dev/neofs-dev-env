@@ -28,7 +28,7 @@ NETMAP_ADDR=`bin/resolve.sh netmap.neofs`
 
 # Fetch current epoch value
 EPOCH=`${NEOGO} contract testinvokefunction -r \
-http://morph_chain.${LOCAL_DOMAIN}:30333 \
+http://morph-chain.${LOCAL_DOMAIN}:30333 \
 ${NETMAP_ADDR} \
 epoch | grep 'value' | awk -F'"' '{ print $4 }'`
 
@@ -36,7 +36,7 @@ echo "Updating NeoFS epoch to $((EPOCH+1))"
 ./bin/passwd.exp ${PASSWD} ${NEOGO} contract invokefunction \
 -w ${WALLET_IMG} \
 -a ${ADDR} \
--r http://morph_chain.${LOCAL_DOMAIN}:30333 \
+-r http://morph-chain.${LOCAL_DOMAIN}:30333 \
 ${NETMAP_ADDR} \
 newEpoch int:$((EPOCH+1)) -- ${ADDR}:Global
 
