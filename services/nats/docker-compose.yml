@@ -21,7 +21,7 @@ services:
       - ./server-key.pem:/certs/server-key.pem
       - ./ca-cert.pem:/certs/ca-cert.pem
     stop_signal: SIGKILL
-    env_file: [ ".env" ]
+    env_file: [ ".env", ".int_test.env" ]
     command: ["-c", "/etc/nats/neofs-nats-server.conf"]
 
 networks:

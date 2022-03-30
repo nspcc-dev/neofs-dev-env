@@ -20,7 +20,7 @@ services:
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
     stop_signal: SIGKILL
-    env_file: [ ".env", ".storage.env" ]
+    env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
       - NEOFS_NODE_KEY=/01.key
       - NEOFS_NODE_ADDRESSES=s01.${LOCAL_DOMAIN}:8080
@@ -53,7 +53,7 @@ services:
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
     stop_signal: SIGKILL
-    env_file: [ ".env", ".storage.env" ]
+    env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
       - NEOFS_NODE_KEY=/02.key
       - NEOFS_NODE_ADDRESSES=s02.${LOCAL_DOMAIN}:8080
@@ -86,7 +86,7 @@ services:
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
     stop_signal: SIGKILL
-    env_file: [ ".env", ".storage.env" ]
+    env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
       - NEOFS_NODE_KEY=/03.key
       - NEOFS_NODE_ADDRESSES=s03.${LOCAL_DOMAIN}:8080
@@ -120,7 +120,7 @@ services:
       - ./s04tls.crt:/tls.crt
       - ./s04tls.key:/tls.key
     stop_signal: SIGKILL
-    env_file: [ ".env", ".storage.env" ]
+    env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
       - NEOFS_NODE_KEY=/04.key
       - NEOFS_NODE_ADDRESSES=s04.${LOCAL_DOMAIN}:8080 grpcs://s04.${LOCAL_DOMAIN}:8082
