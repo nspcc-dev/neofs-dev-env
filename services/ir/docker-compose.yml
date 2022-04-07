@@ -21,7 +21,7 @@ services:
       - ./../../vendor/locode_db:/locode/db
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
-    env_file: [ ".env", ".ir.env" ]
+    env_file: [ ".env", ".ir.env", ".int_test.env" ]
     environment:
     - NEOFS_IR_WALLET_PATH=/wallet.json
     - NEOFS_IR_WALLET_ADDRESS=Nhfg3TbpwogLvDGVvAvqyThbsHgoSUKwtn

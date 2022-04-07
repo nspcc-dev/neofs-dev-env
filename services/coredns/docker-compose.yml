@@ -12,6 +12,7 @@ services:
       internet:
         ipv4_address: ${IPV4_PREFIX}.53
     stop_signal: SIGKILL
+    env_file: [ ".int_test.env" ]
     volumes:
       - ./Corefile:/Corefile
       - ./../../vendor/hosts:/etc/hosts

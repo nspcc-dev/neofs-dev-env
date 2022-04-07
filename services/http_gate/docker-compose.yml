@@ -16,7 +16,7 @@ services:
       - ./wallet.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    env_file: [ ".env", ".http.env" ]
+    env_file: [ ".env", ".http.env", ".int_test.env" ]
     environment:
       - HTTP_GW_WALLET=/wallet.json
       - HTTP_GW_WALLET_PASSPHRASE=one

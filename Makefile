@@ -114,7 +114,8 @@ hosts: vendor/hosts
 .ONESHELL:
 clean:
 	@rm -rf vendor/* services/storage/s04tls.* services/nats/*.pem
-	@for svc in $(START_SVCS)
+	@> .int_test.env
+	@for svc in $(PULL_SVCS)
 	do
 		vols=`docker-compose -f services/$${svc}/docker-compose.yml config --volumes`
 		if [[ ! -z "$${vols}" ]]; then

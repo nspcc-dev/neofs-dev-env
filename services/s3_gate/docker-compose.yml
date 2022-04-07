@@ -20,7 +20,7 @@ services:
       - ./tls.crt:/tls.crt
       - ./../../vendor/hosts:/etc/hosts
     stop_signal: SIGKILL
-    env_file: [ ".env", ".s3.env" ]
+    env_file: [ ".env", ".s3.env", ".int_test.env" ]
     environment:
       - S3_GW_WALLET=/wallet.json
       - S3_GW_WALLET_PASSPHRASE=s3
