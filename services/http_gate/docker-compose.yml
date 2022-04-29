@@ -8,6 +8,8 @@ services:
     hostname: http_gate
     container_name: http_gate
     restart: on-failure
+    dns: 
+      - ${IPV4_PREFIX}.53
     networks:
       http_gate_int:
       internet:
@@ -18,7 +20,7 @@ services:
     stop_signal: SIGKILL
     env_file: [ ".env", ".http.env", ".int_test.env" ]
     environment:
-      - HTTP_GW_WALLET=/wallet.json
+      - HTTP_GW_WALLET_PATH=/wallet.json
       - HTTP_GW_WALLET_PASSPHRASE=one
       - HTTP_GW_PEERS_0_ADDRESS=s01.${LOCAL_DOMAIN}:8080
       - HTTP_GW_PEERS_0_WEIGHT=0.2
