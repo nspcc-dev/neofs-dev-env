@@ -35,6 +35,10 @@ update.eigen_trust_alpha:
 update.basic_income_rate:
 	@./bin/config.sh int BasicIncomeRate $(val)
 
+# Update homomorphic hashing disabled flag (make update.homomorphic_hashing_disable val=true)
+update.homomorphic_hashing_disable:
+	@./bin/config.sh bool HomomorphicHashingDisabled $(val)
+
 # Tick new epoch in side chain
 tick.epoch:
 	@./bin/tick.sh
