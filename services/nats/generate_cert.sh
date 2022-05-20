@@ -25,7 +25,7 @@ if [[ ! -f $CA_KEY || ! -f $CA_CRT ]]; then
 fi
 
 if [[ ! -f $SRV_KEY || ! -f $SRV_CRT ]]; then
-	OUT=$(openssl req -newkey rsa:4096 -nodes --keyout $SRV_KEY -out $SRV_REQ -subj $SUBJ 2>&1 ) || {
+	OUT=$(openssl req -newkey rsa:4096 -nodes -keyout $SRV_KEY -out $SRV_REQ -subj $SUBJ 2>&1 ) || {
 		echo "Server certificate was not created"
 		echo $OUT
 		exit 1
@@ -43,7 +43,7 @@ if [[ ! -f $SRV_KEY || ! -f $SRV_CRT ]]; then
 fi
 
 if [[ ! -f $CLI_KEY || ! -f $CLI_CRT ]]; then
-	OUT=$(openssl req -newkey rsa:4096 -nodes --keyout $CLI_KEY -out $CLI_REQ -subj $SUBJ 2>&1) || {
+	OUT=$(openssl req -newkey rsa:4096 -nodes -keyout $CLI_KEY -out $CLI_REQ -subj $SUBJ 2>&1) || {
 		echo "Client certificate was not created"
 		echo $OUT
 		exit 1
