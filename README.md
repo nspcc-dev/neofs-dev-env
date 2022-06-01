@@ -25,6 +25,13 @@ Make sure you have installed all of the following prerequisites on your machine:
 ## Quick Start
 
 ```
+$ git clone https://github.com/nspcc-dev/neofs-dev-env.git
+$ make get
+$ make hosts
+```
+Then add ```make hosts``` command output to /etc/hosts file.
+
+``` 
 $ make up
 ```
 When all services are up, you need to make GAS deposit for test wallet to be
