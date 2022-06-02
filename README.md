@@ -33,6 +33,14 @@ $ git clone https://github.com/nspcc-dev/neofs-dev-env.git
 Run next commands from project's root:
 
 ```
+$ make get
+```
+
+This command should be executed for the first run only to execute 
+`make hosts`. It is part of the `make up` and, if the hosts have 
+been added already, there is no need to run it separately.
+
+```
 $ make hosts
 192.168.130.10 bastion.neofs.devenv
 192.168.130.50 main-chain.neofs.devenv
