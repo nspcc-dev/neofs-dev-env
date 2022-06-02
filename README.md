@@ -23,14 +23,29 @@ Make sure you have installed all of the following prerequisites on your machine:
 
 
 ## Quick Start
+Clone repo: 
 
 ```
 $ git clone https://github.com/nspcc-dev/neofs-dev-env.git
-$ make get
-$ make hosts
 ```
-Then add ```make hosts``` command output to /etc/hosts file.
 
+Run next commands from project's root:
+```
+$ make get
+```
+This command downloads required artifacts.
+```
+$ make hosts
+192.168.130.10 bastion.neofs.devenv
+192.168.130.50 main-chain.neofs.devenv
+192.168.130.61 ir01.neofs.devenv
+...
+192.168.130.74 s04.neofs.devenv
+```
+
+This command shows addresses and hostnames of components. Add `make hosts` output to your local `/etc/hosts` file.
+
+Run all services with command:
 ``` 
 $ make up
 ```
@@ -62,19 +77,6 @@ Updating NeoFS epoch to 2
 Enter account NNudMSGzEoktFzdYGYoNb3bzHzbmM1genF password > 
 Sent invocation transaction 0e6eb5e190f36332e5e5f4e866c7e100826e285fd949e11c085e15224f343ba6
 ```
-
-You can see the addresses and hostnames of components with `make hosts` command.
-
-```
-$ make hosts
-192.168.130.10 bastion.neofs.devenv
-192.168.130.50 main-chain.neofs.devenv
-192.168.130.61 ir01.neofs.devenv
-...
-192.168.130.74 s04.neofs.devenv
-```
-
-It's recommended to add `make hosts` output to your local `/etc/hosts` file.
 
 For instructions on how to set up DevEnv on macOS, please refer [the
 guide](docs/macOS.md) in `docs` directory.
