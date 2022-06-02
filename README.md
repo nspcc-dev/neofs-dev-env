@@ -23,6 +23,7 @@ Make sure you have installed all of the following prerequisites on your machine:
 
 
 ## Quick Start
+
 Clone repo: 
 
 ```
@@ -30,10 +31,7 @@ $ git clone https://github.com/nspcc-dev/neofs-dev-env.git
 ```
 
 Run next commands from project's root:
-```
-$ make get
-```
-This command downloads required artifacts.
+
 ```
 $ make hosts
 192.168.130.10 bastion.neofs.devenv
@@ -43,24 +41,30 @@ $ make hosts
 192.168.130.74 s04.neofs.devenv
 ```
 
-This command shows addresses and hostnames of components. Add `make hosts` output to your local `/etc/hosts` file.
+This command shows addresses and hostnames of components. Add `make hosts`
+output to your local `/etc/hosts` file.
 
 Run all services with command:
 ``` 
 $ make up
 ```
+
 When all services are up, you need to make GAS deposit for test wallet to be
-able to pay for NeoFS operations. Test wallet is located in `wallets/wallet.json`
-with the corresponding key in `wallets/wallet.key`. The password is empty.
+able to pay for NeoFS operations. Test wallet is located in
+`wallets/wallet.json` with the corresponding key in `wallets/wallet.key`. The
+password is empty.
 
 ```
 $ make prepare.ir
 password >
 fa6ba62bffb04030d303dcc95bda7413e03aa3c7e6ca9c2f999d65db9ec9b82c
 ```
-Also you should add self-signed node (`s04.neofs.devenv`) certificate to truststore 
-(default location might be changed using `CA_CERTS_TRUSTED_STORE` variable). 
-This step is required for client services (neofs-http-gw, neofs-s3-gw) to interact with the node:
+
+Also you should add self-signed node (`s04.neofs.devenv`) certificate to trusted
+store (default location might be changed using `CA_CERTS_TRUSTED_STORE`
+variable). This step is required for client services (neofs-http-gw,
+neofs-s3-gw) to interact with the node:
+
 ```
 $ sudo make prepare.storage
 ```
