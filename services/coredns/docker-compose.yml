@@ -7,6 +7,7 @@ services:
     container_name: coredns
     domainname: ${LOCAL_DOMAIN}
     hostname: coredns
+    restart: on-failure
     networks:
       coredns:
       internet:

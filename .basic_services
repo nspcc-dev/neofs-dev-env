@@ -1,6 +1,7 @@
 # Services start/stop order
 # Will start from top to bottom and stop in reverse
 basenet
+coredns
 chain
 morph_chain
 nats
