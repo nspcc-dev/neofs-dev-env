@@ -13,10 +13,11 @@ services:
       internet:
         ipv4_address: ${IPV4_PREFIX}.71
     volumes:
-      - ./wallet01.json:/wallet01.json
+      - ./wallet01.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - storage_s01:/storage
       - ./../../vendor/neofs-cli:/neofs-cli
+      - ./cli-cfg.yml:/cli-cfg.yml
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
       - ../nats/client-cert.pem:/etc/neofs-node/nats.tls.cert
@@ -25,7 +26,7 @@ services:
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
-      - NEOFS_NODE_WALLET_PATH=./wallet01.json
+      - NEOFS_NODE_WALLET_PATH=./wallet.json
       - NEOFS_NODE_WALLET_ADDRESS=NejLbQpojKJWec4NQRMBhzsrmCyhXfGJJe
       - NEOFS_NODE_WALLET_PASSWORD=
       - NEOFS_NODE_ADDRESSES=s01.${LOCAL_DOMAIN}:8080
@@ -51,10 +52,11 @@ services:
       internet:
         ipv4_address: ${IPV4_PREFIX}.72
     volumes:
-      - ./wallet02.json:/wallet02.json
+      - ./wallet02.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - storage_s02:/storage
       - ./../../vendor/neofs-cli:/neofs-cli
+      - ./cli-cfg.yml:/cli-cfg.yml
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
       - ../nats/client-cert.pem:/etc/neofs-node/nats.tls.cert
@@ -63,7 +65,7 @@ services:
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
-      - NEOFS_NODE_WALLET_PATH=./wallet02.json
+      - NEOFS_NODE_WALLET_PATH=./wallet.json
       - NEOFS_NODE_WALLET_ADDRESS=NVXXy3hNTvwVEZa2dAibALyJB3Q86aiHvL
       - NEOFS_NODE_WALLET_PASSWORD=
       - NEOFS_NODE_ADDRESSES=s02.${LOCAL_DOMAIN}:8080
@@ -89,10 +91,11 @@ services:
       internet:
         ipv4_address: ${IPV4_PREFIX}.73
     volumes:
-      - ./wallet03.json:/wallet03.json
+      - ./wallet03.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - storage_s03:/storage
       - ./../../vendor/neofs-cli:/neofs-cli
+      - ./cli-cfg.yml:/cli-cfg.yml
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
       - ../nats/client-cert.pem:/etc/neofs-node/nats.tls.cert
@@ -101,7 +104,7 @@ services:
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
-      - NEOFS_NODE_WALLET_PATH=./wallet03.json
+      - NEOFS_NODE_WALLET_PATH=./wallet.json
       - NEOFS_NODE_WALLET_ADDRESS=NPTmih9X14Y7xLvmD6RVtDHdH1Y9qJwoTe
       - NEOFS_NODE_WALLET_PASSWORD=
       - NEOFS_NODE_ADDRESSES=s03.${LOCAL_DOMAIN}:8080
@@ -127,10 +130,11 @@ services:
       internet:
         ipv4_address: ${IPV4_PREFIX}.74
     volumes:
-      - ./wallet04.json:/wallet04.json
+      - ./wallet04.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - storage_s04:/storage
       - ./../../vendor/neofs-cli:/neofs-cli
+      - ./cli-cfg.yml:/cli-cfg.yml
       - ./healthcheck.sh:/healthcheck.sh
       - ./s04tls.crt:/tls.crt
       - ./s04tls.key:/tls.key
@@ -140,7 +144,7 @@ services:
     stop_signal: SIGKILL
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
-      - NEOFS_NODE_WALLET_PATH=./wallet04.json
+      - NEOFS_NODE_WALLET_PATH=./wallet.json
       - NEOFS_NODE_WALLET_ADDRESS=Ne2DAQbWvP1s7TbtFc7BStKMnjKJdBaVRm
       - NEOFS_NODE_WALLET_PASSWORD=
       - NEOFS_NODE_ADDRESSES=s04.${LOCAL_DOMAIN}:8080 grpcs://s04.${LOCAL_DOMAIN}:8082
