@@ -3,7 +3,7 @@
 version: "2.4"
 services:
   neofs_morph_chain:
-    image: nspccdev/neo-go:${NEOGO_VERSION}
+    image: ${NEOGO_IMAGE}:${NEOGO_VERSION}
     container_name: morph_chain
     command: ["node", "--config-path", "/config", "--privnet", "--debug"]
     domainname: ${LOCAL_DOMAIN}

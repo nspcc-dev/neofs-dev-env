@@ -5,7 +5,7 @@ services:
 
   basenet:
     container_name: bastion
-    image: debian:10
+    image: ${BASTION_IMAGE}:${BASTION_VERSION}
     domainname: ${LOCAL_DOMAIN}
     hostname: bastion
     command: ["/bin/sleep", "infinity"]
