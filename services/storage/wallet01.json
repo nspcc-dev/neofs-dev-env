@@ -16,9 +16,11 @@
              "deployed":false
           },
           "lock":false,
-          "isDefault":false
+          "extra":null,
+          "isDefault":true
        }
     ],
+    "name":null,
     "scrypt":{
        "n":16384,
        "r":8,

@@ -1,5 +1,6 @@
 {
   "version": "3.0",
+  "name":null,
   "accounts": [
     {
       "address": "Nhfg3TbpwogLvDGVvAvqyThbsHgoSUKwtn",
@@ -16,7 +17,8 @@
         "deployed": false
       },
       "lock": false,
-      "isdefault": false
+      "extra":null,
+      "isDefault": false
     },
     {
       "address": "NVTiAjNgagDkTr5HTzDmQP9kPwPHN5BgVq",
@@ -41,7 +43,8 @@
         "deployed": false
       },
       "lock": false,
-      "isdefault": false
+      "extra":null,
+      "isDefault": false
     },
     {
       "address": "NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP",
@@ -58,7 +61,8 @@
         "deployed": false
       },
       "lock": false,
-      "isdefault": false
+      "extra":null,
+      "isDefault": false
     }
   ],
   "scrypt": {
