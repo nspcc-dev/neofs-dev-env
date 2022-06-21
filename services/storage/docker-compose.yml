@@ -27,7 +27,6 @@ services:
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
       - NEOFS_NODE_WALLET_PATH=./wallet.json
-      - NEOFS_NODE_WALLET_ADDRESS=NejLbQpojKJWec4NQRMBhzsrmCyhXfGJJe
       - NEOFS_NODE_WALLET_PASSWORD=
       - NEOFS_NODE_ADDRESSES=s01.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s01.${LOCAL_DOMAIN}:8080
@@ -66,7 +65,6 @@ services:
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
       - NEOFS_NODE_WALLET_PATH=./wallet.json
-      - NEOFS_NODE_WALLET_ADDRESS=NVXXy3hNTvwVEZa2dAibALyJB3Q86aiHvL
       - NEOFS_NODE_WALLET_PASSWORD=
       - NEOFS_NODE_ADDRESSES=s02.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s02.${LOCAL_DOMAIN}:8080
@@ -105,7 +103,6 @@ services:
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
       - NEOFS_NODE_WALLET_PATH=./wallet.json
-      - NEOFS_NODE_WALLET_ADDRESS=NPTmih9X14Y7xLvmD6RVtDHdH1Y9qJwoTe
       - NEOFS_NODE_WALLET_PASSWORD=
       - NEOFS_NODE_ADDRESSES=s03.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s03.${LOCAL_DOMAIN}:8080
@@ -145,7 +142,6 @@ services:
     env_file: [ ".env", ".storage.env", ".int_test.env" ]
     environment:
       - NEOFS_NODE_WALLET_PATH=./wallet.json
-      - NEOFS_NODE_WALLET_ADDRESS=Ne2DAQbWvP1s7TbtFc7BStKMnjKJdBaVRm
       - NEOFS_NODE_WALLET_PASSWORD=
       - NEOFS_NODE_ADDRESSES=s04.${LOCAL_DOMAIN}:8080 grpcs://s04.${LOCAL_DOMAIN}:8082
       - NEOFS_CONTROL_GRPC_ENDPOINT=s04.${LOCAL_DOMAIN}:8081
