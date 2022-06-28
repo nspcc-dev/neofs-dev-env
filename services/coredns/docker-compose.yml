@@ -8,7 +8,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: coredns
     networks:
-      chain_int:
+      coredns:
       internet:
         ipv4_address: ${IPV4_PREFIX}.53
     stop_signal: SIGKILL
@@ -18,7 +18,7 @@ services:
       - ./../../vendor/hosts:/etc/hosts
 
 networks:
-  chain_int:
+  coredns:
   internet:
     external: true
     name: basenet_internet
