@@ -39,7 +39,7 @@ MORPH_CHAIN_PROTOCOL = './services/morph_chain/protocol.privnet.yml'
 CHAIN_PROTOCOL = './services/chain/protocol.privnet.yml'
 
 # List of grepped environment variables from *.env
-GREP_DOTENV = $(shell find . -name '*.env' -exec grep -rhv -e '^\#' -e '^$$' {} + )
+GREP_DOTENV = $(shell find . -name '*.env' -exec grep -rhv -e '^\#' -e '^$$' {} + | sort -u )
 
 # Pull all required Docker images
 .PHONY: pull
