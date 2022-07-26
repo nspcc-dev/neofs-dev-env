@@ -7,6 +7,7 @@ source bin/helper.sh
 
 # NeoGo binary path.
 NEOGO="${NEOGO:-docker exec -it main_chain neo-go}"
+NEOGO_NONINTERACTIVE="${NEOGO_NONINTERACTIVE:-docker exec -t main_chain neo-go}"
 
 # Wallet files to change config value
 WALLET="${WALLET:-services/chain/node-wallet.json}"
@@ -29,7 +30,7 @@ BLOCK_DURATION=$(grep SecondsPerBlock < "$SIDECHAIN_PROTO" | awk '{print $2}') \
 NETMAP_ADDR=$(bin/resolve.sh netmap.neofs) || die "Cannot resolve netmap.neofs"
 
 # Fetch current epoch value
-EPOCH=$(${NEOGO} contract testinvokefunction \
+EPOCH=$(${NEOGO_NONINTERACTIVE} contract testinvokefunction \
 	-r "http://morph-chain.${LOCAL_DOMAIN}:30333" "${NETMAP_ADDR}" epoch \
 	| grep 'value' | awk -F'"' '{ print $4 }') \
 	|| die "Cannot fetch epoch from netmap contract"
