@@ -121,6 +121,12 @@ You can find more information on each service in `docs` directory.
 
 Maybe you will find the answer for your question in [F.A.Q.](docs/faq.md)
 
+## Using NeoFS Admin Tool in `dev-env`
+
+Devenv supports NeoFS network management via [neofs-adm](https://github.com/nspcc-dev/neofs-node/tree/master/cmd/neofs-adm).
+`services/ir` contains the Alphabet wallet in a proper format, specify it
+with `--alphabet-wallets` flag.
+
 ## Notable make targets
 
 `make help` will print the brief description of available targets. Here we
