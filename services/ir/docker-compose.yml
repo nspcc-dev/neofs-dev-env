@@ -15,8 +15,8 @@ services:
         ipv4_address: ${IPV4_PREFIX}.61
     stop_signal: SIGKILL
     volumes:
-      - ./wallet01.json:/wallet.json
-      - ./wallet01.key:/wallet01.key
+      - ./az.json:/wallet.json
+      - ./az.key:/wallet01.key
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/locode_db:/locode/db
       - ./../../vendor/neofs-cli:/neofs-cli

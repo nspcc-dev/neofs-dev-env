@@ -5,7 +5,7 @@
     {
       "address": "Nhfg3TbpwogLvDGVvAvqyThbsHgoSUKwtn",
       "key": "6PYM8VdX2BSm7BSXKzV4Fz6S3R9cDLLWNrD9nMjxW352jEv3fsC8N3wNLY",
-      "label": "",
+      "label": "single",
       "contract": {
         "script": "DCECs2Ir9AF73+MXxYrtX0x1PyBrfbiWBG+n13S7xL9/jcJBVuezJw==",
         "parameters": [
@@ -21,22 +21,14 @@
       "isDefault": false
     },
     {
-      "address": "NVTiAjNgagDkTr5HTzDmQP9kPwPHN5BgVq",
+      "address": "NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP",
       "key": "6PYM8VdX2BSm7BSXKzV4Fz6S3R9cDLLWNrD9nMjxW352jEv3fsC8N3wNLY",
-      "label": "",
+      "label": "consensus",
       "contract": {
-        "script": "EwwhAhA6f33QFlWFl/eWDSfFFqQ5T9loueZRVetLAT5AQEBuDCECp7xV/oaE4BGXaNEEujB5W9zIZhnoZK3SYVZyPtGFzWIMIQKzYiv0AXvf4xfFiu1fTHU/IGt9uJYEb6fXdLvEv3+NwgwhA9kMB99j5pDOd5EuEKtRrMlEtmhgI3tgjE+PgwnnHuaZFEGe0Nw6",
+        "script": "EQwhArNiK/QBe9/jF8WK7V9MdT8ga324lgRvp9d0u8S/f43CEUGe0Nw6",
         "parameters": [
           {
             "name": "parameter0",
-            "type": "Signature"
-          },
-          {
-            "name": "parameter1",
-            "type": "Signature"
-          },
-          {
-            "name": "parameter2",
             "type": "Signature"
           }
         ],
@@ -49,7 +41,7 @@
     {
       "address": "NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP",
       "key": "6PYM8VdX2BSm7BSXKzV4Fz6S3R9cDLLWNrD9nMjxW352jEv3fsC8N3wNLY",
-      "label": "",
+      "label": "committee",
       "contract": {
         "script": "EQwhArNiK/QBe9/jF8WK7V9MdT8ga324lgRvp9d0u8S/f43CEUGe0Nw6",
         "parameters": [
