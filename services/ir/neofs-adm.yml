@@ -1,0 +1,4 @@
+rpc-endpoint: http://morph-chain.neofs.devenv:30333
+credentials:
+  az: "one"
+  contract: "one"
