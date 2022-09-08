@@ -14,10 +14,7 @@ services:
         ipv4_address: ${IPV4_PREFIX}.90
     stop_signal: SIGKILL
     env_file: [ ".int_test.env" ]
-    environment:
-    - ACC=/morph_chain.gz
     volumes:
-    - ./../../vendor/morph_chain.gz:/morph_chain.gz
     - ./protocol.privnet.yml:/config/protocol.privnet.yml
     - ./node-wallet.json:/wallets/node-wallet.json
     - ./../../vendor/hosts:/etc/hosts
