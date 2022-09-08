@@ -1,5 +1,5 @@
 # Services start/stop order
 # Will start from top to bottom and stop in reverse
-nats
-ir
-storage
+basenet
+chain
+morph_chain
