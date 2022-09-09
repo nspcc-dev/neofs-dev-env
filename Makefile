@@ -72,8 +72,8 @@ up/basic: up/bootstrap
 .PHONY: up/bootstrap
 up/bootstrap: get vendor/hosts
 	@$(foreach SVC, $(START_BOOTSTRAP), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
-	@./vendor/neofs-adm --config services/ir/neofs-adm.yml morph init --alphabet-wallets ./services/ir --contracts vendor/contracts || exit 1
-	@for f in ./services/storage/wallet*.json; do echo "Transfer GAS to wallet $${f}" && ./vendor/neofs-adm -c services/ir/neofs-adm.yml morph refill-gas --storage-wallet $${f} --gas 10.0 --alphabet-wallets services/ir || exit 1; done
+	@./vendor/neofs-adm --config neofs-adm.yml morph init --alphabet-wallets ./services/ir --contracts vendor/contracts || exit 1
+	@for f in ./services/storage/wallet*.json; do echo "Transfer GAS to wallet $${f}" && ./vendor/neofs-adm -c neofs-adm.yml morph refill-gas --storage-wallet $${f} --gas 10.0 --alphabet-wallets services/ir || exit 1; done
 	@echo "NeoFS sidechain environment is deployed"
 
 # Build up certain service
