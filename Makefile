@@ -28,10 +28,10 @@ PULL_SVCS = $(shell find ./services -type f -name 'docker-compose.yml' | sort -u
 # List of services to run
 START_SVCS = $(shell cat .services | grep -v \\\#)
 START_BASIC = $(shell cat .basic_services | grep -v \\\#)
-START_ESSENTIAL = $(shell cat .essential_services | grep -v \\\#)
+START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v \\\#)
 STOP_SVCS = $(shell tac .services | grep -v \\\#)
 STOP_BASIC = $(shell tac .basic_services | grep -v \\\#)
-STOP_ESSENTIAL = $(shell tac .essential_services | grep -v \\\#)
+STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v \\\#)
 
 # List of hosts available in devenv
 HOSTS_LINES = $(shell grep -Rl IPV4_PREFIX ./services/* | grep .hosts)
@@ -62,16 +62,16 @@ up: up/basic
 
 # Build up NeoFS
 .PHONY: up/basic
-up/basic: up/essential
+up/basic: up/bootstrap
 	@$(foreach SVC, $(START_BASIC), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
 	@./bin/tick.sh
 	@./bin/config.sh string SystemDNS container
 	@echo "Basic NeoFS Developer Environment is ready"
 
-# Start essential services
-.PHONY: up/essential
-up/essential: get vendor/hosts
-	@$(foreach SVC, $(START_ESSENTIAL), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
+# Start bootstrap services
+.PHONY: up/bootstrap
+up/bootstrap: get vendor/hosts
+	@$(foreach SVC, $(START_BOOTSTRAP), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
 	@./vendor/neofs-adm --config services/ir/neofs-adm.yml morph init --alphabet-wallets ./services/ir --contracts vendor/contracts || exit 1
 	@for f in ./services/storage/wallet*.json; do echo "Transfer GAS to wallet $${f}" && ./vendor/neofs-adm -c services/ir/neofs-adm.yml morph refill-gas --storage-wallet $${f} --gas 10.0 --alphabet-wallets services/ir || exit 1; done
 	@echo "NeoFS sidechain environment is deployed"
@@ -84,7 +84,7 @@ up/%: get vendor/hosts
 
 # Stop environment
 .PHONY: down
-down: down/add down/basic down/essential
+down: down/add down/basic down/bootstrap
 	@echo "Full NeoFS Developer Environment is down"
 
 .PHONY: down/add
@@ -96,10 +96,10 @@ down/add:
 down/basic:
 	$(foreach SVC, $(STOP_BASIC), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
 
-# Stop essential services
-.PHONY: down/essential
-down/essential:
-	$(foreach SVC, $(STOP_ESSENTIAL), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
+# Stop bootstrap services
+.PHONY: down/bootstrap
+down/bootstrap:
+	$(foreach SVC, $(STOP_BOOTSTRAP), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
 
 # Stop certain service
 .PHONY: down/%
