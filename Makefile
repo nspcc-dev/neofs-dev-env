@@ -135,7 +135,7 @@ clean:
 		vols=`docker-compose -f services/$${svc}/docker-compose.yml config --volumes`
 		if [[ ! -z "$${vols}" ]]; then
 			for vol in $${vols}; do
-				docker volume rm "$${svc}_$${vol}" 2> /dev/null
+				docker volume rm -f "$${svc}_$${vol}" 2> /dev/null
 			done
 		fi
 	done
