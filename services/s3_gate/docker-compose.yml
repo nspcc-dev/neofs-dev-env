@@ -8,7 +8,7 @@ services:
     hostname: s3_gate
     container_name: s3_gate
     restart: on-failure
-    dns: 
+    dns:
       - ${IPV4_PREFIX}.53
     networks:
       s3_gate_int:
