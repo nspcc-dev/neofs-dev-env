@@ -1,0 +1,33 @@
+---
+
+version: "2.4"
+services:
+  rest_gate:
+    image: ${REST_GW_IMAGE}:${REST_GW_VERSION}
+    domainname: ${LOCAL_DOMAIN}
+    hostname: rest
+    container_name: rest_gate
+    restart: on-failure
+    networks:
+      rest_gate_int:
+      internet:
+        ipv4_address: ${IPV4_PREFIX}.83
+    volumes:
+      - ./wallet.json:/wallet.json
+      - ./../../vendor/hosts:/etc/hosts
+    stop_signal: SIGKILL
+    env_file: [ ".env", ".int_test.env" ]
+    environment:
+      - REST_GW_WALLET_PATH=/wallet.json
+      - REST_GW_WALLET_PASSPHRASE=one
+      - REST_GW_LISTEN_ADDRESS=0.0.0.0:8090
+      - REST_GW_PEERS_0_ADDRESS=s01.${LOCAL_DOMAIN}:8080
+      - REST_GW_PEERS_1_ADDRESS=s02.${LOCAL_DOMAIN}:8080
+      - REST_GW_PEERS_2_ADDRESS=s03.${LOCAL_DOMAIN}:8080
+      - REST_GW_PEERS_3_ADDRESS=s04.${LOCAL_DOMAIN}:8080
+
+networks:
+  rest_gate_int:
+  internet:
+    external: true
+    name: basenet_internet
