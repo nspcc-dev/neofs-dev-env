@@ -29,6 +29,7 @@ ApplicationConfiguration:
   MinPeers: 0
   RPC:
     Enabled: true
+    SessionEnabled: true
     EnableCORSWorkaround: false
     MaxGasInvoke: 100
     Port: 30333
