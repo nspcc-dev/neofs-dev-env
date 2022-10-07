@@ -13,7 +13,7 @@ ifeq (${NEOFS_CONTRACTS_PATH},)
 	@rm ${NEOFS_CONTRACTS_ARCHIVE}
 else
 	@echo "⇒ Copy compiled contracts from ${NEOFS_CONTRACTS_PATH}"
-	@cp -r ${NEOFS_CONTRACTS_PATH} ${NEOFS_CONTRACTS_DEST}
+	@cp -r ${NEOFS_CONTRACTS_PATH}/* ${NEOFS_CONTRACTS_DEST}
 endif
 
 get.adm: NEOFS_ADM_DEST=./vendor/neofs-adm
