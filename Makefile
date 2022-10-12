@@ -52,7 +52,7 @@ pull:
 	$(foreach SVC, $(PULL_SVCS), $(shell cd services/$(SVC) && docker-compose pull))
 	@:
 
-# Get all services artifacs
+# Get all services artifacts
 .PHONY: get
 get: $(foreach SVC, $(GET_SVCS), get.$(SVC))
 	@:
@@ -109,6 +109,7 @@ down/bootstrap:
 down/%:
 	@docker-compose -f services/$*/docker-compose.yml down
 
+# Generate changes for /etc/hosts
 .PHONY: vendor/hosts
 .ONESHELL:
 vendor/hosts:
@@ -122,7 +123,7 @@ vendor/hosts:
 		done < $${file};
 	done > $@
 
-# Display changes for /etc/hosts
+# Generate and display changes for /etc/hosts
 .PHONY: hosts
 hosts: vendor/hosts
 	@cat vendor/hosts

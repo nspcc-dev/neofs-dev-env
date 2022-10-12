@@ -1,4 +1,5 @@
 # Download privnet chain dump with pre-deployed NeoFS contracts
+
 get.chain: CHAIN_DUMP_NAME=devenv.dump.
 get.chain: CHAIN_PATH?=
 get.chain:

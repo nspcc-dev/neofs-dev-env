@@ -1,4 +1,4 @@
-# Create new tls certs
+# Create new TLS certs for NATS server and clients
 
 NATS_DIR=$(abspath services/nats)
 
