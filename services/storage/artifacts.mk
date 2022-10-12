@@ -1,11 +1,11 @@
-# Create new tls certs
+# Create new TLS certs to NeoFS node
 
 CURRENT_DIR=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 STORAGE_DIR=$(patsubst %/,%,$(CURRENT_DIR))
 SSL_CONFIG := $(shell mktemp)
 
 get.storage:
-	@echo "⇒ Creating tls certs to NeoFS node"
+	@echo "⇒ Creating TLS certs to NeoFS node"
 	@(echo "[req]"; \
       echo "distinguished_name=req"; \
       echo "req_extensions=san"; \

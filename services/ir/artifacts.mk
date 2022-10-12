@@ -1,10 +1,11 @@
-# Get NeoFS LOCODE database
+# Get NeoFS IR artifacts (LOCODE database and NeoFS CLI)
 
 LOCODE_DB_ARCHIVE_PATH=./vendor
 LOCODE_DB_ARCHIVE_FILE=locode_db.gz
 
 get.ir: get.locode get.cli
 
+# Get NeoFS LOCODE database
 get.locode: LOCODE_DB_PATH?= 
 get.locode:
 	@mkdir -p ${LOCODE_DB_ARCHIVE_PATH}
@@ -21,6 +22,7 @@ endif
 
 	gzip -dfk ${LOCODE_DB_ARCHIVE_PATH}/${LOCODE_DB_ARCHIVE_FILE}
 
+# Download NeoFS CLI 
 .ONESHELL:
 get.cli: NEOFS_CLI_FILE=./vendor/neofs-cli
 get.cli: NEOFS_CLI_ARCHIVE_FILE=${NEOFS_CLI_FILE}.tar.gz

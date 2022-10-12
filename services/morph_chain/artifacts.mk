@@ -1,6 +1,8 @@
 # Download NeoFS Contracts and Adm tool to deploy environment
+
 get.morph_chain: get.contracts get.adm
 
+# Download NeoFS Contracts
 get.contracts: NEOFS_CONTRACTS_DEST=./vendor/contracts
 get.contracts: NEOFS_CONTRACTS_ARCHIVE=neofs-contracts.tar.gz
 get.contracts:
@@ -16,6 +18,7 @@ else
 	@cp -r ${NEOFS_CONTRACTS_PATH}/* ${NEOFS_CONTRACTS_DEST}
 endif
 
+# Download NeoFS ADM tool 
 get.adm: NEOFS_ADM_DEST=./vendor/neofs-adm
 get.adm: NEOFS_ADM_ARCHIVE=neofs-adm.tar.gz
 get.adm:
