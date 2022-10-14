@@ -19,12 +19,6 @@ include services/*/artifacts.mk
 # Targets helpful to prepare service environment
 include services/*/prepare.mk
 
-# Services that require artifacts
-GET_SVCS = $(shell grep -Rl "get.*:" ./services/* | sort -u | grep artifacts.mk | xargs -I {} dirname {} | xargs basename -a)
-
-# Services that require pulling images
-PULL_SVCS = $(shell find ./services -type f -name 'docker-compose.yml' | sort -u | xargs -I {} dirname {} | xargs basename -a)
-
 # List of services to run
 START_SVCS = $(shell cat .services | grep -v \\\#)
 START_BASIC = $(shell cat .basic_services | grep -v \\\#)
@@ -32,6 +26,15 @@ START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v \\\#)
 STOP_SVCS = $(shell tac .services | grep -v \\\#)
 STOP_BASIC = $(shell tac .basic_services | grep -v \\\#)
 STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v \\\#)
+
+# Enabled services dirs
+ENABLED_SVCS_DIRS = $(shell echo "${START_BOOTSTRAP} ${START_BASIC} ${START_SVCS}" | sed 's|[^ ]* *|./services/&|g')
+
+# Services that require artifacts
+GET_SVCS = $(shell grep -Rl "get.*:" ./services/* | sort -u | grep artifacts.mk | xargs -I {} dirname {} | xargs basename -a)
+
+# Services that require pulling images
+PULL_SVCS = $(shell find ${ENABLED_SVCS_DIRS} -type f -name 'docker-compose.yml' | sort -u | xargs -I {} dirname {} | xargs basename -a)
 
 # List of hosts available in devenv
 HOSTS_LINES = $(shell grep -Rl IPV4_PREFIX ./services/* | grep .hosts)
