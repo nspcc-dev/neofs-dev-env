@@ -20,12 +20,12 @@ include services/*/artifacts.mk
 include services/*/prepare.mk
 
 # List of services to run
-START_SVCS = $(shell cat .services | grep -v \\\#)
-START_BASIC = $(shell cat .basic_services | grep -v \\\#)
-START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v \\\#)
-STOP_SVCS = $(shell tac .services | grep -v \\\#)
-STOP_BASIC = $(shell tac .basic_services | grep -v \\\#)
-STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v \\\#)
+START_SVCS = $(shell cat .services | grep -v '#')
+START_BASIC = $(shell cat .basic_services | grep -ve '#')
+START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v '#')
+STOP_SVCS = $(shell tac .services | grep -v '#')
+STOP_BASIC = $(shell tac .basic_services | grep -v '#')
+STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v '#')
 
 # Enabled services dirs
 ENABLED_SVCS_DIRS = $(shell echo "${START_BOOTSTRAP} ${START_BASIC} ${START_SVCS}" | sed 's|[^ ]* *|./services/&|g')
