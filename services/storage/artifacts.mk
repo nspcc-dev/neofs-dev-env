@@ -2,7 +2,7 @@
 
 CURRENT_DIR=$(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 STORAGE_DIR=$(patsubst %/,%,$(CURRENT_DIR))
-SSL_CONFIG=$(shell mktemp)
+SSL_CONFIG:=$(shell mktemp)
 
 get.storage:
 	@echo "⇒ Creating TLS certs to NeoFS node"
