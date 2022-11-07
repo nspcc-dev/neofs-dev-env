@@ -28,6 +28,7 @@ ApplicationConfiguration:
   AttemptConnPeers: 5
   MinPeers: 0
   RPC:
+    Address: 192.168.130.90
     Enabled: true
     SessionEnabled: true
     EnableCORSWorkaround: false
