@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
+echo "Running bin/deposit.sh"
+
 # Source env settings
 . .env
 . services/ir/.ir.env
 source bin/helper.sh
 
 # NeoGo binary path.
-NEOGO="${NEOGO:-docker exec -it main_chain neo-go}"
+NEOGO="${NEOGO:-docker exec main_chain neo-go}"
 # Wallet file to use for deposit GAS from
-WALLET="${WALLET:-wallets/wallet.json}"
-# Wallet password that would be entered automatically; '-' means no password
-PASSWD="-"
+WALLET="${WALLET:-services/chain/node-wallet.json}"
+CONFIG="${CONFIG:-/wallets/config.yml}"
 # How much GAS to deposit. First cli argument or 50 by default
 DEPOSIT="${1:-50}"
 
@@ -25,10 +26,10 @@ CONTRACT_ADDR=$(${NEOGO} util convert "${NEOFS_IR_CONTRACTS_NEOFS}" \
 
 # Make deposit
 # shellcheck disable=SC2086
-./bin/passwd.exp ${PASSWD} ${NEOGO} wallet nep17 transfer \
-	-w ${WALLET} \
+${NEOGO} wallet nep17 transfer \
+        --wallet-config ${CONFIG} \
 	-r http://main-chain.${LOCAL_DOMAIN}:30333 \
-	--from ${ADDR} \
+	--from ${ADDR} --force \
 	--to ${CONTRACT_ADDR} \
 	--token GAS \
-	--amount ${DEPOSIT}
+	--amount ${DEPOSIT} || die "Cannot transfer GAS to NeoFS contract"
