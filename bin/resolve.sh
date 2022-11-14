@@ -5,7 +5,7 @@
 source bin/helper.sh
 
 # NeoGo binary path.
-NEOGO="${NEOGO:-docker exec -t morph_chain neo-go}"
+NEOGO="${NEOGO:-docker exec morph_chain neo-go}"
 # NNS contract script hash
 output=$(curl -s --data '{ "id": 1, "jsonrpc": "2.0", "method": "getcontractstate", "params": [1] }' \
 	"http://morph-chain.${LOCAL_DOMAIN}:30333/") \
