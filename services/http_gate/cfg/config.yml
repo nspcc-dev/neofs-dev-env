@@ -1,0 +1,17 @@
+logger:
+  level: debug
+  
+rebalance_timer: 5m  # Interval to check nodes health
+
+connect_timeout: 60s  # Timeout to dial node
+
+request_timeout: 300s  # Timeout to check node health during rebalance
+
+# The order in which resolvers are used to find an container id by name
+resolve_order:
+  - dns
+
+# Wallet settings
+wallet:
+  path: /wallet.json  # Path to wallet 
+  passphrase: one  # Passphrase to decrypt wallet
