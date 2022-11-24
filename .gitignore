@@ -1,9 +1,18 @@
+# IDE
 .idea
+.vscode
+
+# Vendoring
 vendor
+
+temp
 tmp
+
 .secrets
 sites/*
 !sites/.gitkeep
+
+# Runtime generation keys
 services/storage/*tls.crt
 services/storage/*tls.key
 services/nats/*.pem
