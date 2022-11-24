@@ -21,11 +21,9 @@ services:
       - ./../../vendor/locode_db:/locode/db
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
+      - ./cfg:/etc/neofs/ir
     env_file: [ ".env", ".ir.env", ".int_test.env" ]
-    environment:
-    - NEOFS_IR_WALLET_PATH=/wallet.json
-    - NEOFS_IR_WALLET_ADDRESS=Nhfg3TbpwogLvDGVvAvqyThbsHgoSUKwtn
-    - NEOFS_IR_WALLET_PASSWORD=one
+    command: [ "neofs-ir", "--config", "/etc/neofs/ir/config.yml" ]
     healthcheck:
       test: ["CMD-SHELL", "/healthcheck.sh"]
       interval: 2s
