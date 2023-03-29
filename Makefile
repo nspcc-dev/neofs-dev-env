@@ -220,3 +220,37 @@ restart.storage-clean:
 		docker volume rm storage_$(vol);)
 	docker-compose -f ./services/storage/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
 	$(call error_handler,$@);
+
+# Test Environment Preparation Target
+.PHONY: prepare-test-env
+prepare-test-env:
+	@echo "Starting the test environment setup..."
+
+	trap 'echo "Test environment setup failed. Please check the error messages above."; exit 1;' ERR
+
+	echo "Step 1: Stopping the environment..."; \
+	$(MAKE) down; \
+	sleep 10;
+
+	echo "Step 2: Cleaning the environment..."; \
+	$(MAKE) clean; \
+	sleep 10;
+
+	echo "Step 3: Setting up the test environment..."; \
+	$(MAKE) up; \
+	echo "Waiting a few minutes..."; \
+	sleep 120; \
+
+	echo "Step 4: Preparing the IR service..."; \
+	$(MAKE) prepare.ir; \
+	sleep 10; \
+
+	if sudo -n true 2>/dev/null; then \
+		echo "Step 5: Preparing the storage service (with sudo)..."; \
+		sudo $(MAKE) prepare.storage; \
+	else \
+		echo "Step 5: Preparing the storage service (with sudo, you may need to enter your password)..."; \
+		sudo $(MAKE) prepare.storage; \
+	fi; \
+
+	echo "Test environment setup completed."
