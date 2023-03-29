@@ -46,44 +46,87 @@ CHAIN_PROTOCOL = './services/chain/protocol.privnet.yml'
 # List of grepped environment variables from *.env
 GREP_DOTENV = $(shell find . -name '*.env' -exec grep -rhv -e '^\#' -e '^$$' {} + | sort -u )
 
+# Error handling function
+define error_handler
+    ret_val=$$?;\
+	if [ "$$ret_val" -ne 0 ]; then \
+		cat docker-compose.err;\
+		echo "Error: The target $1 failed with exit code $$ret_val";\
+		rm docker-compose.err;\
+		exit "$$ret_val";\
+	fi;\
+	if grep -q "ERROR" docker-compose.err; then \
+		cat docker-compose.err;\
+		echo "Error: The target '$1' failed and exit code is $$ret_val";\
+		rm docker-compose.err;\
+		exit 1;\
+	else \
+		echo "The target '$1' completed successfully";\
+		rm docker-compose.err;\
+		exit 0;\
+	fi
+endef
+
 # Pull all required Docker images
 .PHONY: pull
 pull:
-	$(foreach SVC, $(PULL_SVCS), $(shell cd services/$(SVC) && docker-compose pull))
+	@for svc in $(PULL_SVCS); do \
+		echo "$@ for service: $${svc}"; \
+		docker-compose -f services/$${svc}/docker-compose.yml pull 2>&1 | tee -a docker-compose.err; \
+	done
+	$(call error_handler,$@);
 	@:
 
 # Get all services artifacts
 .PHONY: get
-get: $(foreach SVC, $(GET_SVCS), get.$(SVC))
+get:
+	@for svc in $(GET_SVCS); do \
+		echo "$@ for service: $${svc}"; \
+		make get.$$svc 2>&1 | tee -a docker-compose.err; \
+	done
+	$(call error_handler,$@);
 	@:
 
 # Start environment
 .PHONY: up
 up: up/basic
-	@$(foreach SVC, $(START_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
+	@for svc in $(START_SVCS); do \
+		echo "$@ for service: $${svc}"; \
+		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
+	done
+	$(call error_handler,$@);
 	@echo "Full NeoFS Developer Environment is ready"
 
 # Build up NeoFS
 .PHONY: up/basic
 up/basic: up/bootstrap
-	@$(foreach SVC, $(START_BASIC), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
+	@for svc in $(START_BASIC); do \
+		echo "$@ for service: $${svc}"; \
+		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
+	done
 	@./bin/tick.sh
 	@./bin/config.sh string SystemDNS container
+	$(call error_handler,$@);
 	@echo "Basic NeoFS Developer Environment is ready"
 
 # Start bootstrap services
 .PHONY: up/bootstrap
 up/bootstrap: get vendor/hosts
-	@$(foreach SVC, $(START_BOOTSTRAP), $(shell docker-compose -f services/$(SVC)/docker-compose.yml up -d))
+	@for svc in $(START_BOOTSTRAP); do \
+		echo "$@ for service: $${svc}"; \
+		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
+	done
 	@source ./bin/helper.sh
 	@./vendor/neofs-adm --config neofs-adm.yml morph init --alphabet-wallets ./services/ir --contracts vendor/contracts || die "Failed to initialize Alphabet wallets"
 	@for f in ./services/storage/wallet*.json; do echo "Transfer GAS to wallet $${f}" && ./vendor/neofs-adm -c neofs-adm.yml morph refill-gas --storage-wallet $${f} --gas 10.0 --alphabet-wallets services/ir || die "Failed to transfer GAS to alphabet wallets"; done
+	$(call error_handler,$@);
 	@echo "NeoFS sidechain environment is deployed"
 
 # Build up certain service
 .PHONY: up/%
 up/%: get vendor/hosts
-	@docker-compose -f services/$*/docker-compose.yml up -d
+	@docker-compose -f services/$*/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
+	$(call error_handler,$@);
 	@echo "Developer Environment for $* service is ready"
 
 # Stop environment
@@ -93,22 +136,35 @@ down: down/add down/basic down/bootstrap
 
 .PHONY: down/add
 down/add:
-	$(foreach SVC, $(STOP_SVCS), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
+	@for svc in $(STOP_SVCS); do \
+		echo "$@ for service: $${svc}"; \
+		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee -a docker-compose.err; \
+	done
+	$(call error_handler,$@);
 
 # Stop basic environment
 .PHONY: down/basic
 down/basic:
-	$(foreach SVC, $(STOP_BASIC), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
+	@for svc in $(STOP_BASIC); do \
+		echo "$@ for service: $${svc}"; \
+		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee -a docker-compose.err; \
+	done
+	$(call error_handler,$@);
 
 # Stop bootstrap services
 .PHONY: down/bootstrap
 down/bootstrap:
-	$(foreach SVC, $(STOP_BOOTSTRAP), $(shell docker-compose -f services/$(SVC)/docker-compose.yml down))
+	@for svc in $(STOP_BOOTSTRAP); do \
+		echo "$@ for service: $${svc}"; \
+		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee docker-compose.err; \
+	done
+	$(call error_handler,$@);
 
 # Stop certain service
 .PHONY: down/%
 down/%:
-	@docker-compose -f services/$*/docker-compose.yml down
+	@docker-compose -f services/$*/docker-compose.yml down 2>&1 | tee docker-compose.err
+	$(call error_handler,$@);
 
 # Generate changes for /etc/hosts
 .PHONY: vendor/hosts
@@ -137,13 +193,14 @@ clean:
 	@> .int_test.env
 	@for svc in $(PULL_SVCS)
 	do
-		vols=`docker-compose -f services/$${svc}/docker-compose.yml config --volumes`
+		vols=`docker-compose -f services/$${svc}/docker-compose.yml config --volumes 2>&1 | tee -a docker-compose.err`
 		if [[ ! -z "$${vols}" ]]; then
 			for vol in $${vols}; do
 				docker volume rm -f "$${svc}_$${vol}" 2> /dev/null
 			done
 		fi
 	done
+	$(call error_handler,$@);
 
 # Generate environment
 .PHONY: env
@@ -156,9 +213,10 @@ env:
 # Restart storage nodes with clean volumes
 .PHONY: restart.storage-clean
 restart.storage-clean:
-	@docker-compose -f ./services/storage/docker-compose.yml down
+	@docker-compose -f ./services/storage/docker-compose.yml down 2>&1 | tee -a docker-compose.err
 	@$(foreach vol, \
-		$(shell docker-compose -f services/storage/docker-compose.yml config --volumes),\
+		$(shell docker-compose -f services/storage/docker-compose.yml config --volumes 2>&1 | tee -a docker-compose.err),\
+		$(call error_handler,$@ for storage_$${vol}); \,\
 		docker volume rm storage_$(vol);)
-	@docker-compose -f ./services/storage/docker-compose.yml up -d
-
+	docker-compose -f ./services/storage/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
+	$(call error_handler,$@);
