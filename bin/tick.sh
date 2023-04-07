@@ -23,7 +23,7 @@ fi
 
 # Grep Morph block time
 SIDECHAIN_PROTO="${SIDECHAIN_PROTO:-services/morph_chain/protocol.privnet.yml}"
-BLOCK_DURATION=$(grep SecondsPerBlock < "$SIDECHAIN_PROTO" | awk '{print $2}') \
+BLOCK_DURATION=$(grep TimePerBlock < "$SIDECHAIN_PROTO" | awk '{print $2}') \
 	|| die "Cannot fetch block duration"
 NETMAP_ADDR=$(bin/resolve.sh netmap.neofs) || die "Cannot resolve netmap.neofs"
 

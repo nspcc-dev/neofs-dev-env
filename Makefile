@@ -20,12 +20,12 @@ include services/*/artifacts.mk
 include services/*/prepare.mk
 
 # List of services to run
-START_SVCS = $(shell cat .services | grep -v '#')
-START_BASIC = $(shell cat .basic_services | grep -ve '#')
-START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v '#')
-STOP_SVCS = $(shell tac .services | grep -v '#')
-STOP_BASIC = $(shell tac .basic_services | grep -v '#')
-STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v '#')
+START_SVCS = $(shell cat .services | grep -v '\#')
+START_BASIC = $(shell cat .basic_services | grep -ve '\#')
+START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v '\#')
+STOP_SVCS = $(shell tac .services | grep -v '\#')
+STOP_BASIC = $(shell tac .basic_services | grep -v '\#')
+STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v '\#')
 
 # Enabled services dirs
 ENABLED_SVCS_DIRS = $(shell echo "${START_BOOTSTRAP} ${START_BASIC} ${START_SVCS}" | sed 's|[^ ]* *|./services/&|g')
@@ -206,8 +206,8 @@ clean:
 .PHONY: env
 env:
 	@$(foreach envvar,$(GREP_DOTENV),echo $(envvar);)
-	@echo MORPH_BLOCK_TIME=$(shell grep 'SecondsPerBlock' $(MORPH_CHAIN_PROTOCOL) | awk '{print $$2}')s
-	@echo MAINNET_BLOCK_TIME=$(shell grep 'SecondsPerBlock' $(CHAIN_PROTOCOL) | awk '{print $$2}')s
+	@echo MORPH_BLOCK_TIME=$(shell grep 'TimePerBlock' $(MORPH_CHAIN_PROTOCOL) | awk '{print $$2}')
+	@echo MAINNET_BLOCK_TIME=$(shell grep 'TimePerBlock' $(CHAIN_PROTOCOL) | awk '{print $$2}')
 	@echo MORPH_MAGIC=$(shell grep 'Magic' $(MORPH_CHAIN_PROTOCOL) | awk '{print $$2}')
 
 # Restart storage nodes with clean volumes
