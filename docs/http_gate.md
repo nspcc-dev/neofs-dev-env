@@ -23,7 +23,7 @@ Image label prefix to use for containers.
 ```
 $ neofs-cli --rpc-endpoint s01.neofs.devenv:8080 \
             --wallet wallets/wallet.json \
-            container create --basic-acl readonly --await \
+            container create --basic-acl eacl-public-read --await \
             --policy "REP 1 SELECT 1 FROM *"
 container ID: 4LfREK1cetL4PUji5fqj9SgRTSmaC5jExEDK9HKCDjdP
 awaiting...
