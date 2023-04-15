@@ -22,7 +22,7 @@ Image label prefix to use for containers.
 - Create a new container
 ```
 $ neofs-cli --rpc-endpoint s01.neofs.devenv:8080 \
-            --key wallets/wallet.key \
+            --wallet wallets/wallet.json \
             container create --basic-acl readonly --await \
             --policy "REP 1 SELECT 1 FROM *"
 container ID: 4LfREK1cetL4PUji5fqj9SgRTSmaC5jExEDK9HKCDjdP
@@ -33,7 +33,7 @@ container has been persisted on sidechain
 - Put an object into the newly created container
 ```
 $ neofs-cli --rpc-endpoint s01.neofs.devenv:8080 \
-            --key wallets/wallet.key \
+            --wallet wallets/wallet.json \
             object put --file /tmp/backup.jpeg \
             --cid 4LfREK1cetL4PUji5fqj9SgRTSmaC5jExEDK9HKCDjdP
 [/tmp/backup.jpeg] Object successfully stored
