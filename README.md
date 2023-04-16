@@ -59,8 +59,7 @@ $ make up
 
 When all services are up, you need to make GAS deposit for test wallet to be
 able to pay for NeoFS operations. Test wallet is located in
-`wallets/wallet.json` with the corresponding key in `wallets/wallet.key`. The
-password is empty.
+`wallets/wallet.json`. The password is empty.
 
 ```
 $ make prepare.ir
