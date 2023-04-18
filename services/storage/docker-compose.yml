@@ -35,10 +35,10 @@ services:
       - NEOFS_NODE_ATTRIBUTE_2=Price:22
     healthcheck:
       test: ["CMD-SHELL", "/healthcheck.sh"]
-      interval: 2s
-      timeout: 1s
+      interval: 5s
+      timeout: 5s
       retries: 5
-      start_period: 10s
+      start_period: 20s
 
   storage02:
     image: ${NODE_IMAGE}:${NODE_VERSION}
@@ -73,10 +73,10 @@ services:
       - NEOFS_NODE_ATTRIBUTE_2=Price:33
     healthcheck:
       test: ["CMD-SHELL", "/healthcheck.sh"]
-      interval: 2s
-      timeout: 1s
+      interval: 5s
+      timeout: 5s
       retries: 5
-      start_period: 10s
+      start_period: 20s
 
   storage03:
     image: ${NODE_IMAGE}:${NODE_VERSION}
@@ -111,10 +111,10 @@ services:
       - NEOFS_NODE_ATTRIBUTE_2=Price:11
     healthcheck:
       test: ["CMD-SHELL", "/healthcheck.sh"]
-      interval: 2s
-      timeout: 1s
+      interval: 5s
+      timeout: 5s
       retries: 5
-      start_period: 10s
+      start_period: 20s
 
   storage04:
     image: ${NODE_IMAGE}:${NODE_VERSION}
@@ -155,10 +155,10 @@ services:
       - NEOFS_NODE_ATTRIBUTE_2=Price:44
     healthcheck:
       test: ["CMD-SHELL", "/healthcheck.sh"]
-      interval: 2s
-      timeout: 1s
+      interval: 5s
+      timeout: 5s
       retries: 5
-      start_period: 10s
+      start_period: 20s
 
   sn-healthcheck:
     container_name: sn-healthcheck
