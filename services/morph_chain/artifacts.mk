@@ -19,17 +19,30 @@ else
 endif
 
 # Download NeoFS ADM tool 
-get.adm: NEOFS_ADM_DEST=./vendor/neofs-adm
+get.adm: NEOFS_ADM_DEST=./vendor
+get.adm: NEOFS_ADM_BIN=neofs-adm
 get.adm: NEOFS_ADM_ARCHIVE=neofs-adm.tar.gz
 get.adm:
 
 ifeq (${NEOFS_ADM_PATH},)
-	@echo "⇒ Download NeoFS ADM binary from ${NEOFS_ADM_URL}"
-	@curl -sSL ${NEOFS_ADM_URL} -o ${NEOFS_ADM_ARCHIVE}
-	@tar -xvf ${NEOFS_ADM_ARCHIVE} -C ./vendor | xargs -I {} \
-		mv ./vendor/{} ${NEOFS_ADM_DEST}
-	@rm ${NEOFS_ADM_ARCHIVE}
+    ifneq (${NEOFS_ADM_URL},)
+		@echo "⇒ Download NeoFS ADM binary from ${NEOFS_ADM_URL}"
+		@curl -sSL ${NEOFS_ADM_URL} -o ${NEOFS_ADM_ARCHIVE}
+		@tar -xvf ${NEOFS_ADM_ARCHIVE} -C ./vendor | xargs -I {} \
+		    mv ./vendor/{} ${NEOFS_ADM_DEST}/${NEOFS_ADM_BIN}
+		@rm ${NEOFS_ADM_ARCHIVE}
+    else
+		@echo "⇒ NEOFS_ADM_URL is empty."
+    endif
 else
-	@echo "⇒ Copy neofs-adm binary from ${NEOFS_ADM_PATH}"
-	@cp ${NEOFS_ADM_PATH} ${NEOFS_ADM_DEST}
+    ifneq (${NEOFS_ADM_PATH},)
+		@echo "⇒ Copy neofs-adm binary from ${NEOFS_ADM_PATH}"
+		@cp ${NEOFS_ADM_PATH} ${NEOFS_ADM_DEST}
+    else
+		@echo "⇒ NEOFS_ADM_PATH is empty."
+    endif
 endif
+
+	@if [ -e ${NEOFS_ADM_DEST}/${NEOFS_ADM_BIN} ]; then \
+	    chmod +x ${NEOFS_ADM_DEST}/${NEOFS_ADM_BIN}; \
+    fi

@@ -31,14 +31,22 @@ get.cli:
 	@mkdir -p ./vendor
 
 ifeq (${NEOFS_CLI_PATH},)
-	@echo "⇒ Download NeoFS CLI binary from ${NEOFS_CLI_URL}"
-	@curl \
-		-sSL "${NEOFS_CLI_URL}" \
-		-o ${NEOFS_CLI_ARCHIVE_FILE} 
-	@tar -xvf ${NEOFS_CLI_ARCHIVE_FILE} -C ./vendor | xargs -I {} \
-		mv ./vendor/{} ${NEOFS_CLI_FILE}
-	@rm ${NEOFS_CLI_ARCHIVE_FILE}
+    ifneq (${NEOFS_CLI_URL},)
+		@echo "⇒ Download NeoFS CLI binary from ${NEOFS_CLI_URL}"
+		@curl \
+		    -sSL "${NEOFS_CLI_URL}" \
+		    -o ${NEOFS_CLI_ARCHIVE_FILE}
+		@tar -xvf ${NEOFS_CLI_ARCHIVE_FILE} -C ./vendor | xargs -I {} \
+			mv ./vendor/{} ${NEOFS_CLI_FILE}
+		@rm ${NEOFS_CLI_ARCHIVE_FILE}
+    else
+	    @echo "⇒ NEOFS_CLI_PATH and NEOFS_CLI_URL are empty."
+    endif
 else
-	@echo "⇒ Copy local binary from ${NEOFS_CLI_PATH}"
-	@cp ${NEOFS_CLI_PATH} ${NEOFS_CLI_FILE}
+    ifneq (${NEOFS_CLI_PATH},)
+		@echo "⇒ Copy local binary from ${NEOFS_CLI_PATH}"
+		@cp ${NEOFS_CLI_PATH} ${NEOFS_CLI_FILE}
+    else
+		@echo "⇒ NEOFS_CLI_PATH is empty."
+    endif
 endif
