@@ -245,12 +245,7 @@ prepare-test-env:
 	$(MAKE) prepare.ir; \
 	sleep 10; \
 
-	if sudo -n true 2>/dev/null; then \
-		echo "Step 5: Preparing the storage service (with sudo)..."; \
-		sudo $(MAKE) prepare.storage; \
-	else \
-		echo "Step 5: Preparing the storage service (with sudo, you may need to enter your password)..."; \
-		sudo $(MAKE) prepare.storage; \
-	fi; \
+	echo "Step 5: Preparing the storage service..."; \
+	$(MAKE) prepare.storage; \
 
 	echo "Test environment setup completed."
