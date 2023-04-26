@@ -73,7 +73,7 @@ variable). This step is required for client services (neofs-http-gw,
 neofs-s3-gw) to interact with the node:
 
 ```
-$ sudo make prepare.storage
+$ make prepare.storage
 ```
 
 Change NeoFS global configuration values with `make update.*` commands. The
@@ -175,34 +175,6 @@ are correct.
 ```bash
 make prepare-test-env
 ```
-
-If you need to enter your password for sudo when running `make prepare-test-env`, the script will wait for you
-to input the password in the terminal.
-Enter your password, and the execution will continue.
-
-However, if you don't want to enter your password every time, you can configure sudo not to ask for a password
-for a specific command or for your user.
-You can add the following line to the `/etc/sudoers` file, using the `sudo visudo` command:
-
-```bash
-your_username ALL=(ALL) NOPASSWD: /path/to/your/make
-```
-
-Replace `your_username` with your actual username and `/path/to/your/make` with the path to the make executable
-on your computer.
-You can find the path to make by running the `which make` command.
-This setting will allow you to run the make command using sudo without entering a password.
-
-If you want to allow running all commands without entering a password for your user, use the following entry:
-
-```bash
-your_username ALL=(ALL) NOPASSWD: ALL
-```
-
-**Note**: Changing sudo settings may increase the security risk for your system,
-especially if you allow running all commands without a password.
-Use this option only if you are aware of the possible risks and are willing to accept them.
-
 
 ## Contributing
 
