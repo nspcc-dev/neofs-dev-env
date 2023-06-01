@@ -1,6 +1,6 @@
 #!/bin/sh
 
-/neofs-cli control healthcheck \
+/neofs-cli control healthcheck -c /cli-cfg.yml \
 	--endpoint "$NEOFS_IR_CONTROL_GRPC_ENDPOINT" \
-	--wallet /wallet01.key --ir |
+	--ir |
 	grep "Health status: READY"
