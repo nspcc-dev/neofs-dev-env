@@ -16,11 +16,11 @@ services:
     stop_signal: SIGKILL
     volumes:
       - ./az.json:/wallet.json
-      - ./az.key:/wallet01.key
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/locode_db:/locode/db
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./healthcheck.sh:/healthcheck.sh
+      - ./cli-cfg.yml:/cli-cfg.yml
     env_file: [ ".env", ".ir.env", ".int_test.env" ]
     environment:
     - NEOFS_IR_WALLET_PATH=/wallet.json
