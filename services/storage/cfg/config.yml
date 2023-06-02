@@ -23,7 +23,6 @@ morph:
 
 # Common storage node settings
 node:
-  attribute_0: "User-Agent:NeoFS/0.33"
   notification:
     enabled: true  # Turn on object notification service
     endpoint: "tls://nats.neofs.devenv:4222"  # Notification server endpoint
