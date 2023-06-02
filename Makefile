@@ -228,24 +228,16 @@ prepare-test-env:
 
 	trap 'echo "Test environment setup failed. Please check the error messages above."; exit 1;' ERR
 
-	echo "Step 1: Stopping the environment..."; \
-	$(MAKE) down; \
-	sleep 10;
-
-	echo "Step 2: Cleaning the environment..."; \
-	$(MAKE) clean; \
-	sleep 10;
-
-	echo "Step 3: Setting up the test environment..."; \
+	echo "Step 1: Setting up the test environment..."; \
 	$(MAKE) up; \
-	echo "Waiting a few minutes..."; \
-	sleep 120; \
+	echo "Waiting a few seconds..."; \
+	sleep 30; \
 
-	echo "Step 4: Preparing the IR service..."; \
+	echo "Step 3: Preparing the IR service..."; \
 	$(MAKE) prepare.ir; \
 	sleep 10; \
 
-	echo "Step 5: Preparing the storage service..."; \
+	echo "Step 4: Preparing the storage service..."; \
 	$(MAKE) prepare.storage; \
 
 	echo "Test environment setup completed."
