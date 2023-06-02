@@ -1,5 +1,5 @@
 logger:
-  level: info # Log level
+  level: debug # Log level
   
 rebalance_timer: 5m  # Interval to check nodes' health
 
