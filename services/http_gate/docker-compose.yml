@@ -17,11 +17,11 @@ services:
     volumes:
       - ./wallet.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
+      - ./cfg:/etc/neofs/http
     stop_signal: SIGKILL
     env_file: [ ".env", ".http.env", ".int_test.env" ]
+    command: [ "neofs-http-gw", "--config", "/etc/neofs/http/config.yml" ]
     environment:
-      - HTTP_GW_WALLET_PATH=/wallet.json
-      - HTTP_GW_WALLET_PASSPHRASE=one
       - HTTP_GW_PEERS_0_ADDRESS=s01.${LOCAL_DOMAIN}:8080
       - HTTP_GW_PEERS_0_WEIGHT=0.2
       - HTTP_GW_PEERS_1_ADDRESS=s02.${LOCAL_DOMAIN}:8080
