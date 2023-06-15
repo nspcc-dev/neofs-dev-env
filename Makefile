@@ -230,6 +230,7 @@ prepare-test-env:
 
 	echo "Step 1: Setting up the test environment..."; \
 	$(MAKE) up; \
+	./bin/config.sh int MaxObjectSize 1024; \
 	echo "Waiting a few seconds..."; \
 	sleep 30; \
 
