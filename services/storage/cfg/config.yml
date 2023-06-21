@@ -17,9 +17,8 @@ prometheus:
 # Morph section
 morph:
   dial_timeout: 30s  # Timeout for side chain NEO RPC client connection
-  rpc_endpoint:  # Side chain NEO RPC endpoints
-    - address: ws://morph-chain:30333/ws
-      priority: 1
+  endpoints:  # Side chain NEO RPC endpoints
+    - ws://morph-chain:30333/ws
 
 # Common storage node settings
 node:

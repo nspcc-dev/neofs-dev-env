@@ -25,15 +25,13 @@ without_mainnet: false
 
 # Neo main chain RPC settings
 mainnet:
-  endpoint:
-    client:  # List of websocket RPC endpoints in mainchain; ignore if mainchain is disabled
-      - address: ws://main-chain:30333/ws
+  endpoints: # List of websocket RPC endpoints in mainchain; ignore if mainchain is disabled
+    - ws://main-chain:30333/ws
 
 # Neo side chain RPC settings
 morph:
-  endpoint:
-    client:  # List of websocket RPC endpoints in sidechain
-      - address: ws://morph-chain:30333/ws
+  endpoints: # List of websocket RPC endpoints in sidechain
+    - ws://morph-chain:30333/ws
   validators:  # List of hex-encoded 33-byte public keys of sidechain validators to vote for at application startup
     - 02b3622bf4017bdfe317c58aed5f4c753f206b7db896046fa7d774bbc4bf7f8dc2
 
