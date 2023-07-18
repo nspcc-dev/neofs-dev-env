@@ -25,7 +25,7 @@ services:
     env_file: [ ".env", ".ir.env", ".int_test.env" ]
     command: [ "neofs-ir", "--config", "/etc/neofs/ir/config.yml" ]
     healthcheck:
-      test: ["CMD-SHELL", "/healthcheck.sh"]
+      test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_IR_CONTROL_GRPC_ENDPOINT}", "--ir"]
       interval: 2s
       timeout: 1s
       retries: 5
