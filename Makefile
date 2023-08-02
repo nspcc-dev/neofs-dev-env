@@ -230,7 +230,10 @@ prepare-test-env:
 
 	echo "Step 1: Setting up the test environment..."; \
 	$(MAKE) up; \
-	./bin/config.sh int MaxObjectSize 1024; \
+#	Why 524288? Amazon S3 multipart min upload limits is 5 MiB: https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html
+#	In tests, we test aws and create a lot of tets objects.
+#	This "magic" constant was chosen as a compromise for the speed of tests and for the possibility to cover aws multipart functionality.
+	./bin/config.sh int MaxObjectSize 524288; \
 	echo "Waiting a few seconds..."; \
 	sleep 30; \
 
