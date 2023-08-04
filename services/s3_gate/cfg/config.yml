@@ -17,7 +17,8 @@ max_clients_count: 100
 max_clients_deadline: 30s
 
 server:
-  - tls:
+  - address: 0.0.0.0:8080
+    tls:
       enabled: true
       cert_file: /tls.crt
       key_file: /tls.key
