@@ -33,8 +33,8 @@ services:
       - NEOFS_NODE_ADDRESSES=s01.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s01.${LOCAL_DOMAIN}:8080
       - NEOFS_CONTROL_GRPC_ENDPOINT=s01.${LOCAL_DOMAIN}:8081
-      - NEOFS_NODE_ATTRIBUTE_1=UN-LOCODE:RU MOW
-      - NEOFS_NODE_ATTRIBUTE_2=Price:22
+      - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:RU MOW
+      - NEOFS_NODE_ATTRIBUTE_1=Price:22
     healthcheck:
       test: ["CMD-SHELL", "/healthcheck.sh"]
       interval: 5s
@@ -73,8 +73,8 @@ services:
       - NEOFS_NODE_ADDRESSES=s02.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s02.${LOCAL_DOMAIN}:8080
       - NEOFS_CONTROL_GRPC_ENDPOINT=s02.${LOCAL_DOMAIN}:8081
-      - NEOFS_NODE_ATTRIBUTE_1=UN-LOCODE:RU LED
-      - NEOFS_NODE_ATTRIBUTE_2=Price:33
+      - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:RU LED
+      - NEOFS_NODE_ATTRIBUTE_1=Price:33
     healthcheck:
       test: ["CMD-SHELL", "/healthcheck.sh"]
       interval: 5s
@@ -113,8 +113,8 @@ services:
       - NEOFS_NODE_ADDRESSES=s03.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s03.${LOCAL_DOMAIN}:8080
       - NEOFS_CONTROL_GRPC_ENDPOINT=s03.${LOCAL_DOMAIN}:8081
-      - NEOFS_NODE_ATTRIBUTE_1=UN-LOCODE:SE STO
-      - NEOFS_NODE_ATTRIBUTE_2=Price:11
+      - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:SE STO
+      - NEOFS_NODE_ATTRIBUTE_1=Price:11
     healthcheck:
       test: ["CMD-SHELL", "/healthcheck.sh"]
       interval: 5s
@@ -159,8 +159,8 @@ services:
       - NEOFS_GRPC_1_TLS_ENABLED=true
       - NEOFS_GRPC_1_TLS_CERTIFICATE=/tls.crt
       - NEOFS_GRPC_1_TLS_KEY=/tls.key
-      - NEOFS_NODE_ATTRIBUTE_1=UN-LOCODE:FI HEL
-      - NEOFS_NODE_ATTRIBUTE_2=Price:44
+      - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:FI HEL
+      - NEOFS_NODE_ATTRIBUTE_1=Price:44
     healthcheck:
       test: ["CMD-SHELL", "/healthcheck.sh"]
       interval: 5s
