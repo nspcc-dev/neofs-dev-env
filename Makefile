@@ -23,9 +23,11 @@ include services/*/prepare.mk
 START_SVCS = $(shell cat .services | grep -v '\#')
 START_BASIC = $(shell cat .basic_services | grep -ve '\#')
 START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v '\#')
+START_TESTING = $(shell cat .testing_services | grep -v '\#')
 STOP_SVCS = $(shell tac .services | grep -v '\#')
 STOP_BASIC = $(shell tac .basic_services | grep -v '\#')
 STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v '\#')
+STOP_TESTING = $(shell tac .testing_services | grep -v '\#')
 
 # Enabled services dirs
 ENABLED_SVCS_DIRS = $(shell echo "${START_BOOTSTRAP} ${START_BASIC} ${START_SVCS}" | sed 's|[^ ]* *|./services/&|g')
@@ -122,6 +124,15 @@ up/bootstrap: get vendor/hosts
 	$(call error_handler,$@);
 	@echo "NeoFS sidechain environment is deployed"
 
+.PHONY: up/testing
+up/testing:
+	@for svc in $(START_TESTING); do \
+		echo "$@ for service: $${svc}"; \
+		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
+	done
+	$(call error_handler,$@);
+	@echo "NeoFS Testing Environment is ready"
+
 # Build up certain service
 .PHONY: up/%
 up/%: get vendor/hosts
@@ -131,7 +142,7 @@ up/%: get vendor/hosts
 
 # Stop environment
 .PHONY: down
-down: down/add down/basic down/bootstrap
+down: down/add down/basic down/testing down/bootstrap
 	@echo "Full NeoFS Developer Environment is down"
 
 .PHONY: down/add
@@ -155,6 +166,15 @@ down/basic:
 .PHONY: down/bootstrap
 down/bootstrap:
 	@for svc in $(STOP_BOOTSTRAP); do \
+		echo "$@ for service: $${svc}"; \
+		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee docker-compose.err; \
+	done
+	$(call error_handler,$@);
+
+# Stop testing services
+.PHONY: down/testing
+down/testing:
+	@for svc in $(STOP_TESTING); do \
 		echo "$@ for service: $${svc}"; \
 		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee docker-compose.err; \
 	done
@@ -240,5 +260,9 @@ prepare-test-env:
 
 	echo "Step 4: Preparing the storage service..."; \
 	$(MAKE) prepare.storage; \
+
+	echo "Step 5: Preparing the k6 load node..."; \
+	$(MAKE) up/testing; \
+	sleep 5; \
 
 	echo "Test environment setup completed."
