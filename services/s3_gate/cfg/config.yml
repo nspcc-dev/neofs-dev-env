@@ -17,7 +17,8 @@ max_clients_count: 100
 max_clients_deadline: 30s
 
 server:
-  - tls:
+  - address: 0.0.0.0:8080
+    tls:
       enabled: true
       cert_file: /tls.crt
       key_file: /tls.key
@@ -26,3 +27,6 @@ server:
 wallet:
   path: /wallet.json # Path to wallet
   passphrase: "s3" # Passphrase to decrypt wallet
+
+# RPC endpoint
+rpc_endpoint: http://morph-chain.neofs.devenv:30333
