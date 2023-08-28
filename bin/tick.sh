@@ -21,15 +21,15 @@ else
   ADDR=$(jq -r .accounts[0].address < "${WALLET}" || die "Cannot get address from ${WALLET}")
 fi
 
-# Grep Morph block time
-SIDECHAIN_PROTO="${SIDECHAIN_PROTO:-services/morph_chain/protocol.privnet.yml}"
-BLOCK_DURATION=$(grep TimePerBlock < "$SIDECHAIN_PROTO" | awk '{print $2}') \
+# Grep NeoFS chain block time
+NEOFS_CHAIN_PROTO="${NEOFS_CHAIN_PROTO:-services/ir/cfg/config.yml}"
+BLOCK_DURATION=$(grep time_per_block < "$NEOFS_CHAIN_PROTO" | awk '{print $2}') \
 	|| die "Cannot fetch block duration"
 NETMAP_ADDR=$(bin/resolve.sh netmap.neofs) || die "Cannot resolve netmap.neofs"
 
 # Fetch current epoch value
 EPOCH=$(${NEOGO} contract testinvokefunction \
-	-r "http://morph-chain.${LOCAL_DOMAIN}:30333" "${NETMAP_ADDR}" epoch \
+	-r "http://ir01.${LOCAL_DOMAIN}:30333" "${NETMAP_ADDR}" epoch \
 	| grep 'value' | awk -F'"' '{ print $4 }') \
 	|| die "Cannot fetch epoch from netmap contract"
 
@@ -39,11 +39,11 @@ echo "Updating NeoFS epoch to $((EPOCH+1))"
 ${NEOGO} contract invokefunction \
         --wallet-config ${CONFIG_IMG} \
 	-a ${ADDR} --force \
-	-r http://morph-chain.${LOCAL_DOMAIN}:30333 \
+	-r http://ir01.${LOCAL_DOMAIN}:30333 \
 	${NETMAP_ADDR} \
 	newEpoch int:$((EPOCH+1)) -- ${ADDR}:Global \
         || die "Cannot increment an epoch"
 
-# Wait one Morph block to ensure the transaction broadcasted
+# Wait one NeoFS chain block to ensure the transaction broadcasted
 # shellcheck disable=SC2086
 sleep $BLOCK_DURATION

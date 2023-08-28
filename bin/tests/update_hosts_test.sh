@@ -4,22 +4,22 @@ set -e
 
 : "${TEST_HOSTS_FILE:=$(mktemp)}"
 : "${TEST_COREFILE:=$(mktemp)}"
-: "${TEST_MORPH_CHAIN_CONFIG:=$(mktemp)}"
+: "${TEST_NEOFS_CHAIN_CONFIG:=$(mktemp)}"
 
 : "${TEMP_ENV_FILE:=$(mktemp)}"
 
 : "${BASE_HOSTS_FILE:=/etc/hosts}"
 : "${BASE_COREFILE:=services/coredns/Corefile}"
-: "${BASE_MORPH_CHAIN_CONFIG:=services/morph_chain/protocol.privnet.yml}"
+: "${BASE_NEOFS_CHAIN_CONFIG:=services/ir/cfg/config.yml}"
 : "${BASE_ENV_FILE:=.env}"
 
 cleanup() {
-  rm -f "$TEST_HOSTS_FILE" "$TEST_COREFILE" "$TEST_MORPH_CHAIN_CONFIG"
+  rm -f "$TEST_HOSTS_FILE" "$TEST_COREFILE" "$TEST_NEOFS_CHAIN_CONFIG"
   cp "$TEMP_ENV_FILE" "$BASE_ENV_FILE"
 }
 
 run_update_hosts() {
-    HOSTS_FILE="$TEST_HOSTS_FILE" COREFILE="$TEST_COREFILE" MORPH_CHAIN_CONFIG="$TEST_MORPH_CHAIN_CONFIG" ./bin/update_hosts.sh > /dev/null
+    HOSTS_FILE="$TEST_HOSTS_FILE" COREFILE="$TEST_COREFILE" NEOFS_CHAIN_CONFIG="$TEST_NEOFS_CHAIN_CONFIG" ./bin/update_hosts.sh > /dev/null
 }
 
 check_test() {
@@ -44,7 +44,7 @@ prepare_environment() {
   cleanup
   :>"$TEST_HOSTS_FILE"
   :>"$TEST_COREFILE"
-  :>"$TEST_MORPH_CHAIN_CONFIG"
+  :>"$TEST_NEOFS_CHAIN_CONFIG"
   sed -i 's/^IPV4_PREFIX=192\.168\.130/IPV4_PREFIX=192\.168\.100/' "$BASE_ENV_FILE"
 }
 
@@ -65,7 +65,7 @@ empty_file_test() {
   out=""
   check_test "$out" "$empty_output" "$test_name corefile"
   
-  empty_output=$(cat "$TEST_MORPH_CHAIN_CONFIG")
+  empty_output=$(cat "$TEST_NEOFS_CHAIN_CONFIG")
   out=""
   check_test "$out" "$empty_output" "$test_name config"
 }
@@ -91,16 +91,16 @@ update_entries_in_hosts_test() {
   echo "Running update entries in $BASE_HOSTS_FILE tests..."
   prepare_environment
 
-  echo "192.168.130.90 morph-chain.neofs.devenv
+  echo "192.168.100.61 ir01.neofs.devenv
 127.0.0.1       localhost" > "$TEST_HOSTS_FILE"
   run_update_hosts
-  expected_output="192.168.100.90 morph-chain.neofs.devenv
+  expected_output="192.168.100.61 ir01.neofs.devenv
 127.0.0.1       localhost
 192.168.100.10 bastion.neofs.devenv
 192.168.100.50 main-chain.neofs.devenv
 192.168.100.53 coredns.neofs.devenv
 192.168.100.81 http.neofs.devenv
-192.168.100.61 ir01.neofs.devenv
+192.168.100.102 k6_node.neofs.devenv
 192.168.100.101 nats.neofs.devenv
 192.168.100.83 rest.neofs.devenv
 192.168.100.82 s3.neofs.devenv
@@ -119,7 +119,6 @@ echo "127.0.0.1       localhost
 192.168.130.53 coredns.neofs.devenv
 192.168.130.81 http.neofs.devenv
 192.168.130.61 ir01.neofs.devenv
-192.168.130.90 morph-chain.neofs.devenv
 192.168.130.101 nats.neofs.devenv
 192.168.130.83 rest.neofs.devenv
 192.168.130.82 s3.neofs.devenv
@@ -135,7 +134,6 @@ echo "127.0.0.1       localhost
 192.168.100.53 coredns.neofs.devenv
 192.168.100.81 http.neofs.devenv
 192.168.100.61 ir01.neofs.devenv
-192.168.100.90 morph-chain.neofs.devenv
 192.168.100.101 nats.neofs.devenv
 192.168.100.83 rest.neofs.devenv
 192.168.100.82 s3.neofs.devenv
@@ -143,7 +141,8 @@ echo "127.0.0.1       localhost
 192.168.100.71 s01.neofs.devenv
 192.168.100.72 s02.neofs.devenv
 192.168.100.73 s03.neofs.devenv
-192.168.100.74 s04.neofs.devenv"
+192.168.100.74 s04.neofs.devenv
+192.168.100.102 k6_node.neofs.devenv"
 
 update_hosts_output=$(cat "$TEST_HOSTS_FILE")
 check_test "$expected_output" "$update_hosts_output" "update all entries in $BASE_HOSTS_FILE"
@@ -155,7 +154,7 @@ update_corefile_test() {
   echo "Running update $BASE_COREFILE file test..."
   prepare_environment
   echo ". {
-    nns http://192.168.130.90:30333
+    nns http://192.168.130.61:30333
     transfer {
        to *
     }
@@ -164,7 +163,7 @@ update_corefile_test() {
 }" > "$TEST_COREFILE"
   run_update_hosts
   expected_output=". {
-    nns http://192.168.100.90:30333
+    nns http://192.168.100.61:30333
     transfer {
        to *
     }
@@ -178,7 +177,7 @@ update_corefile_test() {
 update_configfile_test() {
   local expected_output
   local update_output
-  echo "Running update $BASE_MORPH_CHAIN_CONFIG file test..."
+  echo "Running update $BASE_NEOFS_CHAIN_CONFIG file test..."
   prepare_environment
   echo "P2P:
     Addresses:
@@ -186,7 +185,7 @@ update_configfile_test() {
       
   RPC:
     Addresses:
-      - \"192.168.130.90:30333\"
+      - \"192.168.130.61:30333\"
       
   Prometheus:
     Addresses:
@@ -194,7 +193,7 @@ update_configfile_test() {
 
   Pprof:
     Addresses:
-      - \":20011\"" > "$TEST_MORPH_CHAIN_CONFIG"
+      - \":20011\"" > "$TEST_NEOFS_CHAIN_CONFIG"
   run_update_hosts
   expected_output="P2P:
     Addresses:
@@ -202,7 +201,7 @@ update_configfile_test() {
       
   RPC:
     Addresses:
-      - \"192.168.100.90:30333\"
+      - \"192.168.130.61:30333\"
       
   Prometheus:
     Addresses:
@@ -211,8 +210,8 @@ update_configfile_test() {
   Pprof:
     Addresses:
       - \":20011\""
-  update_output=$(cat "$TEST_MORPH_CHAIN_CONFIG")
-  check_test "$expected_output" "$update_output" "update $BASE_MORPH_CHAIN_CONFIG file"
+  update_output=$(cat "$TEST_NEOFS_CHAIN_CONFIG")
+  check_test "$expected_output" "$update_output" "update $BASE_NEOFS_CHAIN_CONFIG file"
 } 
 
 cp "$BASE_ENV_FILE" "$TEMP_ENV_FILE"

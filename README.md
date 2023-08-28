@@ -102,7 +102,6 @@ guide](docs/macOS.md) in `docs` directory.
 │   ├── basenet
 │   ├── chain
 │   ├── ir
-│   ├── morph_chain
 │   └── storage
 ├── vendor           # Temporary files and artifacts
 └── wallets          # Wallet files to manage GAS assets
@@ -150,7 +149,9 @@ Display addresses and host names for each running service, if available.
 
 ### clean
 
-Clean up `vendor` directory.
+Clean up `vendor` directory. Remove services' Docker volumes incl:
+- stored NeoFS objects
+- NeoFS chain state
 
 ## How to prepare environment to run neofs-testcases
 
@@ -167,7 +168,7 @@ From the root of the project, run:
 sudo ./bin/update_hosts.sh
 ```
 This script will change the subnet address in the services/coredns/Corefile and
-in the services/morph_chain/protocol.privnet.yml configuration files.
+in the services/ir/cfg/config.yml configuration files.
 And it will add or change ip addresses in the /etc/hosts file.
 After running the script, make sure that the contents of these files
 are correct.

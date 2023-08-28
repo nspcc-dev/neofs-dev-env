@@ -29,4 +29,4 @@ wallet:
   passphrase: "s3" # Passphrase to decrypt wallet
 
 # RPC endpoint
-rpc_endpoint: http://morph-chain.neofs.devenv:30333
+rpc_endpoint: http://ir01.neofs.devenv:30333

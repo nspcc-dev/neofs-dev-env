@@ -3,28 +3,29 @@ set -e
 
 : "${HOSTS_FILE:=/etc/hosts}"
 : "${COREFILE:=services/coredns/Corefile}"
-: "${MORPH_CHAIN_CONFIG:=services/morph_chain/protocol.privnet.yml}"
+: "${NEOFS_CHAIN_CONFIG:=services/ir/cfg/config.yml}"
 temp_file=$(mktemp)
 
 # Get default hosts
 make hosts > "$temp_file"
 
-# Get the morph-chain IP address from the $COREFILE file
-morph_chain_ip=$(grep "morph-chain.neofs.devenv" "$temp_file" | awk '{print $1}')
+# Get the NeoFS chain IP address from the $COREFILE file
+neofs_chain_ip=$(grep "ir01.neofs.devenv" "$temp_file" | awk '{print $1}')
 
 # Replace the IP address in the $COREFILE file
-sed -i -E "s/(nns[[:space:]]*http\:\/\/)([0-9]{1,3}[.]){3}[0-9]{1,3}(:30333)/\1$morph_chain_ip\3/" "$COREFILE"
+sed -i -E "s/(nns[[:space:]]*http\:\/\/)([0-9]{1,3}[.]){3}[0-9]{1,3}(:30333)/\1$neofs_chain_ip\3/" "$COREFILE"
 
 # Get the line numbers of "Addresses:"
-addresses_lines=$(grep -n "Addresses:" "$MORPH_CHAIN_CONFIG" | cut -d ':' -f 1)
+# FIXME(#302): grep by 'listen:' is unstable, jump to exact YAML fields
+addresses_lines=$(grep -n "listen:" "$NEOFS_CHAIN_CONFIG" | cut -d ':' -f 1)
 
 # Loop through each line number with "Addresses:"
 for addresses_line in $addresses_lines; do
   # Increment the line number to find the line with the IP and port
   target_line=$((addresses_line + 1))
 
-  # Replace the IP address in the target line in the MORPH_CHAIN_CONFIG file
-  sed -i "${target_line}s/\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}/$morph_chain_ip/" "$MORPH_CHAIN_CONFIG"
+  # Replace the IP address in the target line in the NEOFS_CHAIN_CONFIG file
+  sed -i "${target_line}s/\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}/$neofs_chain_ip/" "$NEOFS_CHAIN_CONFIG"
 done
 
 while IFS=" " read -r ip domain; do
