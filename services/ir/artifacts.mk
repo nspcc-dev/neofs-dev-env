@@ -3,7 +3,7 @@
 LOCODE_DB_ARCHIVE_PATH=./vendor
 LOCODE_DB_ARCHIVE_FILE=locode_db.gz
 
-get.ir: get.locode get.cli
+get.ir: get.locode get.cli get.storage prepare.storage
 
 # Get NeoFS LOCODE database
 get.locode: LOCODE_DB_PATH?= 
