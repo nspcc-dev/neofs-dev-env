@@ -15,5 +15,5 @@ RUN git clone https://github.com/nspcc-dev/xk6-neofs.git
 RUN cd xk6-neofs && xk6 build --with github.com/nspcc-dev/xk6-neofs=.
 
 # Download neofs-cli
-RUN wget https://github.com/nspcc-dev/neofs-node/releases/download/v0.37.0/neofs-cli-amd64 -O /usr/local/bin/neofs-cli
+RUN wget https://github.com/nspcc-dev/neofs-node/releases/download/v0.38.0/neofs-cli-amd64 -O /usr/local/bin/neofs-cli
 RUN chmod +x /usr/local/bin/neofs-cli
