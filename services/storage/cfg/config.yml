@@ -47,10 +47,8 @@ storage:
         path: /storage/meta0  # Path to the metabase
 
       blobstor:
-        - type: blobovnicza
-          path: /storage/blobovnicza0  # Blobovnicza root directory
-          depth: 2
-          width: 4
+        - type: peapod
+          path: /storage/peapod0.db
         - type: fstree
           path: /storage/fstree0  # FSTree root directory
           depth: 2
@@ -67,10 +65,8 @@ storage:
         path: /storage/meta1  # Path to the metabase
 
       blobstor:
-        - type: blobovnicza
-          path: /storage/blobovnicza1  # Blobovnicza root directory
-          depth: 2
-          width: 4
+        - type: peapod
+          path: /storage/peapod1.db
         - type: fstree
           path: /storage/fstree1  # FSTree root directory
           depth: 2
