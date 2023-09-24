@@ -34,8 +34,6 @@ services:
       - NEOFS_CONTROL_GRPC_ENDPOINT=${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_1}
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:RU MOW
       - NEOFS_NODE_ATTRIBUTE_1=Price:22
-      - NEOFS_STORAGE_SHARD_0_RESYNC_METABASE=${RESYNC_METABASE}
-      - NEOFS_STORAGE_SHARD_1_RESYNC_METABASE=${RESYNC_METABASE}
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_1}"]
       interval: 5s
@@ -75,8 +73,6 @@ services:
       - NEOFS_CONTROL_GRPC_ENDPOINT=${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_2}
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:RU LED
       - NEOFS_NODE_ATTRIBUTE_1=Price:33
-      - NEOFS_STORAGE_SHARD_0_RESYNC_METABASE=${RESYNC_METABASE}
-      - NEOFS_STORAGE_SHARD_1_RESYNC_METABASE=${RESYNC_METABASE}
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_2}"]
       interval: 5s
@@ -116,8 +112,6 @@ services:
       - NEOFS_CONTROL_GRPC_ENDPOINT=${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_3}
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:SE STO
       - NEOFS_NODE_ATTRIBUTE_1=Price:11
-      - NEOFS_STORAGE_SHARD_0_RESYNC_METABASE=${RESYNC_METABASE}
-      - NEOFS_STORAGE_SHARD_1_RESYNC_METABASE=${RESYNC_METABASE}
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_3}"]
       interval: 5s
@@ -163,8 +157,6 @@ services:
       - NEOFS_GRPC_1_TLS_KEY=/tls.key
       - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:FI HEL
       - NEOFS_NODE_ATTRIBUTE_1=Price:44
-      - NEOFS_STORAGE_SHARD_0_RESYNC_METABASE=${RESYNC_METABASE}
-      - NEOFS_STORAGE_SHARD_1_RESYNC_METABASE=${RESYNC_METABASE}
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_4}"]
       interval: 5s
