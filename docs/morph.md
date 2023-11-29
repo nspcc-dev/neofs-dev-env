@@ -16,14 +16,6 @@ RPC available at `http://morph-chain.neofs.devenv:30333`.
 
 ## .env settings
 
-### MORPH_CHAIN_URL
-
-URL to get side chain dump. Used on artifact get stage.
-
-### MORPH_CHAIN_PATH
-
-Path to get side chain dump. If set, overrides `CHAIN_URL`.
-
 ### NEOGO_VERSION
 
 Version of neo-go docker container for side chain deployment.
