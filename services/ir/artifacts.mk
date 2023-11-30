@@ -28,6 +28,7 @@ get.cli: NEOFS_CLI_FILE=./vendor/neofs-cli
 get.cli: NEOFS_CLI_ARCHIVE_FILE=${NEOFS_CLI_FILE}.tar.gz
 get.cli: NEOFS_CLI_PATH?=
 get.cli:
+	@touch services/ir/.ir.env # https://github.com/docker/compose/issues/3560
 	@mkdir -p ./vendor
 
 ifeq (${NEOFS_CLI_PATH},)
