@@ -49,6 +49,8 @@ ApplicationConfiguration:
     Addresses:
       - ":20011"
     Enabled: true
-  UnlockWallet:
-    Path: "./wallets/node-wallet.json"
-    Password: "one"
+  Consensus:
+    Enabled: true
+    UnlockWallet:
+      Path: "./wallets/node-wallet.json"
+      Password: "one"
