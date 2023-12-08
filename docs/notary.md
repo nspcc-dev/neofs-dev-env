@@ -16,13 +16,12 @@ can change that in configuration.
 
 To enable notary service in main chain do these steps.
 
-1. Update `.env` and choose notary enabled chain dump for main chain.
+1. Deploy processing contract to the chain.
 
-```
-CHAIN_URL="https://github.com/nspcc-dev/neofs-contract/releases/download/v0.9.0/devenv_mainchain.gz"
-```
+See up/bootstrap target in the Makefile and set its hash as a parameter during
+neofs contract deployment.
 
-Make sure to update chain dump files with `make get` target.
+Set notary_disabled to false for neofs deployments at the same time.
 
 2. Update `service/chain/protocol.privnet.yml` and enable notary settings.
 

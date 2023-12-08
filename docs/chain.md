@@ -11,14 +11,6 @@ RPC available at `http://main-chain.neofs.devenv:30333`.
 
 ## .env settings
 
-### CHAIN_URL
-
-URL to get main chain dump. Used on artifact get stage.
-
-### CHAIN_PATH
-
-Path to get main chain dump. If set, overrides `CHAIN_URL`.
-
 ### NEOGO_VERSION
 
 Version of neo-go docker container for main chain deployment.
