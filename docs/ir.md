@@ -36,7 +36,7 @@ Script enters passwords automatically with `expect` utility.
 
 ```
 $ make update.epoch_duration val=30
-Changing EpochDuration configration value to 30
+Changing EpochDuration configuration value to 30
 Enter account NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP password >
 Sent invocation transaction bdc0fa88cd6719ef6df2b9c82de423ddec6141ca24255c2d0072688083b1de9d
 Updating NeoFS epoch to 20

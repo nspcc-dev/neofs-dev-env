@@ -34,7 +34,7 @@ else
 fi
 
 # Change config value in side chain
-echo "Changing ${KEY} configration value to ${VALUE}"
+echo "Changing ${KEY} configuration value to ${VALUE}"
 
 # shellcheck disable=SC2086
 ${NEOGO} contract invokefunction \

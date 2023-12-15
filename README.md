@@ -81,7 +81,7 @@ password of inner ring wallet is `one`. See examples in `make help`.
 
 ```
 $ make update.epoch_duration val=30
-Changing EpochDuration configration value to 30
+Changing EpochDuration configuration value to 30
 Enter account NNudMSGzEoktFzdYGYoNb3bzHzbmM1genF password > 
 Sent invocation transaction dbb8c1145b6d10f150135630e13bb0dc282023163f5956c6945a60db0cb45cb0
 Updating NeoFS epoch to 2
