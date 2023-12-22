@@ -8,7 +8,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: ir01
     container_name: ir01
-    restart: on-failure
+    restart: no
     networks:
       ir_int:
       internet:
