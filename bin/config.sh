@@ -34,13 +34,13 @@ else
 fi
 
 # Change config value in side chain
-echo "Changing ${KEY} configration value to ${VALUE}"
+echo "Changing ${KEY} configuration value to ${VALUE}"
 
 # shellcheck disable=SC2086
 ${NEOGO} contract invokefunction \
 	--wallet-config ${CONFIG_IMG} \
 	-a ${ADDR} --force \
-	-r http://morph-chain.${LOCAL_DOMAIN}:30333 \
+	-r http://ir01.${LOCAL_DOMAIN}:30333 \
 	${NETMAP_ADDR} \
 	setConfig bytes:beefcafe \
 	string:${KEY} \

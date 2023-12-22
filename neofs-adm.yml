@@ -1,15 +1,4 @@
-rpc-endpoint: http://morph-chain.neofs.devenv:30333
-network:
-  max_object_size: 67108864
-  epoch_duration: 240
-  basic_income_rate: 100000000
-  homomorphic_hash_disabled: false
-  fee:
-    audit: 10000
-    candidate: 10000000000
-    container: 1000
-    container_alias: 500
-    withdraw: 100000000
+rpc-endpoint: http://ir01.neofs.devenv:30333
 credentials:
   az: "one"
   contract: "one"

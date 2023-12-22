@@ -14,11 +14,11 @@ prometheus:
   address: :9090  # Server address
   shutdown_timeout: 15s  # Timeout for metrics HTTP server graceful shutdown
 
-# Morph section
+# NeoFS chain section
 morph:
   dial_timeout: 30s  # Timeout for side chain NEO RPC client connection
   endpoints:  # Side chain NEO RPC endpoints
-    - ws://morph-chain:30333/ws
+    - ws://ir01.neofs.devenv:30333/ws
 
 # Common storage node settings
 node:

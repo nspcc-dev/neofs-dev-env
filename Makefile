@@ -42,7 +42,7 @@ PULL_SVCS = $(shell find ${ENABLED_SVCS_DIRS} -type f -name 'docker-compose.yml'
 HOSTS_LINES = $(shell grep -Rl IPV4_PREFIX ./services/* | grep .hosts)
 
 # Paths to protocol.privnet.yml
-MORPH_CHAIN_PROTOCOL = './services/morph_chain/protocol.privnet.yml'
+NEOFS_CHAIN_PROTOCOL = './services/ir/cfg/config.yml'
 CHAIN_PROTOCOL = './services/chain/protocol.privnet.yml'
 
 # List of grepped environment variables from *.env
@@ -125,10 +125,9 @@ up/bootstrap: get vendor/hosts
 	@./vendor/neo-go contract deploy --wallet-config wallets/config.yml --in vendor/contracts/neofs/neofs_contract.nef --manifest vendor/contracts/neofs/config.json --force -r http://main-chain.neofs.devenv:30333 [ true ffffffffffffffffffffffffffffffffffffffff [ 02b3622bf4017bdfe317c58aed5f4c753f206b7db896046fa7d774bbc4bf7f8dc2 ] [ InnerRingCandidateFee 10000000000 WithdrawFee 100000000 ] ]
 	@echo "Waiting for deployment to happen" && sleep 2
 	@NEOGO=vendor/neo-go WALLET=wallets/wallet.json CONFIG=wallets/config.yml ./bin/deposit.sh
-	@./vendor/neofs-adm --config neofs-adm.yml morph init --alphabet-wallets ./services/ir --contracts vendor/contracts || die "Failed to initialize Alphabet wallets"
 	@for f in ./services/storage/wallet*.json; do echo "Transfer GAS to wallet $${f}" && ./vendor/neofs-adm -c neofs-adm.yml morph refill-gas --storage-wallet $${f} --gas 10.0 --alphabet-wallets services/ir || die "Failed to transfer GAS to alphabet wallets"; done
 	$(call error_handler,$@);
-	@echo "NeoFS sidechain environment is deployed"
+	@echo "NeoFS chain environment is deployed"
 
 .PHONY: up/testing
 up/testing:
@@ -232,9 +231,9 @@ clean:
 .PHONY: env
 env:
 	@$(foreach envvar,$(GREP_DOTENV),echo $(envvar);)
-	@echo MORPH_BLOCK_TIME=$(shell grep 'TimePerBlock' $(MORPH_CHAIN_PROTOCOL) | awk '{print $$2}')
+	@echo NEOFS_CHAIN_BLOCK_TIME=$(shell grep 'time_per_block' $(NEOFS_CHAIN_PROTOCOL) | awk '{print $$2}')
 	@echo MAINNET_BLOCK_TIME=$(shell grep 'TimePerBlock' $(CHAIN_PROTOCOL) | awk '{print $$2}')
-	@echo MORPH_MAGIC=$(shell grep 'Magic' $(MORPH_CHAIN_PROTOCOL) | awk '{print $$2}')
+	@echo NEOFS_CHAIN_MAGIC=$(shell grep 'magic' $(NEOFS_CHAIN_PROTOCOL) | awk '{print $$2}')
 
 # Restart storage nodes with clean volumes
 .PHONY: restart.storage-clean
