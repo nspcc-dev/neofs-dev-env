@@ -20,17 +20,6 @@ morph:
   endpoints:  # Side chain NEO RPC endpoints
     - ws://ir01.neofs.devenv:30333/ws
 
-# Common storage node settings
-node:
-  notification:
-    enabled: true  # Turn on object notification service
-    endpoint: "tls://nats.neofs.devenv:4222"  # Notification server endpoint
-    timeout: "6s"  # Timeout for object notification client connection
-    default_topic: "test"  # Default topic for object notifications if not found in object's meta
-    certificate: "/etc/neofs-node/nats.tls.cert"  # Path to TLS certificate
-    key: "/etc/neofs-node/nats.tls.key"  # Path to TLS key
-    ca: "/etc/neofs-node/nats.ca.crt"  # Path to optional CA certificate
-
 # Tree section
 tree:
   enabled: true
