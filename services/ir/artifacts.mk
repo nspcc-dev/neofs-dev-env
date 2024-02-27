@@ -5,7 +5,6 @@ get.ir: get.cli get.contracts get.adm get.storage prepare.storage
 # Download NeoFS CLI 
 .ONESHELL:
 get.cli: NEOFS_CLI_FILE=./vendor/neofs-cli
-get.cli: NEOFS_CLI_ARCHIVE_FILE=${NEOFS_CLI_FILE}.tar.gz
 get.cli: NEOFS_CLI_PATH?=
 get.cli:
 	@touch services/ir/.ir.env # https://github.com/docker/compose/issues/3560
@@ -13,12 +12,8 @@ get.cli:
 
 ifeq (${NEOFS_CLI_PATH},)
 	@echo "⇒ Download NeoFS CLI binary from ${NEOFS_CLI_URL}"
-	@curl \
-		-sSL "${NEOFS_CLI_URL}" \
-		-o ${NEOFS_CLI_ARCHIVE_FILE} 
-	@tar -xvf ${NEOFS_CLI_ARCHIVE_FILE} -C ./vendor | xargs -I {} \
-		mv ./vendor/{} ${NEOFS_CLI_FILE}
-	@rm ${NEOFS_CLI_ARCHIVE_FILE}
+	@curl -sSL "${NEOFS_CLI_URL}" -o ${NEOFS_CLI_FILE}
+	@chmod 755 ${NEOFS_CLI_FILE}
 else
 	@echo "⇒ Copy local binary from ${NEOFS_CLI_PATH}"
 	@cp ${NEOFS_CLI_PATH} ${NEOFS_CLI_FILE}
@@ -43,15 +38,12 @@ endif
 
 # Download NeoFS ADM tool 
 get.adm: NEOFS_ADM_DEST=./vendor/neofs-adm
-get.adm: NEOFS_ADM_ARCHIVE=neofs-adm.tar.gz
 get.adm:
 
 ifeq (${NEOFS_ADM_PATH},)
 	@echo "⇒ Download NeoFS ADM binary from ${NEOFS_ADM_URL}"
-	@curl -sSL ${NEOFS_ADM_URL} -o ${NEOFS_ADM_ARCHIVE}
-	@tar -xvf ${NEOFS_ADM_ARCHIVE} -C ./vendor | xargs -I {} \
-		mv ./vendor/{} ${NEOFS_ADM_DEST}
-	@rm ${NEOFS_ADM_ARCHIVE}
+	@curl -sSL ${NEOFS_ADM_URL} -o ${NEOFS_ADM_DEST}
+	@chmod 755 ${NEOFS_ADM_DEST}
 else
 	@echo "⇒ Copy neofs-adm binary from ${NEOFS_ADM_PATH}"
 	@cp ${NEOFS_ADM_PATH} ${NEOFS_ADM_DEST}
