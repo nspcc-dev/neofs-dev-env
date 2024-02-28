@@ -214,7 +214,7 @@ hosts: vendor/hosts
 .PHONY: clean
 .ONESHELL:
 clean:
-	@rm -rf vendor/* services/storage/s04tls.* services/nats/*.pem services/k6_node/id_ed25519*
+	@rm -rf vendor/* services/storage/s04tls.* services/k6_node/id_ed25519*
 	@> .int_test.env
 	@for svc in $(PULL_SVCS)
 	do
