@@ -7,7 +7,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: http_gate
     container_name: http_gate
-    restart: on-failure
+    restart: no
     dns:
       - ${IPV4_PREFIX}.53
     networks:

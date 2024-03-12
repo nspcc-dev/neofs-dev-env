@@ -7,7 +7,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: nats
     container_name: nats
-    restart: on-failure
+    restart: no
     dns: 
       - ${IPV4_PREFIX}.101
     networks:
