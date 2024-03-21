@@ -14,7 +14,7 @@ services:
       start_period: 5s
     domainname: ${LOCAL_DOMAIN}
     hostname: main-chain
-    restart: no
+    restart: "no"
     networks:
       chain_int:
       internet:

@@ -7,7 +7,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: rest
     container_name: rest_gate
-    restart: no
+    restart: "no"
     networks:
       rest_gate_int:
       internet:
