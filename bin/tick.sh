@@ -38,12 +38,8 @@ echo "Updating NeoFS epoch to $((EPOCH+1))"
 # shellcheck disable=SC2086
 ${NEOGO} contract invokefunction \
         --wallet-config ${CONFIG_IMG} \
-	-a ${ADDR} --force \
+	-a ${ADDR} --force --await \
 	-r http://ir01.${LOCAL_DOMAIN}:30333 \
 	${NETMAP_ADDR} \
 	newEpoch int:$((EPOCH+1)) -- ${ADDR}:Global \
         || die "Cannot increment an epoch"
-
-# Wait one NeoFS chain block to ensure the transaction broadcasted
-# shellcheck disable=SC2086
-sleep $BLOCK_DURATION
