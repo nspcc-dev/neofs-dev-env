@@ -99,7 +99,6 @@ update_entries_in_hosts_test() {
 192.168.100.10 bastion.neofs.devenv
 192.168.100.50 main-chain.neofs.devenv
 192.168.100.53 coredns.neofs.devenv
-192.168.100.81 http.neofs.devenv
 192.168.100.102 k6_node.neofs.devenv
 192.168.100.101 nats.neofs.devenv
 192.168.100.83 rest.neofs.devenv
@@ -117,7 +116,6 @@ echo "127.0.0.1       localhost
 192.168.130.10 bastion.neofs.devenv
 192.168.130.50 main-chain.neofs.devenv
 192.168.130.53 coredns.neofs.devenv
-192.168.130.81 http.neofs.devenv
 192.168.130.61 ir01.neofs.devenv
 192.168.130.101 nats.neofs.devenv
 192.168.130.83 rest.neofs.devenv
@@ -132,7 +130,6 @@ echo "127.0.0.1       localhost
 192.168.100.10 bastion.neofs.devenv
 192.168.100.50 main-chain.neofs.devenv
 192.168.100.53 coredns.neofs.devenv
-192.168.100.81 http.neofs.devenv
 192.168.100.61 ir01.neofs.devenv
 192.168.100.101 nats.neofs.devenv
 192.168.100.83 rest.neofs.devenv

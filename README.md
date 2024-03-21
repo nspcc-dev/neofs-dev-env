@@ -69,7 +69,7 @@ fa6ba62bffb04030d303dcc95bda7413e03aa3c7e6ca9c2f999d65db9ec9b82c
 
 Also you should add self-signed node (`s04.neofs.devenv`) certificate to trusted
 store (default location might be changed using `CA_CERTS_TRUSTED_STORE`
-variable). This step is required for client services (neofs-http-gw,
+variable). This step is required for client services (neofs-rest-gw,
 neofs-s3-gw) to interact with the node:
 
 ```
