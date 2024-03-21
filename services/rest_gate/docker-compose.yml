@@ -20,10 +20,10 @@ services:
     env_file: [ ".env", ".int_test.env" ]
     command: [ "neofs-rest-gw", "--config", "/etc/neofs/rest/config.yml" ]
     environment:
-      - REST_GW_PEERS_0_ADDRESS=s01.${LOCAL_DOMAIN}:8080
-      - REST_GW_PEERS_1_ADDRESS=s02.${LOCAL_DOMAIN}:8080
-      - REST_GW_PEERS_2_ADDRESS=s03.${LOCAL_DOMAIN}:8080
-      - REST_GW_PEERS_3_ADDRESS=s04.${LOCAL_DOMAIN}:8080
+      - REST_GW_POOL_PEERS_0_ADDRESS=s01.${LOCAL_DOMAIN}:8080
+      - REST_GW_POOL_PEERS_1_ADDRESS=s02.${LOCAL_DOMAIN}:8080
+      - REST_GW_POOL_PEERS_2_ADDRESS=s03.${LOCAL_DOMAIN}:8080
+      - REST_GW_POOL_PEERS_3_ADDRESS=s04.${LOCAL_DOMAIN}:8080
 
 networks:
   rest_gate_int:

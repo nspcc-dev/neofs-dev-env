@@ -1,4 +1,5 @@
-listen-address: 0.0.0.0:8090 # The IP and port to listen on
+server:
+  listen-address: 0.0.0.0:8090 # The IP and port to listen on
 
 # Wallet settings
 wallet:
