@@ -11,7 +11,7 @@ services:
       - 2222:2222
     hostname: k6-node
     container_name: k6-node
-    restart: no
+    restart: "no"
     networks:
       k6_node_int:
       internet:

@@ -7,7 +7,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: s3_gate
     container_name: s3_gate
-    restart: no
+    restart: "no"
     dns:
       - ${IPV4_PREFIX}.53
     networks:

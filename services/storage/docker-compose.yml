@@ -7,7 +7,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: s01
     container_name: s01
-    restart: no
+    restart: "no"
     networks:
       storage_int:
       internet:
@@ -46,7 +46,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: s02
     container_name: s02
-    restart: no
+    restart: "no"
     networks:
       storage_int:
       internet:
@@ -85,7 +85,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: s03
     container_name: s03
-    restart: no
+    restart: "no"
     networks:
       storage_int:
       internet:
@@ -124,7 +124,7 @@ services:
     domainname: ${LOCAL_DOMAIN}
     hostname: s04
     container_name: s04
-    restart: no
+    restart: "no"
     networks:
       storage_int:
       internet:
