@@ -21,6 +21,8 @@ if [[ ! -f ${CERT} ]]; then
         openssl req -new -newkey rsa:4096 -x509 -sha256 -days 365 -nodes \
         -subj "/C=RU/ST=SPB/L=St.Petersburg/O=NSPCC/OU=NSPCC/CN=s04.${LOCAL_DOMAIN}" \
         -keyout "${KEY}" -out "${CERT}" -extensions san -config "${SSL_CONFIG}" &> /dev/null || {
+            rm ${SSL_CONFIG}
             die "Failed to generate SSL certificate for s04"
         }
+        rm ${SSL_CONFIG}
 fi
