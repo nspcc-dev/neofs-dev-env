@@ -21,7 +21,7 @@ services:
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
       - ./cfg:/etc/neofs/storage
     stop_signal: SIGKILL
-    env_file: [ ".env", ".storage.env", ".int_test.env" ]
+    env_file: [ ".env", ".storage.env" ]
     command: [ "neofs-node", "--config", "/etc/neofs/storage/config.yml" ]
     environment:
       - NEOFS_NODE_WALLET_PATH=./wallet.json
@@ -57,7 +57,7 @@ services:
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
       - ./cfg:/etc/neofs/storage
     stop_signal: SIGKILL
-    env_file: [ ".env", ".storage.env", ".int_test.env" ]
+    env_file: [ ".env", ".storage.env" ]
     command: [ "neofs-node", "--config", "/etc/neofs/storage/config.yml" ]
     environment:
       - NEOFS_NODE_WALLET_PATH=./wallet.json
@@ -93,7 +93,7 @@ services:
       - ./s04tls.crt:/etc/ssl/certs/s04tls.crt
       - ./cfg:/etc/neofs/storage
     stop_signal: SIGKILL
-    env_file: [ ".env", ".storage.env", ".int_test.env" ]
+    env_file: [ ".env", ".storage.env" ]
     command: [ "neofs-node", "--config", "/etc/neofs/storage/config.yml" ]
     environment:
       - NEOFS_NODE_WALLET_PATH=./wallet.json
@@ -130,7 +130,7 @@ services:
       - ./s04tls.key:/tls.key
       - ./cfg:/etc/neofs/storage
     stop_signal: SIGKILL
-    env_file: [ ".env", ".storage.env", ".int_test.env" ]
+    env_file: [ ".env", ".storage.env" ]
     command: [ "neofs-node", "--config", "/etc/neofs/storage/config.yml" ]
     environment:
       - NEOFS_NODE_WALLET_PATH=./wallet.json

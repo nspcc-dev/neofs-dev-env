@@ -17,7 +17,7 @@ services:
       - ./../../vendor/hosts:/etc/hosts
       - ./cfg:/etc/neofs/rest
     stop_signal: SIGKILL
-    env_file: [ ".env", ".int_test.env" ]
+    env_file: [ ".env" ]
     command: [ "neofs-rest-gw", "--config", "/etc/neofs/rest/config.yml" ]
     environment:
       - REST_GW_POOL_PEERS_0_ADDRESS=s01.${LOCAL_DOMAIN}:8080

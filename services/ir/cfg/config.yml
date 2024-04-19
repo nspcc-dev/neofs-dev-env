@@ -64,7 +64,6 @@ fschain_autodeploy: true
 
 # Network time settings
 timers:
-  emit: 50  # Number of sidechain blocks between GAS emission cycles; disabled by default
   stop_estimation:
     mul: 1  # Multiplier in x/y relation of when to stop basic income estimation within the epoch
     div: 4  # Divider in x/y relation of when to stop basic income estimation within the epoch

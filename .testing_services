@@ -1,3 +1,0 @@
-# Services start/stop order
-# Will start from top to bottom and stop in reverse
-k6_node

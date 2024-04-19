@@ -11,7 +11,6 @@ services:
     command: ["/bin/sleep", "infinity"]
     restart: always
     stop_signal: SIGKILL
-    env_file: [ ".int_test.env" ]
     environment:
       - TZ=Etc/UTC
     networks:

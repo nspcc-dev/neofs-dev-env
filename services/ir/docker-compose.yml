@@ -22,7 +22,7 @@ services:
       - ./cli-cfg.yml:/cli-cfg.yml
       - ./cfg:/etc/neofs/ir
       - ${CA_CERTS_TRUSTED_STORE}/s04.${LOCAL_DOMAIN}.tls.crt:/etc/ssl/certs/s04tls.crt
-    env_file: [ ".env", ".ir.env", ".int_test.env" ]
+    env_file: [ ".env", ".ir.env" ]
     command: [ "neofs-ir", "--config", "/etc/neofs/ir/config.yml" ]
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_IR_CONTROL_GRPC_ENDPOINT}", "--ir"]
