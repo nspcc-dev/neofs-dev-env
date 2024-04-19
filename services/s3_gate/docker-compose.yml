@@ -21,7 +21,7 @@ services:
       - ./../../vendor/hosts:/etc/hosts
       - ./cfg:/etc/neofs/s3
     stop_signal: SIGKILL
-    env_file: [ ".env", ".s3.env", ".int_test.env" ]
+    env_file: [ ".env", ".s3.env" ]
     command: [ "neofs-s3-gw", "--config", "/etc/neofs/s3/config.yml" ]
     environment:
       - S3_GW_SERVER_0_ADDRESS=s3.${LOCAL_DOMAIN}:8080

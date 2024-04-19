@@ -16,7 +16,6 @@ sites/*
 # Runtime generation keys
 services/storage/*tls.crt
 services/storage/*tls.key
-services/k6_node/id_ed25519*
 
 # IR NeoFS contract configuration
 services/ir/.ir.env

@@ -153,30 +153,6 @@ Clean up `vendor` directory. Remove services' Docker volumes incl:
 - stored NeoFS objects
 - NeoFS chain state
 
-## How to prepare environment to run neofs-testcases
-
-If necessary, change the IPV4_PREFIX value in the .env file from 192.168.130
-to the existing subnet on the host.
-Importantly, the subnet mask must be 24.
-Use ```ip a``` to see the network configuration on the host.
-
-Make a backup of the ```/etc/hosts``` file.
-
-From the root of the project, run:
-
-```bash
-sudo ./bin/update_hosts.sh
-```
-This script will change the subnet address in the services/coredns/Corefile and
-in the services/ir/cfg/config.yml configuration files.
-And it will add or change ip addresses in the /etc/hosts file.
-After running the script, make sure that the contents of these files
-are correct.
-
-```bash
-make prepare-test-env
-```
-
 ## Contributing
 
 Feel free to contribute to this project after reading the [contributing

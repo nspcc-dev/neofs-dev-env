@@ -23,11 +23,9 @@ include services/*/prepare.mk
 START_SVCS = $(shell cat .services | grep -v '\#')
 START_BASIC = $(shell cat .basic_services | grep -ve '\#')
 START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v '\#')
-START_TESTING = $(shell cat .testing_services | grep -v '\#')
 STOP_SVCS = $(shell tac .services | grep -v '\#')
 STOP_BASIC = $(shell tac .basic_services | grep -v '\#')
 STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v '\#')
-STOP_TESTING = $(shell tac .testing_services | grep -v '\#')
 
 # Enabled services dirs
 ENABLED_SVCS_DIRS = $(shell echo "${START_BOOTSTRAP} ${START_BASIC} ${START_SVCS}" | sed 's|[^ ]* *|./services/&|g')
@@ -127,15 +125,6 @@ up/bootstrap: get vendor/hosts
 	$(call error_handler,$@);
 	@echo "NeoFS chain environment is deployed"
 
-.PHONY: up/testing
-up/testing:
-	@for svc in $(START_TESTING); do \
-		echo "$@ for service: $${svc}"; \
-		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
-	done
-	$(call error_handler,$@);
-	@echo "NeoFS Testing Environment is ready"
-
 # Build up certain service
 .PHONY: up/%
 up/%: get vendor/hosts
@@ -145,7 +134,7 @@ up/%: get vendor/hosts
 
 # Stop environment
 .PHONY: down
-down: down/add down/basic down/testing down/bootstrap
+down: down/add down/basic down/bootstrap
 	@echo "Full NeoFS Developer Environment is down"
 
 .PHONY: down/add
@@ -169,15 +158,6 @@ down/basic:
 .PHONY: down/bootstrap
 down/bootstrap:
 	@for svc in $(STOP_BOOTSTRAP); do \
-		echo "$@ for service: $${svc}"; \
-		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee docker-compose.err; \
-	done
-	$(call error_handler,$@);
-
-# Stop testing services
-.PHONY: down/testing
-down/testing:
-	@for svc in $(STOP_TESTING); do \
 		echo "$@ for service: $${svc}"; \
 		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee docker-compose.err; \
 	done
@@ -213,7 +193,6 @@ hosts: vendor/hosts
 .ONESHELL:
 clean:
 	@rm -rf vendor/* services/storage/s04tls.* services/k6_node/id_ed25519*
-	@> .int_test.env
 	@for svc in $(PULL_SVCS)
 	do
 		vols=`docker-compose -f services/$${svc}/docker-compose.yml config --volumes 2>&1 | tee -a docker-compose.err`
@@ -243,32 +222,3 @@ restart.storage-clean:
 		docker volume rm storage_$(vol);)
 	docker-compose -f ./services/storage/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
 	$(call error_handler,$@);
-
-# Test Environment Preparation Target
-.PHONY: prepare-test-env
-prepare-test-env:
-	@echo "Starting the test environment setup..."
-
-	trap 'echo "Test environment setup failed. Please check the error messages above."; exit 1;' ERR
-
-	echo "Step 1: Setting up the test environment..."; \
-	$(MAKE) up; \
-#	Why 524288? Amazon S3 multipart min upload limits is 5 MiB: https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html
-#	In tests, we test aws and create a lot of tets objects.
-#	This "magic" constant was chosen as a compromise for the speed of tests and for the possibility to cover aws multipart functionality.
-	./bin/config.sh int MaxObjectSize 524288; \
-	echo "Waiting a few seconds..."; \
-	sleep 30; \
-
-	echo "Step 3: Preparing the IR service..."; \
-	$(MAKE) prepare.ir; \
-	sleep 10; \
-
-	echo "Step 4: Preparing the storage service..."; \
-	$(MAKE) prepare.storage; \
-
-	echo "Step 5: Preparing the k6 load node..."; \
-	$(MAKE) up/testing; \
-	sleep 5; \
-
-	echo "Test environment setup completed."
