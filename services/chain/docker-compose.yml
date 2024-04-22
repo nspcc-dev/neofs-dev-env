@@ -7,7 +7,7 @@ services:
     container_name: main_chain
     command: ["node", "--config-path", "/config", "--privnet", "--debug"]
     healthcheck:
-      test: [ "CMD", "/neo-go", "query", "height", "-r", "http://localhost:30333" ]
+      test: [ "CMD", "/neo-go", "query", "height", "-r", "http://127.0.0.1:30333" ]
       interval: 5s
       timeout: 1s
       retries: 5
