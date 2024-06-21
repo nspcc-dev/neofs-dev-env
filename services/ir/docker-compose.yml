@@ -26,9 +26,9 @@ services:
     command: [ "neofs-ir", "--config", "/etc/neofs/ir/config.yml" ]
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_IR_CONTROL_GRPC_ENDPOINT}", "--ir"]
-      interval: 20s
+      interval: 1s
       timeout: 1s
-      retries: 5
+      retries: 300
       start_period: 5s
 
   ir-healthcheck:
