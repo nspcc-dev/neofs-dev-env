@@ -20,15 +20,11 @@ services:
       internet:
         ipv4_address: ${IPV4_PREFIX}.50
     stop_signal: SIGKILL
-    environment:
-    - ACC=/chain.gz
     volumes:
-    - ./../../vendor/chain.gz:/chain.gz
     - ./protocol.privnet.yml:/config/protocol.privnet.yml
     - ./node-wallet.json:/wallets/node-wallet.json
     - ./config.yml:/wallets/config.yml
     - ./../../vendor/hosts:/etc/hosts
-    - ./../../wallets/wallet.json:/wallets/wallet.json
     - ./../../vendor/neo-go:/neo-go
   
   main-chain-healthcheck:

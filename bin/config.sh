@@ -28,7 +28,7 @@ VALUE="${3}"
 
 # Internal variables
 if [[ -z "${NEOFS_NOTARY_DISABLED}" ]]; then
-  ADDR=$(jq -r .accounts[2].address < "${WALLET}" || die "Cannot get address from ${WALLET}")
+  ADDR=$(jq -r .accounts[1].address < "${WALLET}" || die "Cannot get address from ${WALLET}")
 else
   ADDR=$(jq -r .accounts[0].address < "${WALLET}" || die "Cannot get address from ${WALLET}")
 fi
