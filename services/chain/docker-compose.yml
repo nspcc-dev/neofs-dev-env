@@ -25,7 +25,6 @@ services:
     - ./node-wallet.json:/wallets/node-wallet.json
     - ./config.yml:/wallets/config.yml
     - ./../../vendor/hosts:/etc/hosts
-    - ./../../wallets/wallet.json:/wallets/wallet.json
     - ./../../vendor/neo-go:/neo-go
   
   main-chain-healthcheck:
