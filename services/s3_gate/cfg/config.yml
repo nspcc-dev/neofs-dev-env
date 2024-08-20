@@ -29,4 +29,6 @@ wallet:
   passphrase: "s3" # Passphrase to decrypt wallet
 
 # RPC endpoint
-rpc_endpoint: http://ir01.neofs.devenv:30333
+fschain:
+  endpoints:
+    - http://ir01.neofs.devenv:30333
