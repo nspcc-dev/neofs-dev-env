@@ -2,18 +2,14 @@
 set -e
 
 : "${HOSTS_FILE:=/etc/hosts}"
-: "${COREFILE:=services/coredns/Corefile}"
 : "${NEOFS_CHAIN_CONFIG:=services/ir/cfg/config.yml}"
 temp_file=$(mktemp)
 
 # Get default hosts
 make hosts > "$temp_file"
 
-# Get the NeoFS chain IP address from the $COREFILE file
+# Get the NeoFS chain IP address from the hosts file
 neofs_chain_ip=$(grep "ir01.neofs.devenv" "$temp_file" | awk '{print $1}')
-
-# Replace the IP address in the $COREFILE file
-sed -i -E "s/(nns[[:space:]]*http\:\/\/)([0-9]{1,3}[.]){3}[0-9]{1,3}(:30333)/\1$neofs_chain_ip\3/" "$COREFILE"
 
 # Get the line numbers of "Addresses:"
 # FIXME(#302): grep by 'listen:' is unstable, jump to exact YAML fields
