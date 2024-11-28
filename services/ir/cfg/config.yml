@@ -29,7 +29,7 @@ mainnet:
     - ws://main-chain:30333/ws
 
 # NeoFS chain RPC settings
-morph:
+fschain:
   validators:  # List of hex-encoded 33-byte public keys of sidechain validators to vote for at application startup
     - 02b3622bf4017bdfe317c58aed5f4c753f206b7db896046fa7d774bbc4bf7f8dc2
   consensus:
