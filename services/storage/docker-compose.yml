@@ -1,6 +1,5 @@
 ---
 
-version: "2.4"
 services:
   storage01:
     image: ${NODE_IMAGE}:${NODE_VERSION}
