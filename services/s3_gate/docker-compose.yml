@@ -1,6 +1,5 @@
 ---
 
-version: "2.4"
 services:
   s3_gate:
     image: ${S3_GW_IMAGE}:${S3_GW_VERSION}

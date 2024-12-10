@@ -4,7 +4,7 @@ echo "Running bin/tick.sh"
 
 # Source env settings
 . .env
-. services/ir/.ir.env
+. services/ir1/.ir.env
 source bin/helper.sh
 
 # NeoGo binary path.
@@ -22,7 +22,7 @@ else
 fi
 
 # Grep NeoFS chain block time
-NEOFS_CHAIN_PROTO="${NEOFS_CHAIN_PROTO:-services/ir/cfg/config.yml}"
+NEOFS_CHAIN_PROTO="${NEOFS_CHAIN_PROTO:-services/ir${IR_NUMBER_OF_NODES}/cfg/config.yml}"
 BLOCK_DURATION=$(grep time_per_block < "$NEOFS_CHAIN_PROTO" | awk '{print $2}') \
 	|| die "Cannot fetch block duration"
 NETMAP_ADDR=$(bin/resolve.sh netmap.neofs) || die "Cannot resolve netmap.neofs"
