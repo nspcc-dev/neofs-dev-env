@@ -4,7 +4,7 @@ echo "Running bin/deposit.sh"
 
 # Source env settings
 . .env
-. services/ir/.ir.env
+. services/ir1/.ir.env
 source bin/helper.sh
 
 # NeoGo binary path.
