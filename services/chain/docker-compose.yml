@@ -20,7 +20,7 @@ services:
         ipv4_address: ${IPV4_PREFIX}.50
     stop_signal: SIGKILL
     volumes:
-    - ./protocol.privnet.yml:/config/protocol.privnet.yml
+    - ./protocol.privnet${IR_NUMBER_OF_NODES}.yml:/config/protocol.privnet.yml
     - ./node-wallet.json:/wallets/node-wallet.json
     - ./config.yml:/wallets/config.yml
     - ./../../vendor/hosts:/etc/hosts
