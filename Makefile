@@ -105,7 +105,7 @@ up/basic: up/bootstrap
 		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
 	done
 	@./bin/tick.sh
-	@./bin/config.sh string SystemDNS container
+	@./bin/config.sh SystemDNS container
 	$(call error_handler,$@);
 	@echo "Basic NeoFS Developer Environment is ready"
 
