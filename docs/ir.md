@@ -24,6 +24,10 @@ pulling from DockerHub, the local image will be used.
 
 Image label prefix to use for Inner Ring docker containers.
 
+### IR_NUMBER_OF_NODES
+
+The number of IR nodes that will work. The value must be either 1, 4, or 7.
+
 ## NeoFS global config
 
 NeoFS uses global configuration to store epoch duration, maximum object size,

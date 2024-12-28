@@ -18,4 +18,4 @@ services/storage/*tls.crt
 services/storage/*tls.key
 
 # IR NeoFS contract configuration
-services/ir/.ir.env
+.ir.env

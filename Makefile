@@ -22,10 +22,10 @@ include services/*/prepare.mk
 # List of services to run
 START_SVCS = $(shell cat .services | grep -v '\#')
 START_BASIC = $(shell cat .basic_services | grep -ve '\#')
-START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v '\#')
+START_BOOTSTRAP = $(shell cat .bootstrap_services | grep -v '\#' | sed 's/^ir$$/&$(IR_NUMBER_OF_NODES)/')
 STOP_SVCS = $(shell tac .services | grep -v '\#')
 STOP_BASIC = $(shell tac .basic_services | grep -v '\#')
-STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v '\#')
+STOP_BOOTSTRAP = $(shell tac .bootstrap_services | grep -v '\#' | sed 's/^ir$$/&$(IR_NUMBER_OF_NODES)/')
 
 # Enabled services dirs
 ENABLED_SVCS_DIRS = $(shell echo "${START_BOOTSTRAP} ${START_BASIC} ${START_SVCS}" | sed 's|[^ ]* *|./services/&|g')
@@ -45,6 +45,8 @@ CHAIN_PROTOCOL = './services/chain/protocol.privnet.yml'
 
 # List of grepped environment variables from *.env
 GREP_DOTENV = $(shell find . -name '*.env' -exec grep -rhv -e '^\#' -e '^$$' {} + | sort -u )
+
+AVAILABLE_NUMBER_OF_NODES = 1 4 7
 
 # Error handling function
 define error_handler
@@ -66,6 +68,14 @@ define error_handler
 		exit 0;\
 	fi
 endef
+
+# Check if number of IR nodes from .env file is correct
+.PHONY: check_nodes
+check_nodes:
+	@if ! echo "$(AVAILABLE_NUMBER_OF_NODES)" | grep -wq "$(IR_NUMBER_OF_NODES)"; then \
+		echo "Invalid IR number $(IR_NUMBER_OF_NODES); supported numbers: ($(AVAILABLE_NUMBER_OF_NODES))"; \
+		exit 1; \
+	fi
 
 # Pull all required Docker images
 .PHONY: pull
@@ -105,23 +115,26 @@ up/basic: up/bootstrap
 		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
 	done
 	@./bin/tick.sh
-	@./bin/config.sh string SystemDNS container
+	@./bin/config.sh SystemDNS container
 	$(call error_handler,$@);
 	@echo "Basic NeoFS Developer Environment is ready"
 
 # Start bootstrap services
 .PHONY: up/bootstrap
-up/bootstrap: get vendor/hosts
-	@echo "NEOFS_IR_CONTRACTS_NEOFS="`./vendor/neo-go contract calc-hash -s NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --in vendor/contracts/neofs/contract.nef -m vendor/contracts/neofs/manifest.json | grep -Eo '[a-fA-F0-9]{40}'` > services/ir/.ir.env
+up/bootstrap: check_nodes get vendor/hosts
+	@echo "NEOFS_IR_CONTRACTS_NEOFS="`./vendor/neo-go contract calc-hash -s NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --in vendor/contracts/neofs/contract.nef -m vendor/contracts/neofs/manifest.json | grep -Eo '[a-fA-F0-9]{40}'` > services/ir${IR_NUMBER_OF_NODES}/.ir.env
 	@for svc in $(START_BOOTSTRAP); do \
 		echo "$@ for service: $${svc}"; \
 		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
 	done
 	@source ./bin/helper.sh
-	@docker exec main_chain neo-go wallet nep17 transfer --force --await --wallet-config /wallets/config.yml -r http://main-chain.neofs.devenv:30333 --from NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP  --to NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --token GAS --amount 1000
+	@docker exec main_chain neo-go wallet nep17 transfer --force --await --wallet-config /wallets/config.yml -r http://main-chain.neofs.devenv:30333 --from NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP --to NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --token GAS --amount 1000
 	@./vendor/neo-go contract deploy --wallet-config wallets/config.yml --in vendor/contracts/neofs/contract.nef --manifest vendor/contracts/neofs/manifest.json --force --await -r http://main-chain.neofs.devenv:30333 [ true ffffffffffffffffffffffffffffffffffffffff [ 02b3622bf4017bdfe317c58aed5f4c753f206b7db896046fa7d774bbc4bf7f8dc2 ] [ InnerRingCandidateFee 10000000000 WithdrawFee 100000000 ] ]
 	@NEOGO=vendor/neo-go WALLET=wallets/wallet.json CONFIG=wallets/config.yml ./bin/deposit.sh
-	@for f in ./services/storage/wallet*.json; do echo "Transfer GAS to wallet $${f}" && ./vendor/neofs-adm -c neofs-adm.yml fschain refill-gas --storage-wallet $${f} --gas 10.0 --alphabet-wallets services/ir || die "Failed to transfer GAS to alphabet wallets"; done
+	@for f in ./services/storage/wallet*.json; do \
+		echo "Transfer GAS to wallet $${f}" && \
+		./vendor/neofs-adm -c neofs-adm.yml fschain refill-gas --storage-wallet $${f} --gas 10.0 --alphabet-wallets services/ir${IR_NUMBER_OF_NODES}/alphabet || die "Failed to transfer GAS to alphabet wallets"; \
+	done
 	$(call error_handler,$@);
 	@echo "NeoFS chain environment is deployed"
 

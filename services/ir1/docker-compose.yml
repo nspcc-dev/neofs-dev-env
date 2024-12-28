@@ -1,6 +1,5 @@
 ---
 
-version: "2.4"
 services:
 
   ir01:
@@ -14,9 +13,11 @@ services:
       internet:
         ipv4_address: ${IPV4_PREFIX}.61
     stop_signal: SIGKILL
+    environment:
+      - NEOFS_IR_CONTROL_GRPC_ENDPOINT=${NEOFS_IR_CONTROL_GRPC_ENDPOINT_1}
     volumes:
       - neofs_chain_ir01:/neofs_chain/
-      - ./az.json:/wallet.json
+      - ./alphabet/az.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/neofs-cli:/neofs-cli
       - ./cli-cfg.yml:/cli-cfg.yml
@@ -25,7 +26,7 @@ services:
     env_file: [ ".env", ".ir.env" ]
     command: [ "neofs-ir", "--config", "/etc/neofs/ir/config.yml" ]
     healthcheck:
-      test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_IR_CONTROL_GRPC_ENDPOINT}", "--ir"]
+      test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_IR_CONTROL_GRPC_ENDPOINT_1}", "--ir"]
       interval: 1s
       timeout: 1s
       retries: 300

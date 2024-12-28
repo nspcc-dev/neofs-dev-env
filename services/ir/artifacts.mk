@@ -7,7 +7,7 @@ get.ir: get.cli get.contracts get.adm get.storage prepare.storage
 get.cli: NEOFS_CLI_FILE=./vendor/neofs-cli
 get.cli: NEOFS_CLI_PATH?=
 get.cli:
-	@touch services/ir/.ir.env # https://github.com/docker/compose/issues/3560
+	@touch services/ir${IR_NUMBER_OF_NODES}/.ir.env # https://github.com/docker/compose/issues/3560
 	@mkdir -p ./vendor
 
 ifeq (${NEOFS_CLI_PATH},)
