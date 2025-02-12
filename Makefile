@@ -129,7 +129,7 @@ up/bootstrap: check_nodes get vendor/hosts
 	done
 	@source ./bin/helper.sh
 	@docker exec main_chain neo-go wallet nep17 transfer --force --await --wallet-config /wallets/config.yml -r http://main-chain.neofs.devenv:30333 --from NPpKskku5gC6g59f2gVRR8fmvUTLDp9w7Y --to NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --token GAS --amount 1000
-	@./vendor/neo-go contract deploy --wallet-config wallets/config.yml --in vendor/contracts/neofs/contract.nef --manifest vendor/contracts/neofs/manifest.json --force --await -r http://main-chain.neofs.devenv:30333 [ true ffffffffffffffffffffffffffffffffffffffff [ 02b3622bf4017bdfe317c58aed5f4c753f206b7db896046fa7d774bbc4bf7f8dc2 ] [ InnerRingCandidateFee 10000000000 WithdrawFee 100000000 ] ]
+	@./bin/contractDeploy.sh
 	@NEOGO=vendor/neo-go WALLET=wallets/wallet.json CONFIG=wallets/config.yml ./bin/deposit.sh
 	@for f in ./services/storage/wallet*.json; do \
 		echo "Transfer GAS to wallet $${f}" && \
