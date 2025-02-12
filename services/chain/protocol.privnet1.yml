@@ -4,10 +4,14 @@ ProtocolConfiguration:
   TimePerBlock: 1s
   MemPoolSize: 50000
   StandbyCommittee:
-    - 02b3622bf4017bdfe317c58aed5f4c753f206b7db896046fa7d774bbc4bf7f8dc2
+    - 032ec21f003a9946430662c7287ba81bd9d60fa1faf18206434feadbd008f5ae00
   ValidatorsCount: 1
   VerifyTransactions: true
   P2PSigExtensions: false
+  Genesis:
+    Roles:
+      NeoFSAlphabet:
+        - 02b3622bf4017bdfe317c58aed5f4c753f206b7db896046fa7d774bbc4bf7f8dc2
 
 ApplicationConfiguration:
   SkipBlockVerification: false

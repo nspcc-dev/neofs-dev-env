@@ -91,7 +91,7 @@ Claim GAS to consensus node's wallet. Use account that contains NEO tokens.
 $ neo-go wallet claim \
     -w services/chain/node-wallet.json \
     -r http://main-chain.neofs.devenv:30333 \
-    -a NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP \
+    -a NPpKskku5gC6g59f2gVRR8fmvUTLDp9w7Y \
 Password >
 70e09bbd55846dcc7cee23905b737c63e5a80d32e387bce108bc6db8e641fb90
 ```
@@ -102,7 +102,7 @@ Then you can transfer GAS the same way as it was done in previous section.
 $ neo-go wallet nep17 transfer \
     -w services/chain/node-wallet.json \
     -r http://main-chain.neofs.devenv:30333 \
-    --from NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP \
+    --from NPpKskku5gC6g59f2gVRR8fmvUTLDp9w7Y \
     --to NXnzw3J9VvKXjM1BPAJK4QUpTtEQu4TpU6 \
     --amount 50 \
     --token GAS

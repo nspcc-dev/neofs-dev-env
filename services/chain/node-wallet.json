@@ -1,13 +1,12 @@
 {
-  "version": "3.0",
-  "name":null,
+  "version": "1.0",
   "accounts": [
     {
-      "address": "Nhfg3TbpwogLvDGVvAvqyThbsHgoSUKwtn",
-      "key": "6PYM8VdX2BSm7BSXKzV4Fz6S3R9cDLLWNrD9nMjxW352jEv3fsC8N3wNLY",
+      "address": "NZBEUULRXo79EqBQVPpUTziicepFc7kuXU",
+      "key": "6PYPBU46oBC5E1BrDEGzRvvsMEQZCzLsDChQi3GyVGtWLTrtPo3o3n7fYU",
       "label": "single",
       "contract": {
-        "script": "DCECs2Ir9AF73+MXxYrtX0x1PyBrfbiWBG+n13S7xL9/jcJBVuezJw==",
+        "script": "DCEDLsIfADqZRkMGYscoe6gb2dYPofrxggZDT+rb0Aj1rgBBVuezJw==",
         "parameters": [
           {
             "name": "parameter0",
@@ -17,15 +16,14 @@
         "deployed": false
       },
       "lock": false,
-      "extra":null,
       "isDefault": false
     },
     {
-      "address": "NfgHwwTi3wHAS8aFAN243C5vGbkYDpqLHP",
-      "key": "6PYM8VdX2BSm7BSXKzV4Fz6S3R9cDLLWNrD9nMjxW352jEv3fsC8N3wNLY",
-      "label": "consensus",
+      "address": "NPpKskku5gC6g59f2gVRR8fmvUTLDp9w7Y",
+      "key": "6PYPBU46oBC5E1BrDEGzRvvsMEQZCzLsDChQi3GyVGtWLTrtPo3o3n7fYU",
+      "label": "committee",
       "contract": {
-        "script": "EQwhArNiK/QBe9/jF8WK7V9MdT8ga324lgRvp9d0u8S/f43CEUGe0Nw6",
+        "script": "EQwhAy7CHwA6mUZDBmLHKHuoG9nWD6H68YIGQ0/q29AI9a4AEUGe0Nw6",
         "parameters": [
           {
             "name": "parameter0",
@@ -35,7 +33,23 @@
         "deployed": false
       },
       "lock": false,
-      "extra":null,
+      "isDefault": false
+    },
+    {
+      "address": "NPpKskku5gC6g59f2gVRR8fmvUTLDp9w7Y",
+      "key": "6PYPBU46oBC5E1BrDEGzRvvsMEQZCzLsDChQi3GyVGtWLTrtPo3o3n7fYU",
+      "label": "consensus",
+      "contract": {
+        "script": "EQwhAy7CHwA6mUZDBmLHKHuoG9nWD6H68YIGQ0/q29AI9a4AEUGe0Nw6",
+        "parameters": [
+          {
+            "name": "parameter0",
+            "type": "Signature"
+          }
+        ],
+        "deployed": false
+      },
+      "lock": false,
       "isDefault": false
     }
   ],
