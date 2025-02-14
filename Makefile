@@ -229,9 +229,11 @@ env:
 .PHONY: restart.storage-clean
 restart.storage-clean:
 	@docker-compose -f ./services/storage/docker-compose.yml down 2>&1 | tee -a docker-compose.err
-	@$(foreach vol, \
-		$(shell docker-compose -f services/storage/docker-compose.yml config --volumes 2>&1 | tee -a docker-compose.err),\
-		$(call error_handler,$@ for storage_$${vol}); \,\
-		docker volume rm storage_$(vol);)
-	docker-compose -f ./services/storage/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
+	vols=`docker-compose -f services/storage/docker-compose.yml config --volumes 2>&1 | tee -a docker-compose.err`
+	if [ ! -z "$${vols}" ]; then
+		for vol in $${vols}; do
+			docker volume rm -f "storage_$${vol}" 2> /dev/null
+		done
+	fi
+	@docker-compose -f ./services/storage/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
 	$(call error_handler,$@);
