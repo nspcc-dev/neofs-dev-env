@@ -13,8 +13,7 @@ Tools to set up local NeoFS network and N3 privnets. Devenv, for short.
 ## Prerequisites
 
 Make sure you have installed all of the following prerequisites on your machine:
-* docker
-* docker-compose
+* docker compose
 * make (`3.82+`)
 * expect
 * openssl
