@@ -88,3 +88,6 @@ audit:
 settlement:
   basic_income_rate: 100000000  # Optional: override basic income rate value from network config; applied only in debug mode
   audit_fee: 100000  # Optional: override audit fee value from network config; applied only in debug mode
+
+experimental:
+  chain_meta_data: true # Optional: allows creating containers with metadata handled via FS chain
