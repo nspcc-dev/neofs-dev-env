@@ -20,15 +20,10 @@ fschain:
   endpoints:  # Side chain NEO RPC endpoints
     - ws://ir01.neofs.devenv:30333/ws
 
-# Tree section
-tree:
-  enabled: true
-
 # Storage engine configuration
 storage:
-  shard:
-    0:
-      writecache:
+  shards:
+    - writecache:
         enabled: false
         path: /storage/wc0  # Write-cache root directory
 
@@ -42,11 +37,7 @@ storage:
           path: /storage/fstree0  # FSTree root directory
           depth: 2
 
-      pilorama:
-        path: /storage/pilorama0  # Path to the pilorama database
-
-    1:
-      writecache:
+    - writecache:
         enabled: false
         path: /storage/wc1  # Write-cache root directory
 
@@ -59,6 +50,3 @@ storage:
         - type: fstree
           path: /storage/fstree1  # FSTree root directory
           depth: 2
-
-      pilorama:
-        path: /storage/pilorama1  # Path to the pilorama database

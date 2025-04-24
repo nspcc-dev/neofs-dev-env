@@ -28,8 +28,8 @@ services:
       - NEOFS_NODE_ADDRESSES=s01.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s01.${LOCAL_DOMAIN}:8080
       - NEOFS_CONTROL_GRPC_ENDPOINT=${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_1}
-      - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:RU MOW
-      - NEOFS_NODE_ATTRIBUTE_1=Price:22
+      - NEOFS_NODE_ATTRIBUTES_0=UN-LOCODE:RU MOW
+      - NEOFS_NODE_ATTRIBUTES_1=Price:22
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_1}"]
       interval: 5s
@@ -64,8 +64,8 @@ services:
       - NEOFS_NODE_ADDRESSES=s02.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s02.${LOCAL_DOMAIN}:8080
       - NEOFS_CONTROL_GRPC_ENDPOINT=${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_2}
-      - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:RU LED
-      - NEOFS_NODE_ATTRIBUTE_1=Price:33
+      - NEOFS_NODE_ATTRIBUTES_0=UN-LOCODE:RU LED
+      - NEOFS_NODE_ATTRIBUTES_1=Price:33
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_2}"]
       interval: 5s
@@ -100,8 +100,8 @@ services:
       - NEOFS_NODE_ADDRESSES=s03.${LOCAL_DOMAIN}:8080
       - NEOFS_GRPC_0_ENDPOINT=s03.${LOCAL_DOMAIN}:8080
       - NEOFS_CONTROL_GRPC_ENDPOINT=${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_3}
-      - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:SE STO
-      - NEOFS_NODE_ATTRIBUTE_1=Price:11
+      - NEOFS_NODE_ATTRIBUTES_0=UN-LOCODE:SE STO
+      - NEOFS_NODE_ATTRIBUTES_1=Price:11
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_3}"]
       interval: 5s
@@ -142,8 +142,8 @@ services:
       - NEOFS_GRPC_1_TLS_ENABLED=true
       - NEOFS_GRPC_1_TLS_CERTIFICATE=/tls.crt
       - NEOFS_GRPC_1_TLS_KEY=/tls.key
-      - NEOFS_NODE_ATTRIBUTE_0=UN-LOCODE:FI HEL
-      - NEOFS_NODE_ATTRIBUTE_1=Price:44
+      - NEOFS_NODE_ATTRIBUTES_0=UN-LOCODE:FI HEL
+      - NEOFS_NODE_ATTRIBUTES_1=Price:44
     healthcheck:
       test: ["CMD", "/neofs-cli", "control", "healthcheck", "-c", "/cli-cfg.yml", "--endpoint", "${NEOFS_STORAGE_CONTROL_GRPC_ENDPOINT_4}"]
       interval: 5s
