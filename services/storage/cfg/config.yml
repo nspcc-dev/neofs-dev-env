@@ -31,11 +31,9 @@ storage:
         path: /storage/meta0  # Path to the metabase
 
       blobstor:
-        - type: peapod
-          path: /storage/peapod0.db
-        - type: fstree
-          path: /storage/fstree0  # FSTree root directory
-          depth: 2
+        type: fstree
+        path: /storage/fstree0  # FSTree root directory
+        depth: 2
 
     - writecache:
         enabled: false
@@ -45,8 +43,6 @@ storage:
         path: /storage/meta1  # Path to the metabase
 
       blobstor:
-        - type: peapod
-          path: /storage/peapod1.db
-        - type: fstree
-          path: /storage/fstree1  # FSTree root directory
-          depth: 2
+        type: fstree
+        path: /storage/fstree1  # FSTree root directory
+        depth: 2
