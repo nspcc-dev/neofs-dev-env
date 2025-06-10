@@ -18,15 +18,6 @@ ProtocolConfiguration:
         - 03a90f6e7dcb49cf9603dde786781c4fdbd43f8a57c5b23fe93d4ecc33952599fd
         - 03c7aa35ab64aad9b85a35647b1f0aec59344271a6c2ed7644faf1997ee098bbab
         - 02ca9097295d28e28e2ae55eb62ca0b1ac48b2d9b6dcb64ddb936a64d80cb8b795
-      P2PNotary:
-        - 022c0bf9e1a0c864905d2b8909555ae421db9a52f86ab268a84d9be42a6ad9d858
-        - 024a640c8cbe3e34f0cd927950c64f6d0d239770397fe645d52bf920fddd655bf8
-        - 024f19ec7a8e35722c8cdd7d21fcc2090f2658b2fd67b7b23f1936dc5e7b54b216
-        - 03797de54a6abb6d19c22a5afabf30d320a9348b0f294315e74cb3b423b1ac9dc9
-        - 03a90f6e7dcb49cf9603dde786781c4fdbd43f8a57c5b23fe93d4ecc33952599fd
-        - 03c7aa35ab64aad9b85a35647b1f0aec59344271a6c2ed7644faf1997ee098bbab
-        - 02ca9097295d28e28e2ae55eb62ca0b1ac48b2d9b6dcb64ddb936a64d80cb8b795
-
 
 ApplicationConfiguration:
   SkipBlockVerification: false
