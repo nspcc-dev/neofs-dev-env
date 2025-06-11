@@ -82,7 +82,7 @@ check_nodes:
 pull:
 	@for svc in $(PULL_SVCS); do \
 		echo "$@ for service: $${svc}"; \
-		docker-compose -f services/$${svc}/docker-compose.yml pull 2>&1 | tee -a docker-compose.err; \
+		docker compose -f services/$${svc}/docker-compose.yml pull 2>&1 | tee -a docker compose.err; \
 	done
 	$(call error_handler,$@);
 	@:
@@ -92,7 +92,7 @@ pull:
 get:
 	@for svc in $(GET_SVCS); do \
 		echo "$@ for service: $${svc}"; \
-		make get.$$svc 2>&1 | tee -a docker-compose.err; \
+		make get.$$svc 2>&1 | tee -a docker compose.err; \
 	done
 	$(call error_handler,$@);
 	@:
@@ -102,7 +102,7 @@ get:
 up: up/basic
 	@for svc in $(START_SVCS); do \
 		echo "$@ for service: $${svc}"; \
-		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
+		docker compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
 	done
 	$(call error_handler,$@);
 	@echo "Full NeoFS Developer Environment is ready"
@@ -112,7 +112,7 @@ up: up/basic
 up/basic: up/bootstrap
 	@for svc in $(START_BASIC); do \
 		echo "$@ for service: $${svc}"; \
-		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
+		docker compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
 	done
 	@./bin/tick.sh
 	@./bin/config.sh SystemDNS container
@@ -125,7 +125,7 @@ up/bootstrap: check_nodes get vendor/hosts
 	@echo "NEOFS_IR_CONTRACTS_NEOFS="`./vendor/neo-go contract calc-hash -s NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --in vendor/contracts/neofs/contract.nef -m vendor/contracts/neofs/manifest.json | grep -Eo '[a-fA-F0-9]{40}'` > services/ir${IR_NUMBER_OF_NODES}/.ir.env
 	@for svc in $(START_BOOTSTRAP); do \
 		echo "$@ for service: $${svc}"; \
-		docker-compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
+		docker compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
 	done
 	@source ./bin/helper.sh
 	@docker exec main_chain neo-go wallet nep17 transfer --force --await --wallet-config /wallets/config.yml -r http://main-chain.neofs.devenv:30333 --from NPpKskku5gC6g59f2gVRR8fmvUTLDp9w7Y --to NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --token GAS --amount 1000
@@ -141,7 +141,7 @@ up/bootstrap: check_nodes get vendor/hosts
 # Build up certain service
 .PHONY: up/%
 up/%: get vendor/hosts
-	@docker-compose -f services/$*/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
+	@docker compose -f services/$*/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
 	$(call error_handler,$@);
 	@echo "Developer Environment for $* service is ready"
 
@@ -154,7 +154,7 @@ down: down/add down/basic down/bootstrap
 down/add:
 	@for svc in $(STOP_SVCS); do \
 		echo "$@ for service: $${svc}"; \
-		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee -a docker-compose.err; \
+		docker compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee -a docker-compose.err; \
 	done
 	$(call error_handler,$@);
 
@@ -163,7 +163,7 @@ down/add:
 down/basic:
 	@for svc in $(STOP_BASIC); do \
 		echo "$@ for service: $${svc}"; \
-		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee -a docker-compose.err; \
+		docker compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee -a docker-compose.err; \
 	done
 	$(call error_handler,$@);
 
@@ -172,14 +172,14 @@ down/basic:
 down/bootstrap:
 	@for svc in $(STOP_BOOTSTRAP); do \
 		echo "$@ for service: $${svc}"; \
-		docker-compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee docker-compose.err; \
+		docker compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee docker-compose.err; \
 	done
 	$(call error_handler,$@);
 
 # Stop certain service
 .PHONY: down/%
 down/%:
-	@docker-compose -f services/$*/docker-compose.yml down 2>&1 | tee docker-compose.err
+	@docker compose -f services/$*/docker-compose.yml down 2>&1 | tee docker-compose.err
 	$(call error_handler,$@);
 
 # Generate changes for /etc/hosts
@@ -208,7 +208,7 @@ clean:
 	@rm -rf vendor/* services/storage/s04tls.* services/k6_node/id_ed25519*
 	@for svc in $(PULL_SVCS)
 	do
-		vols=`docker-compose -f services/$${svc}/docker-compose.yml config --volumes 2>&1 | tee -a docker-compose.err`
+		vols=`docker compose -f services/$${svc}/docker-compose.yml config --volumes 2>&1 | tee -a docker-compose.err`
 		if [[ ! -z "$${vols}" ]]; then
 			for vol in $${vols}; do
 				docker volume rm -f "$${svc}_$${vol}" 2> /dev/null
@@ -228,12 +228,12 @@ env:
 # Restart storage nodes with clean volumes
 .PHONY: restart.storage-clean
 restart.storage-clean:
-	@docker-compose -f ./services/storage/docker-compose.yml down 2>&1 | tee -a docker-compose.err
-	vols=`docker-compose -f services/storage/docker-compose.yml config --volumes 2>&1 | tee -a docker-compose.err`
+	@docker compose -f ./services/storage/docker-compose.yml down 2>&1 | tee -a docker-compose.err
+	vols=`docker compose -f services/storage/docker-compose.yml config --volumes 2>&1 | tee -a docker-compose.err`
 	if [ ! -z "$${vols}" ]; then
 		for vol in $${vols}; do
 			docker volume rm -f "storage_$${vol}" 2> /dev/null
 		done
 	fi
-	@docker-compose -f ./services/storage/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
+	@docker compose -f ./services/storage/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err
 	$(call error_handler,$@);

@@ -79,11 +79,6 @@ emit:
   storage:
     amount: 1000000000  # Fixed8 value of sidechain GAS emitted to all storage nodes once per GAS emission cycle; disabled by default
   
-# Storage node removal settings
-netmap_cleaner:
-  enabled: true  # Enable voting for removing stale storage nodes from network map
-  threshold: 3  # Number of NeoFS epoch without bootstrap request from storage node before it considered stale
-  
 # Audit settings
 audit:
   pdp:
@@ -93,3 +88,6 @@ audit:
 settlement:
   basic_income_rate: 100000000  # Optional: override basic income rate value from network config; applied only in debug mode
   audit_fee: 100000  # Optional: override audit fee value from network config; applied only in debug mode
+
+experimental:
+  chain_meta_data: true # Optional: allows creating containers with metadata handled via FS chain
