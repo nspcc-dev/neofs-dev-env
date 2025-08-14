@@ -55,7 +55,6 @@ $ make help
 ...
 Targets:
 ...
-update.audit_fee                Update audit fee per result in fixed 12 (make update.audit_fee val=100)
 update.basic_income_rate        Update basic income rate in fixed 12 (make update.basic_income_rate val=1000)
 update.container_fee            Update container fee per alphabet node in fixed 12 (make update.container_fee val=500)
 update.eigen_trust_iterations   Update amount of EigenTrust iterations (make update.eigen_trust_iterations val=2)

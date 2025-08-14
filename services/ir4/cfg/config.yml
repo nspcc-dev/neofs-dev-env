@@ -73,15 +73,9 @@ emit:
   storage:
     amount: 1000000000  # Fixed8 value of sidechain GAS emitted to all storage nodes once per GAS emission cycle; disabled by default
 
-# Audit settings
-audit:
-  pdp:
-    max_sleep_interval: 100ms  # Maximum timeout between object.RangeHash requests to the storage node
-
 # Settlement settings
 settlement:
   basic_income_rate: 100000000  # Optional: override basic income rate value from network config; applied only in debug mode
-  audit_fee: 100000  # Optional: override audit fee value from network config; applied only in debug mode
 
 experimental:
   chain_meta_data: true # Optional: allows creating containers with metadata handled via FS chain
