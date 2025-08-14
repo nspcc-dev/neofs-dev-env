@@ -6,10 +6,6 @@ update.epoch_duration:
 update.max_object_size:
 	@./bin/config.sh MaxObjectSize $(val)
 
-# Update audit fee per result in fixed 12 (make update.audit_fee val=100)
-update.audit_fee:
-	@./bin/config.sh AuditFee $(val)
-
 # Update container fee per alphabet node in fixed 12 (make update.container_fee val=500)
 update.container_fee:
 	@./bin/config.sh ContainerFee $(val)
