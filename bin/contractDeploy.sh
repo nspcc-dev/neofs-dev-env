@@ -12,11 +12,11 @@ NEOGO="${NEOGO:-./vendor/neo-go}"
 
 CONFIG="${CONFIG:-./wallets/config.yml}"
 
-CONTRACT_ADDR=$(${NEOGO} util convert "${NEOFS_IR_CONTRACTS_NEOFS}" \
+CONTRACT_ADDR=$(${NEOGO} util convert "${NEOFS_IR_MAINNET_CONTRACTS_NEOFS}" \
 	| grep 'LE ScriptHash to Address' \
 	| awk '{print $5}' \
 	| grep -oP "[A-z0-9]+" \
-	|| die "Cannot parse contract address: ${NEOFS_IR_CONTRACTS_NEOFS}")
+	|| die "Cannot parse contract address: ${NEOFS_IR_MAINNET_CONTRACTS_NEOFS}")
 
 keys=$(${NEOGO} wallet dump-keys -w services/ir${IR_NUMBER_OF_NODES}/alphabet/az.json \
   | awk -v RS=':' 'END {print $0}' \

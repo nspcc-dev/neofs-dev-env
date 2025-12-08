@@ -122,7 +122,7 @@ up/basic: up/bootstrap
 # Start bootstrap services
 .PHONY: up/bootstrap
 up/bootstrap: check_nodes get vendor/hosts
-	@echo "NEOFS_IR_CONTRACTS_NEOFS="`./vendor/neo-go contract calc-hash -s NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --in vendor/contracts/neofs/contract.nef -m vendor/contracts/neofs/manifest.json | grep -Eo '[a-fA-F0-9]{40}'` > services/ir${IR_NUMBER_OF_NODES}/.ir.env
+	@echo "NEOFS_IR_MAINNET_CONTRACTS_NEOFS="`./vendor/neo-go contract calc-hash -s NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --in vendor/contracts/neofs/contract.nef -m vendor/contracts/neofs/manifest.json | grep -Eo '[a-fA-F0-9]{40}'` > services/ir${IR_NUMBER_OF_NODES}/.ir.env
 	@for svc in $(START_BOOTSTRAP); do \
 		echo "$@ for service: $${svc}"; \
 		docker compose -f services/$${svc}/docker-compose.yml up -d 2>&1 | tee -a docker-compose.err; \
