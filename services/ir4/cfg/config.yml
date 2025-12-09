@@ -19,11 +19,9 @@ prometheus:
   address: :9090  # Endpoint for application prometheus metrics; disabled by default
   shutdown_timeout: 30s  # Timeout for metrics HTTP server graceful shutdown
 
-# Toggling the sidechain-only mode
-without_mainnet: false
-
 # Neo main chain RPC settings
 mainnet:
+  enabled: true # Enable connection to mainchain; by default, 'false', run application in single chain environment
   endpoints: # List of websocket RPC endpoints in mainchain; ignore if mainchain is disabled
     - ws://main-chain:30333/ws
 
@@ -53,8 +51,6 @@ fschain:
       listen:
         - ":20333"
     set_roles_in_genesis: true
-
-fschain_autodeploy: true
 
 # Network time settings
 timers:
