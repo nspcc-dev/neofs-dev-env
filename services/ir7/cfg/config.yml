@@ -74,4 +74,24 @@ settlement:
   basic_income_rate: 100000000  # Optional: override basic income rate value from network config; applied only in debug mode
 
 experimental:
-  chain_meta_data: true # Optional: allows creating containers with metadata handled via FS chain
+  chain_meta_data:  # Optional: allows creating containers with metadata handled via FS chain
+    enabled: true
+    storage:
+      type: boltdb
+      path: /neofs_metachain/db.bolt
+    seed_nodes:
+      - ir01:20334
+      - ir02:20334
+      - ir03:20334
+      - ir04:20334
+      - ir05:20334
+      - ir06:20334
+      - ir07:20334
+    rpc:
+      listen:
+        - ":30334"
+    p2p:
+      listen:
+        - ":20334"
+      peers:
+        min: 4

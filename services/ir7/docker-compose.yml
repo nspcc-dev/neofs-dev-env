@@ -18,6 +18,7 @@ services:
       - NEOFS_IR_CONTROL_GRPC_ENDPOINT=${NEOFS_IR_CONTROL_GRPC_ENDPOINT_1}
     volumes:
       - neofs_chain_ir01:/neofs_chain/
+      - neofs_metachain_ir01:/neofs_metachain/
       - ./alphabet/az.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/neofs-cli:/neofs-cli
@@ -49,6 +50,7 @@ services:
       - NEOFS_IR_CONTROL_GRPC_ENDPOINT=${NEOFS_IR_CONTROL_GRPC_ENDPOINT_2}
     volumes:
       - neofs_chain_ir02:/neofs_chain/
+      - neofs_metachain_ir02:/neofs_metachain/
       - ./alphabet/buky.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/neofs-cli:/neofs-cli
@@ -80,6 +82,7 @@ services:
       - NEOFS_IR_CONTROL_GRPC_ENDPOINT=${NEOFS_IR_CONTROL_GRPC_ENDPOINT_3}
     volumes:
       - neofs_chain_ir03:/neofs_chain/
+      - neofs_metachain_ir03:/neofs_metachain/
       - ./alphabet/vedi.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/neofs-cli:/neofs-cli
@@ -111,6 +114,7 @@ services:
       - NEOFS_IR_CONTROL_GRPC_ENDPOINT=${NEOFS_IR_CONTROL_GRPC_ENDPOINT_4}
     volumes:
       - neofs_chain_ir04:/neofs_chain/
+      - neofs_metachain_ir04:/neofs_metachain/
       - ./alphabet/glagoli.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/neofs-cli:/neofs-cli
@@ -142,6 +146,7 @@ services:
       - NEOFS_IR_CONTROL_GRPC_ENDPOINT=${NEOFS_IR_CONTROL_GRPC_ENDPOINT_5}
     volumes:
       - neofs_chain_ir05:/neofs_chain/
+      - neofs_metachain_ir05:/neofs_metachain/
       - ./alphabet/dobro.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/neofs-cli:/neofs-cli
@@ -173,6 +178,7 @@ services:
       - NEOFS_IR_CONTROL_GRPC_ENDPOINT=${NEOFS_IR_CONTROL_GRPC_ENDPOINT_6}
     volumes:
       - neofs_chain_ir06:/neofs_chain/
+      - neofs_metachain_ir06:/neofs_metachain/
       - ./alphabet/yest.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/neofs-cli:/neofs-cli
@@ -204,6 +210,7 @@ services:
       - NEOFS_IR_CONTROL_GRPC_ENDPOINT=${NEOFS_IR_CONTROL_GRPC_ENDPOINT_7}
     volumes:
       - neofs_chain_ir07:/neofs_chain/
+      - neofs_metachain_ir07:/neofs_metachain/
       - ./alphabet/zhivete.json:/wallet.json
       - ./../../vendor/hosts:/etc/hosts
       - ./../../vendor/neofs-cli:/neofs-cli
@@ -252,4 +259,11 @@ volumes:
   neofs_chain_ir05:
   neofs_chain_ir06:
   neofs_chain_ir07:
+  neofs_metachain_ir01:
+  neofs_metachain_ir02:
+  neofs_metachain_ir03:
+  neofs_metachain_ir04:
+  neofs_metachain_ir05:
+  neofs_metachain_ir06:
+  neofs_metachain_ir07:
     
