@@ -47,3 +47,24 @@ storage:
         type: fstree
         path: /storage/fstree1  # FSTree root directory
         depth: 2
+
+metadata:
+  seed_nodes:
+    - ir01:20334
+    - ir02:20334
+    - ir03:20334
+    - ir04:20334
+    - ir05:20334
+    - ir06:20334
+    - ir07:20334
+  storage:
+    type: boltdb
+    path: /storage/metachain/db.bolt
+  rpc:
+    listen:
+      - ":30333"
+  p2p:
+    listen:
+      - ":20333"
+    peers:
+      min: 4
