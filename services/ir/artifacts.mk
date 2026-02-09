@@ -25,7 +25,6 @@ get.contracts: NEOFS_CONTRACTS_ARCHIVE=neofs-contracts.tar.gz
 get.contracts:
 	@mkdir -p ${NEOFS_CONTRACTS_DEST}
 
-# TODO(#303): pull only NeoFS contract, others are not needed
 ifeq (${NEOFS_CONTRACTS_PATH},)
 	@echo "⇒ Download compiled NeoFS contracts from ${NEOFS_CONTRACTS_URL}"
 	@curl -sSL ${NEOFS_CONTRACTS_URL} -o ${NEOFS_CONTRACTS_ARCHIVE}
