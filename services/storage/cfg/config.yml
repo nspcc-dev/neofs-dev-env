@@ -47,3 +47,5 @@ storage:
         type: fstree
         path: /storage/fstree1  # FSTree root directory
         depth: 2
+
+      compress: true
