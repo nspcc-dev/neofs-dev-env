@@ -49,3 +49,10 @@ storage:
         depth: 2
 
       compress: true
+
+metadata:
+  path: /storage/metachain/
+  seed_port: 20334
+  p2p_addresses:
+    - ":20334"
+  rpc_addresses: ":30334"
