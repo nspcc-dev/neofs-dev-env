@@ -16,7 +16,7 @@ CONFIG="${CONFIG:-/wallets/config.yml}"
 DEPOSIT="${1:-50}"
 
 # Internal variables
-ADDR=$(jq -r .accounts[0].address < "${WALLET}" \
+ADDR=$(jq -r .accounts[1].address < "${WALLET}" \
 	|| die "Cannot get address from wallet: ${WALLET}")
 CONTRACT_ADDR=$(${NEOGO} util convert "${NEOFS_IR_MAINNET_CONTRACTS_NEOFS}" \
 	| grep 'LE ScriptHash to Address' \
