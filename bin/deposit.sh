@@ -8,10 +8,10 @@ echo "Running bin/deposit.sh"
 source bin/helper.sh
 
 # NeoGo binary path.
-NEOGO="${NEOGO:-docker exec main_chain neo-go}"
+NEOGO="${NEOGO:-vendor/neo-go}"
 # Wallet file to use for deposit GAS from
-WALLET="${WALLET:-services/chain/node-wallet.json}"
-CONFIG="${CONFIG:-/wallets/config.yml}"
+WALLET="${WALLET:-wallets/wallet.json}"
+CONFIG="${CONFIG:-wallets/config.yml}"
 # How much GAS to deposit. First cli argument or 50 by default
 DEPOSIT="${1:-50}"
 
