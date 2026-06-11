@@ -5,7 +5,6 @@ A single-node N3 privnet deployment, running on
 
 Contracts deployed:
 - NeoFS [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/contracts/neofs)
-- Processing [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/contracts/processing)
 
 RPC available at `http://main-chain.neofs.devenv:30333`.
 
