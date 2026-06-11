@@ -130,7 +130,7 @@ up/bootstrap: check_nodes get vendor/hosts
 	@source ./bin/helper.sh
 	@docker exec main_chain neo-go wallet nep17 transfer --force --await --wallet-config /wallets/config.yml -r http://main-chain.neofs.devenv:30333 --from NPpKskku5gC6g59f2gVRR8fmvUTLDp9w7Y --to NbUgTSFvPmsRxmGeWpuuGeJUoRoi6PErcM --token GAS --amount 1000
 	@./bin/contractDeploy.sh
-	@NEOGO=vendor/neo-go WALLET=wallets/wallet.json CONFIG=wallets/config.yml ./bin/deposit.sh
+	@./bin/deposit.sh
 	@for f in ./services/storage/wallet*.json; do \
 		echo "Transfer GAS to wallet $${f}" && \
 		./vendor/neofs-adm -c neofs-adm.yml fschain refill-gas --storage-wallet $${f} --gas 10.0 --alphabet-wallets services/ir${IR_NUMBER_OF_NODES}/alphabet || die "Failed to transfer GAS to alphabet wallets"; \

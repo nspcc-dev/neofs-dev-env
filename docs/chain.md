@@ -4,8 +4,7 @@ A single-node N3 privnet deployment, running on
 [neo-go](https://github.com/nspcc-dev/neo-go). Represents N3 MainNet.
 
 Contracts deployed:
-- NeoFS [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/neofs)
-- Processing [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/processing)
+- NeoFS [contract](https://github.com/nspcc-dev/neofs-contract/tree/master/contracts/neofs)
 
 RPC available at `http://main-chain.neofs.devenv:30333`.
 
