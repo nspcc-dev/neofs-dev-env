@@ -68,6 +68,7 @@ settlement:
   basic_income_rate: 100000000  # Optional: override basic income rate value from network config; applied only in debug mode
 
 experimental:
+  allow_ec: true # Optional: allows creating containers with EC placement policies
   chain_meta_data: # Optional: allows creating containers with metadata handled via FS chain
     enabled: true
     seed_port: 20334 # List of existing nodes to communicate with over Neo P2P protocol (addresses are taken from fschain.consensus.seed_nodes, but ports are changed to this value)
