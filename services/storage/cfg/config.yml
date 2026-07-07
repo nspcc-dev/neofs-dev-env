@@ -48,8 +48,6 @@ storage:
         path: /storage/fstree1  # FSTree root directory
         depth: 2
 
-      compress: true
-
 metadata:
   path: /storage/metachain/
   seed_port: 20334
