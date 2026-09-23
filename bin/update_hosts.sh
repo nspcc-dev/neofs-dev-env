@@ -11,17 +11,18 @@ make hosts > "$temp_file"
 # Get the NeoFS chain IP address from the hosts file
 neofs_chain_ip=$(grep "ir01.neofs.devenv" "$temp_file" | awk '{print $1}')
 
-# Get the line numbers of "Addresses:"
-# FIXME(#302): grep by 'listen:' is unstable, jump to exact YAML fields
-addresses_lines=$(grep -n "listen:" "$NEOFS_CHAIN_CONFIG" | cut -d ':' -f 1)
+# Get NeoFS chain listeners by full YAML path.
+listen_addresses=$(
+  python3 -c 'import json, sys, yaml; print(json.dumps(yaml.safe_load(open(sys.argv[1], "r", encoding="utf-8"))))' "$NEOFS_CHAIN_CONFIG" \
+    | jq -r '.fschain.consensus.rpc.listen[], .fschain.consensus.p2p.listen[]'
+)
 
-# Loop through each line number with "Addresses:"
-for addresses_line in $addresses_lines; do
-  # Increment the line number to find the line with the IP and port
-  target_line=$((addresses_line + 1))
-
-  # Replace the IP address in the target line in the NEOFS_CHAIN_CONFIG file
-  sed -i "${target_line}s/\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}/$neofs_chain_ip/" "$NEOFS_CHAIN_CONFIG"
+for listen_address in $listen_addresses; do
+  if [[ "$listen_address" =~ :([0-9]+)$ ]]; then
+    updated_listen_address="${neofs_chain_ip}:${BASH_REMATCH[1]}"
+    listen_address_escaped=${listen_address//./\\.}
+    sed -i "s|$listen_address_escaped|$updated_listen_address|" "$NEOFS_CHAIN_CONFIG"
+  fi
 done
 
 while IFS=" " read -r ip domain; do
