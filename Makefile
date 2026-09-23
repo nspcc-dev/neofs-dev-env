@@ -107,7 +107,7 @@ up: up/basic
 	$(call error_handler,$@);
 	@echo "Full NeoFS Developer Environment is ready"
 
-# Build up NeoFS
+# Build up NeoFS including bootstrap services
 .PHONY: up/basic
 up/basic: up/bootstrap
 	@for svc in $(START_BASIC); do \
@@ -147,7 +147,7 @@ up/%: get vendor/hosts
 
 # Stop environment
 .PHONY: down
-down: down/add down/basic down/bootstrap
+down: down/add down/basic
 	@echo "Full NeoFS Developer Environment is down"
 
 .PHONY: down/add
@@ -158,10 +158,10 @@ down/add:
 	done
 	$(call error_handler,$@);
 
-# Stop basic environment
+# Stop basic environment started by up/basic
 .PHONY: down/basic
 down/basic:
-	@for svc in $(STOP_BASIC); do \
+	@for svc in $(STOP_BASIC) $(STOP_BOOTSTRAP); do \
 		echo "$@ for service: $${svc}"; \
 		docker compose -f services/$${svc}/docker-compose.yml down 2>&1 | tee -a docker-compose.err; \
 	done
