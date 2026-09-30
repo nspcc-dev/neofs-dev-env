@@ -56,15 +56,10 @@ Run all services with command:
 $ make up
 ```
 
-When all services are up, you need to make GAS deposit for test wallet to be
-able to pay for NeoFS operations. Test wallet is located in
-`wallets/wallet.json`. The password is empty.
-
-```
-$ make prepare.ir
-password >
-fa6ba62bffb04030d303dcc95bda7413e03aa3c7e6ca9c2f999d65db9ec9b82c
-```
+An account from test wallet (`wallets/wallet.json` with empty password) gets
+some GAS during the setup phase and a deposit is made to NeoFS account from
+this wallet. Additional deposits for other wallets (like
+`wallets/wallet_empty.json`) can be made with `bin/deposit.sh` script.
 
 Also you should add self-signed node (`s04.neofs.devenv`) certificate to trusted
 store (default location might be changed using `CA_CERTS_TRUSTED_STORE`
