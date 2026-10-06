@@ -6,6 +6,12 @@
 </p>
 
 ---
+
+# Archived
+
+This repository is archived and is no longer maintained, dev-env was moved to
+neofs-node repository, see https://github.com/nspcc-dev/neofs-node/
+
 ## Overview
 
 Tools to set up local NeoFS network and N3 privnets. Devenv, for short.
